@@ -22,7 +22,7 @@
                         <a href="/" class="text-xl font-bold text-indigo-600">ExpressBeauty</a>
                     </div>
                     <div class="hidden md:flex md:ml-10 space-x-8">
-                        <a href="/" class="text-gray-700 hover:text-indigo-600 px-3 py-2 text-sm font-medium">Accueil</a>
+                        <a href="{{ route('home') }}" class="text-gray-700 hover:text-indigo-600 px-3 py-2 text-sm font-medium {{ request()->routeIs('home') ? 'text-indigo-600' : '' }}">Accueil</a>
                         <div class="relative group">
                             <button class="text-gray-700 group-hover:text-indigo-600 px-3 py-2 text-sm font-medium inline-flex items-center">
                                 Nos Produits
@@ -32,9 +32,9 @@
                             </button>
                             <div class="absolute z-10 left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden group-hover:block">
                                 <div class="py-1">
-                                    <a href="/products?category=hair" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50">Soins Capillaires</a>
-                                    <a href="/products?category=styling" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50">Appareils de Coiffure</a>
-                                    <a href="/products?category=accessories" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50">Accessoires</a>
+                                    <a href="{{ route('products.category', 'hair') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50">Soins Capillaires</a>
+                                    <a href="{{ route('products.category', 'styling') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50">Appareils de Coiffure</a>
+                                    <a href="{{ route('products.category', 'accessories') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50">Accessoires</a>
                                 </div>
                             </div>
                         </div>
@@ -47,13 +47,13 @@
                             </button>
                             <div class="absolute z-10 left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden group-hover:block">
                                 <div class="py-1">
-                                    <a href="/products?brand=Dyson" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50">Dyson</a>
-                                    <a href="/products?brand=Savage X Fenty" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50">Savage X Fenty</a>
+                                    <a href="{{ route('products.brand', 'Dyson') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50">Dyson</a>
+                                    <a href="{{ route('products.brand', 'Savage X Fenty') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50">Savage X Fenty</a>
                                 </div>
                             </div>
                         </div>
-                        <a href="/about" class="text-gray-700 hover:text-indigo-600 px-3 py-2 text-sm font-medium">À Propos</a>
-                        <a href="/contact" class="text-gray-700 hover:text-indigo-600 px-3 py-2 text-sm font-medium">Contact</a>
+                        <a href="{{ route('about') }}" class="text-gray-700 hover:text-indigo-600 px-3 py-2 text-sm font-medium {{ request()->routeIs('about') ? 'text-indigo-600' : '' }}">À Propos</a>
+                        <a href="{{ route('contact') }}" class="text-gray-700 hover:text-indigo-600 px-3 py-2 text-sm font-medium {{ request()->routeIs('contact') ? 'text-indigo-600' : '' }}">Contact</a>
                     </div>
                 </div>
 
