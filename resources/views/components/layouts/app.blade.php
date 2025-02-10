@@ -24,7 +24,7 @@
                         </a>
                     </div>
                     <div class="hidden space-x-8 md:flex md:ml-10">
-                        <a href="{{ route('home') }}" class="text-gray-700 hover:text-[#7B1F1F] px-3 py-2 text-sm font-medium {{ request()->routeIs('home') ? 'text-[#7B1F1F]' : '' }}">Accueil</a>
+                        <a href="{{ route('home') }}" class="text-gray-700 hover:text-[#7B1F1F∑∑∑∑] px-3 py-2 text-sm font-medium {{ request()->routeIs('home') ? 'text-[#7B1F1F]' : '' }}">Accueil</a>
                         <div class="relative group">
                             <button class="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 group-hover:text-[#7B1F1F]">
                                 Nos Produits
@@ -87,37 +87,7 @@
         {{ $slot }}
     </main>
 
-    <!-- Carousel des marques -->
-    <section class="py-12 bg-white">
-        <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-12">Ils parlent de nous</h2>
 
-            <div class="relative overflow-hidden" x-data="{
-                activeSlide: 0,
-                slides: [0, 1],
-                init() {
-                    setInterval(() => {
-                        this.activeSlide = (this.activeSlide + 1) % 2;
-                    }, 3000);
-                }
-            }">
-                <div class="flex transition-transform duration-500 ease-in-out" :style="'transform: translateX(-' + (activeSlide * 50) + '%)'">
-                    <!-- Premier groupe -->
-                    <div class="flex justify-around items-center min-w-full px-4">
-                        <img src="{{ asset('storage/brands/marie-claire.png') }}" alt="Marie Claire" class="h-12 grayscale hover:grayscale-0 transition-all">
-                        <img src="{{ asset('storage/brands/cosmopolitan.png') }}" alt="Cosmopolitan" class="h-12 grayscale hover:grayscale-0 transition-all">
-                        <img src="{{ asset('storage/brands/sephora.png') }}" alt="Sephora" class="h-12 grayscale hover:grayscale-0 transition-all">
-                    </div>
-                    <!-- Deuxième groupe -->
-                    <div class="flex justify-around items-center min-w-full px-4">
-                        <img src="{{ asset('storage/brands/allure.png') }}" alt="Allure" class="h-12 grayscale hover:grayscale-0 transition-all">
-                        <img src="{{ asset('storage/brands/elle.png') }}" alt="Elle" class="h-12 grayscale hover:grayscale-0 transition-all">
-                        <img src="{{ asset('storage/brands/marie-claire.png') }}" alt="Marie Claire" class="h-12 grayscale hover:grayscale-0 transition-all">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Footer -->
     <footer class="py-6 mt-12 bg-white">
