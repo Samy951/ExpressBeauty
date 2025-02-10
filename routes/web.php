@@ -2,14 +2,77 @@
 
 use App\Livewire\ProductsList;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\BrandController;
 
 // Page d'accueil
 Route::get('/', ProductsList::class)->name('home');
 
 // Routes pour les produits
-Route::get('/products', ProductsList::class)->name('products.index');
-Route::get('/products/category/{category}', ProductsList::class)->name('products.category');
-Route::get('/products/brand/{brand}', ProductsList::class)->name('products.brand');
+Route::prefix('products')->group(function () {
+    // Liste de tous les produits
+    Route::get('/', [ProductController::class, 'index'])->name('products.index');
+    
+    // Filtrage par catégorie
+    Route::get('/category/hair', [ProductController::class, 'index'])
+        ->defaults('category', 'hair')
+        ->name('products.category.hair');
+    Route::get('/category/styling', [ProductController::class, 'index'])
+        ->defaults('category', 'styling')
+        ->name('products.category.styling');
+    Route::get('/category/accessories', [ProductController::class, 'index'])
+        ->defaults('category', 'accessories')
+        ->name('products.category.accessories');
+    
+    // Filtrage par marque
+    Route::get('/brand/dyson', [ProductController::class, 'index'])
+        ->defaults('brand', 'Dyson')
+        ->name('products.brand.dyson');
+    Route::get('/brand/ghd', [ProductController::class, 'index'])
+        ->defaults('brand', 'GHD')
+        ->name('products.brand.ghd');
+    Route::get('/brand/fenty', [ProductController::class, 'index'])
+        ->defaults('brand', 'Savage X Fenty')
+        ->name('products.brand.fenty');
+    
+    // Détail d'un produit
+    Route::get('/{product}', [ProductController::class, 'show'])->name('products.show');
+});
+
+// Routes pour les catégories
+Route::prefix('categories')->group(function () {
+    // Liste de toutes les catégories
+    Route::get('/', [CategoryController::class, 'index'])->name('categories.index');
+    
+    // Pages des catégories spécifiques
+    Route::get('/hair', [CategoryController::class, 'show'])
+        ->defaults('category', 'hair')
+        ->name('categories.hair');
+    Route::get('/styling', [CategoryController::class, 'show'])
+        ->defaults('category', 'styling')
+        ->name('categories.styling');
+    Route::get('/accessories', [CategoryController::class, 'show'])
+        ->defaults('category', 'accessories')
+        ->name('categories.accessories');
+});
+
+// Routes pour les marques
+Route::prefix('brands')->group(function () {
+    // Liste de toutes les marques
+    Route::get('/', [BrandController::class, 'index'])->name('brands.index');
+    
+    // Pages des marques spécifiques
+    Route::get('/dyson', [BrandController::class, 'show'])
+        ->defaults('brand', 'Dyson')
+        ->name('brands.dyson');
+    Route::get('/ghd', [BrandController::class, 'show'])
+        ->defaults('brand', 'GHD')
+        ->name('brands.ghd');
+    Route::get('/savage-x-fenty', [BrandController::class, 'show'])
+        ->defaults('brand', 'Savage X Fenty')
+        ->name('brands.fenty');
+});
 
 // Pages statiques
 Route::view('/about', 'pages.about')->name('about');

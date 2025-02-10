@@ -97,7 +97,7 @@ class ProductFactory extends Factory
                 ]
             ],
             'Airwrap' => [
-                'description' => 'Styler multi-fonction utilisant l'effet Coanda pour coiffer, boucler et lisser sans chaleur extrême.',
+                'description' => 'Styler multi-fonction utilisant l\'effet Coanda pour coiffer, boucler et lisser sans chaleur extrême.',
                 'price' => 499.99,
                 'specs' => [
                     'puissance' => '1300W',
