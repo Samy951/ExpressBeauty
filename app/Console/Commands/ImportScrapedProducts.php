@@ -99,16 +99,55 @@ class ImportScrapedProducts extends Command
 
             foreach ($savageProducts as $product) {
                 try {
+                    $color = $product['color'] ?? 'default';
+
+                    // Amélioration de la sélection d'image
+                    $image_url = null;
+                    if (!empty($product['images'])) {
+                        // Filtrer les images de basse qualité
+                        $filtered_images = array_filter($product['images'], function($img) {
+                            $low_quality_indicators = ['thumb', 'small', 'mini', 'preview', '150x', '300x'];
+                            foreach ($low_quality_indicators as $indicator) {
+                                if (stripos($img, $indicator) !== false) {
+                                    return false;
+                                }
+                            }
+                            return true;
+                        });
+
+                        if (!empty($filtered_images)) {
+                            // Chercher d'abord les images HD ou haute qualité
+                            foreach ($filtered_images as $img) {
+                                if (preg_match('/(hd|HD|high|large|original|full|zoom|[0-9]{4,}x[0-9]{4,})/', $img)) {
+                                    $image_url = $img;
+                                    break;
+                                }
+                            }
+
+                            // Si aucune image HD n'est trouvée, prendre la dernière image filtrée
+                            if (!$image_url) {
+                                $image_url = end($filtered_images);
+                            }
+                        } else {
+                            // Si toutes les images ont été filtrées, prendre la dernière du tableau original
+                            $image_url = end($product['images']);
+                        }
+                    }
+
                     Product::updateOrCreate(
-                        ['name' => $product['title']],
+                        [
+                            'name' => $product['title'],
+                            'specifications->color' => $color
+                        ],
                         [
                             'brand' => 'Savage X Fenty',
                             'description' => $product['description'],
                             'price' => (float) str_replace(['€', ','], ['', '.'], $product['price']['current']),
-                            'image_url' => $product['images'][0] ?? null,
+                            'image_url' => $image_url,
                             'specifications' => [
                                 'url' => $product['url'],
-                                'timestamp' => $product['timestamp']
+                                'timestamp' => $product['timestamp'],
+                                'color' => $color
                             ]
                         ]
                     );
@@ -122,17 +161,50 @@ class ImportScrapedProducts extends Command
             $this->error('Fichier Savage X Fenty non trouvé: ' . $savagePath);
         }
 
+        // Importer les produits Fenty Beauty
+        $fentyPath = storage_path('app/scraping/fentybeautyProducts.json');
+        if (file_exists($fentyPath)) {
+            $fentyProducts = json_decode(file_get_contents($fentyPath), true);
+            $this->info('Traitement de ' . count($fentyProducts) . ' produits Fenty Beauty...');
+
+            foreach ($fentyProducts as $product) {
+                try {
+                    Product::updateOrCreate(
+                        ['name' => $product['title']],
+                        [
+                            'brand' => 'Fenty Beauty',
+                            'description' => $product['description'],
+                            'price' => (float) str_replace(['€', ','], ['', '.'], $product['price']['current']),
+                            'image_url' => $product['images'][0] ?? null,
+                            'specifications' => [
+                                'url' => $product['url'],
+                                'timestamp' => $product['timestamp']
+                            ]
+                        ]
+                    );
+                } catch (\Exception $e) {
+                    $this->error('Erreur lors de l\'importation du produit Fenty Beauty: ' . $product['title']);
+                    $this->error($e->getMessage());
+                }
+            }
+            $this->info('Produits Fenty Beauty importés avec succès.');
+        } else {
+            $this->error('Fichier Fenty Beauty non trouvé: ' . $fentyPath);
+        }
+
         $this->info('Importation terminée !');
 
         // Afficher les statistiques
         $totalDyson = Product::where('brand', 'Dyson')->count();
         $totalGhd = Product::where('brand', 'GHD')->count();
         $totalSavage = Product::where('brand', 'Savage X Fenty')->count();
+        $totalFenty = Product::where('brand', 'Fenty Beauty')->count();
 
         $this->info("Statistiques finales :");
         $this->info("- Produits Dyson : $totalDyson");
         $this->info("- Produits GHD : $totalGhd");
         $this->info("- Produits Savage X Fenty : $totalSavage");
-        $this->info("- Total : " . ($totalDyson + $totalGhd + $totalSavage));
+        $this->info("- Produits Fenty Beauty : $totalFenty");
+        $this->info("- Total : " . ($totalDyson + $totalGhd + $totalSavage + $totalFenty));
     }
 }
