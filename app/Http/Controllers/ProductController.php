@@ -51,6 +51,14 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
+        // Assurez-vous que le produit existe
+        if (!$product) {
+            abort(404);
+        }
+
+        // Vous pouvez ajouter ici la logique pour récupérer les images supplémentaires,
+        // les avis clients, etc.
+
         return view('pages.products.show', [
             'product' => $product
         ]);
