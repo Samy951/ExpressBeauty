@@ -11,14 +11,27 @@ class ProductController extends Controller
     {
         $query = Product::query();
 
-        // Filtrage par marque
-        if ($request->has('brand')) {
-            $query->where('brand', $request->brand);
-        }
+        // Récupérer la catégorie depuis la route ou la requête
+        $category = $request->route('category') ?? $request->input('category');
+        $brand = $request->route('brand') ?? $request->input('brand');
 
-        // Filtrage par catégorie
-        if ($request->has('category')) {
-            $query->where('category', strtolower($request->category));
+        // Filtrage selon la catégorie
+        if ($category) {
+            switch ($category) {
+                case 'makeup':
+                    $query->where('brand', 'Fenty Beauty');
+                    break;
+                case 'hair':
+                    $query->whereIn('brand', ['Dyson', 'GHD']);
+                    break;
+                case 'lingerie':
+                    $query->where('brand', 'Savage X Fenty');
+                    break;
+            }
+        }
+        // Filtrage direct par marque si spécifié
+        elseif ($brand) {
+            $query->where('brand', $brand);
         }
 
         // Tri
@@ -44,10 +57,19 @@ class ProductController extends Controller
 
         $products = $query->paginate(12);
 
+        // Debug information
+        \Log::info('Filtering products:', [
+            'category' => $category,
+            'brand' => $brand,
+            'count' => $products->count(),
+            'sql' => $query->toSql(),
+            'bindings' => $query->getBindings()
+        ]);
+
         return view('pages.products.index', [
             'products' => $products,
-            'currentCategory' => $request->category,
-            'currentBrand' => $request->brand
+            'currentCategory' => $category,
+            'currentBrand' => $brand
         ]);
     }
 
