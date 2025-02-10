@@ -69,14 +69,17 @@ Route::prefix('brands')->group(function () {
 
     // Pages des marques spécifiques
     Route::get('/dyson', [BrandController::class, 'show'])
-        ->defaults('brand', 'Dyson')
+        ->defaults('brand', 'dyson')
         ->name('brands.dyson');
     Route::get('/ghd', [BrandController::class, 'show'])
-        ->defaults('brand', 'GHD')
+        ->defaults('brand', 'ghd')
         ->name('brands.ghd');
     Route::get('/savage-x-fenty', [BrandController::class, 'show'])
-        ->defaults('brand', 'Savage X Fenty')
+        ->defaults('brand', 'savage-x-fenty')
         ->name('brands.fenty');
+    Route::get('/fenty-beauty', [BrandController::class, 'show'])
+        ->defaults('brand', 'fenty-beauty')
+        ->name('brands.fenty-beauty');
 });
 
 // Pages statiques

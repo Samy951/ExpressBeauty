@@ -1,62 +1,55 @@
 <x-layouts.app>
-    <div class="bg-white">
-        <!-- En-tête de la page -->
-        <div class="bg-[#7B1F1F] text-white py-8">
-            <div class="container mx-auto px-4">
-                <h1 class="text-4xl font-bold text-center">Nos Marques</h1>
-                <p class="text-center mt-2 text-gray-200">Découvrez nos marques partenaires de renom</p>
-            </div>
-        </div>
+    <!-- Bannière de déstockage -->
+    <div class="bg-[#7B1F1F] text-white py-2 text-center">
+        <p class="text-sm">
+            ⚡ DÉSTOCKAGE : JUSQU'À -70% SUR TOUT ! LIMITÉ À UN PRODUIT PAR PERSONNE, FAITES VITE ! ⚡
+        </p>
+    </div>
+
+    <div class="container mx-auto px-4 py-12">
+        <!-- En-tête -->
+        <h1 class="text-3xl font-bold text-center mb-4">Nos Marques</h1>
+        <p class="text-gray-600 text-center mb-12">
+            Découvrez notre sélection de marques de beauté premium, soigneusement choisies pour leur qualité et leur innovation.
+        </p>
 
         <!-- Grille des marques -->
-        <div class="container mx-auto px-4 py-12">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                @foreach($brands as $brandKey => $brand)
-                <div class="group">
-                    <a href="{{ route($brand['route']) }}" class="block">
-                        <div class="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden">
-                            <!-- Image de la marque -->
-                            <div class="aspect-w-16 aspect-h-9 relative">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+            @foreach($brands as $brand)
+            <div class="group">
+                <a href="{{ $brand['route'] }}" class="block">
+                    <div class="relative rounded-lg shadow-lg overflow-hidden aspect-[4/3] transition-all duration-300 group-hover:shadow-xl">
+                        <!-- Image Container -->
+                        <div class="absolute inset-0">
+                            @if($brand['name'] === 'GHD')
+                            <div class="w-full h-full bg-black flex items-center justify-center p-8">
                                 <img src="{{ asset($brand['image']) }}" 
                                      alt="{{ $brand['name'] }}" 
-                                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                    <div class="absolute bottom-0 left-0 right-0 p-6">
-                                        <p class="text-white text-lg">Voir les produits</p>
-                                    </div>
-                                </div>
+                                     class="w-full h-full object-contain">
                             </div>
-                            <!-- Informations de la marque -->
-                            <div class="p-6">
-                                <h2 class="text-2xl font-bold text-gray-900">{{ $brand['name'] }}</h2>
-                                <p class="text-gray-600 mt-2">{{ $brand['description'] }}</p>
-                                <div class="mt-4 flex justify-between items-center">
-                                    <span class="text-sm text-gray-500">{{ $brand['count'] }} produits</span>
-                                    <span class="text-[#7B1F1F] group-hover:translate-x-2 transition-transform duration-300">
-                                        →
-                                    </span>
-                                </div>
+                            @else
+                            <div class="w-full h-full bg-white flex items-center justify-center p-12">
+                                <img src="{{ asset($brand['image']) }}" 
+                                     alt="{{ $brand['name'] }}" 
+                                     class="w-full h-full object-contain">
+                            </div>
+                            @endif
+                        </div>
+                            
+                        <!-- Hover Overlay -->
+                        <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <div class="text-center text-white p-4">
+                                <h2 class="text-xl font-bold mb-2">{{ $brand['name'] }}</h2>
+                                <p class="text-sm mb-4">{{ $brand['products_count'] }}</p>
+                                <span class="inline-flex items-center px-4 py-2 border-2 border-white text-white font-medium rounded-full hover:bg-white hover:text-[#7B1F1F] transition-colors duration-300">
+                                    Voir la collection →
+                                </span>
                             </div>
                         </div>
-                    </a>
-                </div>
-                @endforeach
+                    </div>
+                </a>
             </div>
-        </div>
-
-        <!-- Section Partenariats -->
-        <div class="bg-gray-50 py-12">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold text-center mb-8">Ils parlent de nous</h2>
-                <div class="grid grid-cols-2 md:grid-cols-6 gap-8 items-center">
-                    <img src="{{ asset('storage/brands/marie-claire.webp') }}" alt="Marie Claire" class="h-12 grayscale hover:grayscale-0 transition-all mx-auto">
-                    <img src="{{ asset('storage/brands/cosmopolitan.webp') }}" alt="Cosmopolitan" class="h-12 grayscale hover:grayscale-0 transition-all mx-auto">
-                    <img src="{{ asset('storage/brands/sephora.webp') }}" alt="Sephora" class="h-12 grayscale hover:grayscale-0 transition-all mx-auto">
-                    <img src="{{ asset('storage/brands/allure.webp') }}" alt="Allure" class="h-12 grayscale hover:grayscale-0 transition-all mx-auto">
-                    <img src="{{ asset('storage/brands/elle.webp') }}" alt="Elle" class="h-12 grayscale hover:grayscale-0 transition-all mx-auto">
-                    <img src="{{ asset('storage/brands/fenty.png') }}" alt="Savage X Fenty" class="h-12 grayscale hover:grayscale-0 transition-all mx-auto">
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
-</x-layouts.app> 
+</x-layouts.app>

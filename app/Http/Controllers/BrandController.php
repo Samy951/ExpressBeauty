@@ -11,62 +11,88 @@ class BrandController extends Controller
     {
         // Récupérer les statistiques pour chaque marque
         $brands = [
-            'Dyson' => [
+            [
                 'name' => 'Dyson',
-                'count' => Product::where('brand', 'Dyson')->count(),
-                'image' => 'storage/brands/allure.webp',
-                'description' => 'Innovation et Performance',
-                'route' => 'brands.dyson'
+                'image' => 'storage/brands/dyson.webp',
+                'products_count' => Product::where('brand', 'Dyson')->count() . ' produits',
+                'route' => route('brands.dyson')
             ],
-            'GHD' => [
+            [
                 'name' => 'GHD',
-                'count' => Product::where('brand', 'GHD')->count(),
-                'image' => 'storage/brands/elle.webp',
-                'description' => 'Excellence Professionnelle',
-                'route' => 'brands.ghd'
+                'image' => 'storage/brands/ghd.webp',
+                'products_count' => Product::where('brand', 'GHD')->count() . ' produits',
+                'route' => route('brands.ghd')
             ],
-            'Savage X Fenty' => [
+            [
                 'name' => 'Savage X Fenty',
-                'count' => Product::where('brand', 'Savage X Fenty')->count(),
-                'image' => 'storage/brands/fenty.png',
-                'description' => 'Style et Inclusivité',
-                'route' => 'brands.fenty'
+                'image' => 'storage/brands/savage-fenty.webp',
+                'products_count' => Product::where('brand', 'Savage X Fenty')->count() . ' produits',
+                'route' => route('brands.fenty')
+            ],
+            [
+                'name' => 'Fenty Beauty',
+                'image' => 'storage/brands/fenty-beauty.webp',
+                'products_count' => Product::where('brand', 'Fenty Beauty')->count() . ' produits',
+                'route' => route('brands.fenty-beauty')
             ]
         ];
 
-        return view('pages.brands.index', [
-            'brands' => $brands
-        ]);
+        return view('pages.brands.index', compact('brands'));
     }
 
     public function show($brand)
     {
-        $products = Product::where('brand', $brand)
-            ->orderBy('created_at', 'desc')
-            ->paginate(20);
+        // Convertir le slug de la route en nom de marque
+        $brandNames = [
+            'dyson' => 'Dyson',
+            'ghd' => 'GHD',
+            'savage-x-fenty' => 'Savage X Fenty',
+            'fenty-beauty' => 'Fenty Beauty'
+        ];
 
+        $brandName = $brandNames[$brand] ?? null;
+
+        if (!$brandName) {
+            abort(404);
+        }
+
+        // Récupérer les produits de la marque avec pagination
+        $products = Product::where('brand', $brandName)
+            ->orderBy('created_at', 'desc')
+            ->paginate(12);
+
+        // Informations sur la marque
         $brandInfo = [
             'Dyson' => [
                 'name' => 'Dyson',
                 'description' => 'Innovation et Performance dans le domaine des appareils de coiffure',
-                'image' => 'storage/brands/allure.webp'
+                'image' => 'storage/brands/dyson.webp',
+                'banner_image' => 'storage/brands/banners/dyson-banner.webp'
             ],
             'GHD' => [
                 'name' => 'GHD',
                 'description' => 'Excellence Professionnelle pour des résultats de salon à la maison',
-                'image' => 'storage/brands/elle.webp'
+                'image' => 'storage/brands/ghd.webp',
+                'banner_image' => 'storage/brands/banners/ghd-banner.webp'
             ],
             'Savage X Fenty' => [
                 'name' => 'Savage X Fenty',
                 'description' => 'Style et Inclusivité pour tous',
-                'image' => 'storage/brands/fenty.png'
+                'image' => 'storage/brands/savage-fenty.webp',
+                'banner_image' => 'storage/brands/banners/savage-fenty-banner.webp'
+            ],
+            'Fenty Beauty' => [
+                'name' => 'Fenty Beauty',
+                'description' => 'Beauté inclusive et innovante',
+                'image' => 'storage/brands/fenty-beauty.webp',
+                'banner_image' => 'storage/brands/banners/fenty-beauty-banner.webp'
             ]
         ];
 
         return view('pages.brands.show', [
             'products' => $products,
-            'brand' => $brand,
-            'brandInfo' => $brandInfo[$brand] ?? null
+            'brand' => $brandName,
+            'brandInfo' => $brandInfo[$brandName]
         ]);
     }
 } 
