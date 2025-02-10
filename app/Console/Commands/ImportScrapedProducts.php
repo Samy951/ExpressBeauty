@@ -30,7 +30,7 @@ class ImportScrapedProducts extends Command
         $this->info('Début de l\'importation des produits...');
 
         // Importer les produits Dyson
-        $dysonPath = storage_path('app/data/dysonProducts.json');
+        $dysonPath = storage_path('app/scraping/dysonProducts.json');
         if (file_exists($dysonPath)) {
             $dysonProducts = json_decode(file_get_contents($dysonPath), true);
             $this->info('Traitement de ' . count($dysonProducts) . ' produits Dyson...');
@@ -59,8 +59,40 @@ class ImportScrapedProducts extends Command
             $this->error('Fichier Dyson non trouvé: ' . $dysonPath);
         }
 
+        // Importer les produits GHD
+        $ghdPath = storage_path('app/scraping/ghdProducts.json');
+        if (file_exists($ghdPath)) {
+            $ghdProducts = json_decode(file_get_contents($ghdPath), true);
+            $this->info('Traitement de ' . count($ghdProducts) . ' produits GHD...');
+
+            foreach ($ghdProducts as $product) {
+                try {
+                    Product::updateOrCreate(
+                        ['name' => $product['title']],
+                        [
+                            'brand' => 'GHD',
+                            'description' => $product['description'],
+                            'price' => (float) str_replace(['€', ','], ['', '.'], $product['price']['current']),
+                            'image_url' => $product['images'][0] ?? null,
+                            'specifications' => [
+                                'rating' => $product['rating'],
+                                'url' => $product['url'],
+                                'timestamp' => $product['timestamp']
+                            ]
+                        ]
+                    );
+                } catch (\Exception $e) {
+                    $this->error('Erreur lors de l\'importation du produit GHD: ' . $product['title']);
+                    $this->error($e->getMessage());
+                }
+            }
+            $this->info('Produits GHD importés avec succès.');
+        } else {
+            $this->error('Fichier GHD non trouvé: ' . $ghdPath);
+        }
+
         // Importer les produits Savage X Fenty
-        $savagePath = storage_path('app/data/savagexfentyProducts.json');
+        $savagePath = storage_path('app/scraping/savagexfentyProducts.json');
         if (file_exists($savagePath)) {
             $savageProducts = json_decode(file_get_contents($savagePath), true);
             $this->info('Traitement de ' . count($savageProducts) . ' produits Savage X Fenty...');
@@ -94,10 +126,13 @@ class ImportScrapedProducts extends Command
 
         // Afficher les statistiques
         $totalDyson = Product::where('brand', 'Dyson')->count();
+        $totalGhd = Product::where('brand', 'GHD')->count();
         $totalSavage = Product::where('brand', 'Savage X Fenty')->count();
+
         $this->info("Statistiques finales :");
         $this->info("- Produits Dyson : $totalDyson");
+        $this->info("- Produits GHD : $totalGhd");
         $this->info("- Produits Savage X Fenty : $totalSavage");
-        $this->info("- Total : " . ($totalDyson + $totalSavage));
+        $this->info("- Total : " . ($totalDyson + $totalGhd + $totalSavage));
     }
 }

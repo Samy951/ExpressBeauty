@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ExpressBeauty - Produits de Beauté</title>
+    <title>ExpressBeauty</title>
+
+    <!-- Alpine.js -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <!-- Styles -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -11,116 +14,72 @@
     <!-- Livewire Styles -->
     @livewireStyles
 </head>
-<body class="bg-gray-100">
+<body class="bg-white">
     <!-- Navigation -->
-    <nav class="bg-white shadow-lg">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="flex justify-between h-16">
-                <!-- Logo et Navigation principale -->
-                <div class="flex items-center">
-                    <div class="flex-shrink-0">
-                        <a href="/" class="text-xl font-bold text-indigo-600">ExpressBeauty</a>
-                    </div>
-                    <div class="hidden md:flex md:ml-10 space-x-8">
-                        <a href="/" class="text-gray-700 hover:text-indigo-600 px-3 py-2 text-sm font-medium">Accueil</a>
-                        <div class="relative group">
-                            <button class="text-gray-700 group-hover:text-indigo-600 px-3 py-2 text-sm font-medium inline-flex items-center">
-                                Nos Produits
-                                <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                                </svg>
-                            </button>
-                            <div class="absolute z-10 left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden group-hover:block">
-                                <div class="py-1">
-                                    <a href="/products?category=hair" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50">Soins Capillaires</a>
-                                    <a href="/products?category=styling" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50">Appareils de Coiffure</a>
-                                    <a href="/products?category=accessories" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50">Accessoires</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="relative group">
-                            <button class="text-gray-700 group-hover:text-indigo-600 px-3 py-2 text-sm font-medium inline-flex items-center">
-                                Nos Marques
-                                <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                                </svg>
-                            </button>
-                            <div class="absolute z-10 left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden group-hover:block">
-                                <div class="py-1">
-                                    <a href="/products?brand=Dyson" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50">Dyson</a>
-                                    <a href="/products?brand=Savage X Fenty" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50">Savage X Fenty</a>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="/about" class="text-gray-700 hover:text-indigo-600 px-3 py-2 text-sm font-medium">À Propos</a>
-                        <a href="/contact" class="text-gray-700 hover:text-indigo-600 px-3 py-2 text-sm font-medium">Contact</a>
-                    </div>
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white">
+        <div class="container px-4 mx-auto">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="/" class="block">
+                        <img src="{{ asset('storage/expressBeauty.svg') }}" alt="ExpressBeauty" class="h-[57px] w-[193px]">
+                    </a>
                 </div>
 
-                <!-- Menu mobile -->
-                <div class="flex items-center md:hidden">
-                    <button type="button" class="text-gray-700 hover:text-indigo-600" x-data @click="$dispatch('toggle-mobile-menu')">
-                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                <!-- Navigation principale -->
+                <div class="items-center hidden space-x-8 md:flex">
+                    <a href="/" class="text-gray-700 hover:text-gray-900">Accueil</a>
+                    <div class="relative group">
+                        <button class="flex items-center text-gray-700 hover:text-gray-900">
+                            Nos Produits
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div class="absolute left-0 hidden w-48 mt-2 bg-white border border-gray-100 shadow-sm group-hover:block">
+                            <a href="/products?category=hair" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Soins Capillaires</a>
+                            <a href="/products?category=styling" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Appareils de Coiffure</a>
+                            <a href="/products?category=accessories" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Accessoires</a>
+                        </div>
+                    </div>
+                    <div class="relative group">
+                        <button class="flex items-center text-gray-700 hover:text-gray-900">
+                            Nos Marques
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div class="absolute left-0 hidden w-48 mt-2 bg-white border border-gray-100 shadow-sm group-hover:block">
+                            <a href="/products?brand=Dyson" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Dyson</a>
+                            <a href="/products?brand=GHD" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">GHD</a>
+                            <a href="/products?brand=Savage%20X%20Fenty" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Savage X Fenty</a>
+                        </div>
+                    </div>
+                    <a href="/about" class="text-gray-700 hover:text-gray-900">À propos</a>
+                    <a href="/contact" class="text-gray-700 hover:text-gray-900">Contact</a>
+                </div>
+
+                <!-- Barre de recherche -->
+                <div class="relative w-64">
+                    <input
+                        type="text"
+                        placeholder="Rechercher..."
+                        class="w-full px-4 py-2 pr-8 border border-gray-200 rounded-full bg-gray-50 focus:outline-none focus:border-gray-300"
+                    >
+                    <button class="absolute transform -translate-y-1/2 right-3 top-1/2">
+                        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
                     </button>
                 </div>
             </div>
         </div>
-
-        <!-- Menu mobile (caché par défaut) -->
-        <div class="hidden md:hidden" x-show="mobileMenuOpen" x-data="{ mobileMenuOpen: false }" @toggle-mobile-menu.window="mobileMenuOpen = !mobileMenuOpen">
-            <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="/" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50">Accueil</a>
-                <a href="/products" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50">Nos Produits</a>
-                <a href="/brands" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50">Nos Marques</a>
-                <a href="/about" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50">À Propos</a>
-                <a href="/contact" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50">Contact</a>
-            </div>
-        </div>
     </nav>
 
     <!-- Contenu principal -->
-    <main>
+    <main class="pt-20">
         {{ $slot }}
     </main>
-
-    <!-- Footer -->
-    <footer class="bg-white mt-12 py-6">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div>
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">À Propos</h3>
-                    <p class="text-gray-600">ExpressBeauty, votre destination beauté en ligne pour des produits de qualité.</p>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Nos Marques</h3>
-                    <ul class="space-y-2">
-                        <li><a href="/products?brand=Dyson" class="text-gray-600 hover:text-indigo-600">Dyson</a></li>
-                        <li><a href="/products?brand=Savage X Fenty" class="text-gray-600 hover:text-indigo-600">Savage X Fenty</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Catégories</h3>
-                    <ul class="space-y-2">
-                        <li><a href="/products?category=hair" class="text-gray-600 hover:text-indigo-600">Soins Capillaires</a></li>
-                        <li><a href="/products?category=styling" class="text-gray-600 hover:text-indigo-600">Appareils de Coiffure</a></li>
-                        <li><a href="/products?category=accessories" class="text-gray-600 hover:text-indigo-600">Accessoires</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Contact</h3>
-                    <ul class="space-y-2">
-                        <li><a href="/contact" class="text-gray-600 hover:text-indigo-600">Nous Contacter</a></li>
-                        <li><a href="/faq" class="text-gray-600 hover:text-indigo-600">FAQ</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="mt-8 pt-8 border-t border-gray-200">
-                <p class="text-center text-gray-500">&copy; {{ date('Y') }} ExpressBeauty. Tous droits réservés.</p>
-            </div>
-        </div>
-    </footer>
 
     <!-- Livewire Scripts -->
     @livewireScripts

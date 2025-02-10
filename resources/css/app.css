@@ -2,42 +2,82 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Styles pour les cartes produits */
+[x-cloak] {
+    display: none !important;
+}
+
+/* Navigation */
+.nav-link {
+    @apply text-gray-600 hover:text-gray-900 transition-colors duration-200;
+}
+
+.nav-dropdown {
+    @apply absolute z-50 mt-2 w-48 bg-white border border-gray-100 shadow-sm hidden group-hover:block;
+}
+
+.nav-dropdown-item {
+    @apply block px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-gray-900;
+}
+
+/* Produits */
 .product-card {
-    @apply bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300;
+    @apply transition-opacity duration-200;
 }
 
 .product-card:hover {
-    @apply shadow-lg transform scale-[1.02];
-}
-
-.product-image {
-    @apply w-full h-64 object-contain bg-gray-50 transition-opacity duration-300;
-}
-
-.product-image:hover {
     @apply opacity-90;
 }
 
-/* Styles pour les badges */
-.brand-badge {
-    @apply inline-block px-2 py-1 text-xs font-medium text-indigo-600 bg-indigo-50 rounded-full;
+.product-image {
+    @apply w-full h-full object-cover transition-transform duration-300;
 }
 
-.rating-badge {
-    @apply flex items-center bg-yellow-50 px-2 py-1 rounded-full;
+.product-title {
+    @apply text-sm text-gray-900 transition-colors duration-200;
 }
 
-/* Animation de chargement */
+.product-price {
+    @apply text-sm font-medium text-gray-900;
+}
+
+.product-price-barred {
+    @apply text-xs text-gray-400 ml-2;
+}
+
+/* Filtres et recherche */
+.search-input {
+    @apply w-64 px-4 py-2 pl-10 pr-4 text-sm text-gray-900 bg-gray-50 border border-gray-200 rounded-full focus:outline-none focus:bg-white focus:border-gray-300;
+}
+
+.filter-select {
+    @apply pl-4 pr-8 py-2 text-sm text-gray-600 bg-transparent border border-gray-200 rounded focus:outline-none;
+}
+
+/* Pagination */
+.pagination {
+    @apply flex justify-center items-center space-x-1;
+}
+
+.pagination-link {
+    @apply px-4 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded;
+}
+
+.pagination-active {
+    @apply bg-gray-900 text-white;
+}
+
+/* Animations */
+.fade-in {
+    animation: fadeIn 0.3s ease-out;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
+        transform: translateY(5px);
     }
     to {
         opacity: 1;
+        transform: translateY(0);
     }
-}
-
-.fade-in {
-    animation: fadeIn 0.3s ease-in;
 }
