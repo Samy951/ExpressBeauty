@@ -18,13 +18,13 @@ class ProductController extends Controller
 
         // Filtrage par catégorie
         if ($request->has('category')) {
-            $query->where('category', $request->category);
+            $query->where('category', strtolower($request->category));
         }
 
         // Tri
         $sortField = $request->input('sort', 'created_at');
         $sortDirection = $request->input('direction', 'desc');
-        
+
         switch ($sortField) {
             case 'price-asc':
                 $query->orderBy('price', 'asc');
@@ -42,10 +42,12 @@ class ProductController extends Controller
                 $query->orderBy('created_at', 'desc');
         }
 
-        $products = $query->paginate(20);
+        $products = $query->paginate(12);
 
         return view('pages.products.index', [
-            'products' => $products
+            'products' => $products,
+            'currentCategory' => $request->category,
+            'currentBrand' => $request->brand
         ]);
     }
 
@@ -63,4 +65,4 @@ class ProductController extends Controller
             'product' => $product
         ]);
     }
-} 
+}

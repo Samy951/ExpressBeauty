@@ -32,7 +32,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                                 </svg>
                             </button>
-                            <div x-show="open" 
+                            <div x-show="open"
                                  x-transition:enter="transition ease-out duration-100"
                                  x-transition:enter-start="transform opacity-0 scale-95"
                                  x-transition:enter-end="transform opacity-100 scale-100"
@@ -41,9 +41,9 @@
                                  x-transition:leave-end="transform opacity-0 scale-95"
                                  class="absolute left-0 z-10 w-48 mt-2 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
                                 <div class="py-1">
-                                    <a href="{{ route('products.category.hair') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#7B1F1F] hover:text-white">Soins Capillaires</a>
-                                    <a href="{{ route('products.category.styling') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#7B1F1F] hover:text-white">Appareils de Coiffure</a>
-                                    <a href="{{ route('products.category.accessories') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#7B1F1F] hover:text-white">Accessoires</a>
+                                    <a href="{{ route('products.category.makeup') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#7B1F1F] hover:text-white">Maquillage</a>
+                                    <a href="{{ route('products.category.hair') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#7B1F1F] hover:text-white">Coiffure</a>
+                                    <a href="{{ route('products.category.lingerie') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#7B1F1F] hover:text-white">Lingerie</a>
                                     <div class="border-t border-gray-100 my-1"></div>
                                     <a href="{{ route('products.index') }}" class="block px-4 py-2 text-sm text-[#7B1F1F] font-medium hover:bg-[#7B1F1F] hover:text-white">Voir tous les produits</a>
                                 </div>
@@ -93,7 +93,7 @@
         <div class="md:hidden" x-show="mobileMenuOpen" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95">
             <div class="px-2 pt-2 pb-3 space-y-1" x-data="{ productsOpen: false, brandsOpen: false }">
                 <a href="{{ route('home') }}" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-[#7B1F1F] hover:bg-gray-50 {{ request()->routeIs('home') ? 'text-[#7B1F1F]' : '' }}">Accueil</a>
-                
+
                 <!-- Menu Produits -->
                 <div class="relative">
                     <button @click="productsOpen = !productsOpen" class="flex justify-between items-center w-full px-3 py-2 text-base font-medium text-gray-700 hover:text-[#7B1F1F] hover:bg-gray-50">
@@ -102,7 +102,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
                     </button>
-                    <div x-show="productsOpen" 
+                    <div x-show="productsOpen"
                          x-transition:enter="transition ease-out duration-100"
                          x-transition:enter-start="transform opacity-0 scale-95"
                          x-transition:enter-end="transform opacity-100 scale-100"
@@ -110,9 +110,9 @@
                          x-transition:leave-start="transform opacity-100 scale-100"
                          x-transition:leave-end="transform opacity-0 scale-95"
                          class="pl-4">
-                        <a href="{{ route('products.category.hair') }}" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-[#7B1F1F] hover:bg-gray-50">Soins Capillaires</a>
-                        <a href="{{ route('products.category.styling') }}" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-[#7B1F1F] hover:bg-gray-50">Appareils de Coiffure</a>
-                        <a href="{{ route('products.category.accessories') }}" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-[#7B1F1F] hover:bg-gray-50">Accessoires</a>
+                        <a href="{{ route('products.category.makeup') }}" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-[#7B1F1F] hover:bg-gray-50">Maquillage</a>
+                        <a href="{{ route('products.category.hair') }}" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-[#7B1F1F] hover:bg-gray-50">Coiffure</a>
+                        <a href="{{ route('products.category.lingerie') }}" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-[#7B1F1F] hover:bg-gray-50">Lingerie</a>
                         <a href="{{ route('products.index') }}" class="block px-3 py-2 text-base font-medium text-[#7B1F1F] hover:text-white hover:bg-[#7B1F1F]">Voir tous les produits</a>
                     </div>
                 </div>
@@ -171,9 +171,9 @@
                 <div>
                     <h3 class="mb-4 text-lg font-semibold text-gray-900">Catégories</h3>
                     <ul class="space-y-2">
-                        <li><a href="{{ route('products.category.hair') }}" class="text-gray-600 hover:text-[#7B1F1F]">Soins Capillaires</a></li>
-                        <li><a href="{{ route('products.category.styling') }}" class="text-gray-600 hover:text-[#7B1F1F]">Appareils de Coiffure</a></li>
-                        <li><a href="{{ route('products.category.accessories') }}" class="text-gray-600 hover:text-[#7B1F1F]">Accessoires</a></li>
+                        <li><a href="{{ route('products.category.makeup') }}" class="text-gray-600 hover:text-[#7B1F1F]">Maquillage</a></li>
+                        <li><a href="{{ route('products.category.hair') }}" class="text-gray-600 hover:text-[#7B1F1F]">Coiffure</a></li>
+                        <li><a href="{{ route('products.category.lingerie') }}" class="text-gray-600 hover:text-[#7B1F1F]">Lingerie</a></li>
                         <li><a href="{{ route('products.index') }}" class="text-gray-600 hover:text-[#7B1F1F] font-medium">Voir tous les produits</a></li>
                     </ul>
                 </div>
