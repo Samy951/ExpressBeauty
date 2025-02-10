@@ -8,7 +8,7 @@ class PriceService
         [
             'min' => 0,
             'max' => 30,
-            'promo' => 2.00,
+            'promo' => 1.95,
             'link' => 'https://www.bcdxmn8trk.com/6MW5NB/2CTPL/'
         ],
         [

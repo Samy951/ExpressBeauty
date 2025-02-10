@@ -86,3 +86,8 @@ Route::prefix('brands')->group(function () {
 Route::view('/about', 'pages.about')->name('about');
 Route::view('/contact', 'pages.contact')->name('contact');
 Route::view('/faq', 'pages.faq')->name('faq');
+
+// Route pour le paiement
+Route::get('/checkout/{product}', function(App\Models\Product $product) {
+    return view('pages.checkout', ['product' => $product]);
+})->name('checkout');

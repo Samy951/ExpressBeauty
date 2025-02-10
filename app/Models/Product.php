@@ -23,11 +23,18 @@ class Product extends Model
 
     protected $casts = [
         'price' => 'float',
-        'original_price' => 'float',
-        'specifications' => 'array'
+        'original_price' => 'float'
     ];
 
     protected $appends = ['promo_price', 'payment_link'];
+
+    public function getSpecificationsAttribute($value)
+    {
+        if (is_null($value)) {
+            return [];
+        }
+        return is_array($value) ? $value : json_decode($value, true) ?? [];
+    }
 
     public function getPromoPriceAttribute()
     {
