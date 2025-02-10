@@ -58,8 +58,50 @@
     <div class="py-16 bg-white">
         <div class="container px-4 mx-auto">
             <h2 class="mb-12 text-3xl font-bold text-center">Nos Marques Phares</h2>
-            <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
-                <!-- Les marques seront ajoutées ici -->
+            <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+                <!-- Dyson -->
+                <a href="{{ route('brands.dyson') }}" class="group">
+                    <div class="relative overflow-hidden bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                        <img src="{{ asset('storage/brands/dyson.webp') }}" alt="Dyson" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="text-xl font-semibold text-gray-900 group-hover:text-[#7B1F1F] transition-colors">Dyson</h3>
+                            <p class="mt-2 text-gray-600">Innovation et Performance dans le domaine des appareils de coiffure</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- GHD -->
+                <a href="{{ route('brands.ghd') }}" class="group">
+                    <div class="relative overflow-hidden bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                        <img src="{{ asset('storage/brands/ghd.webp') }}" alt="GHD" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="text-xl font-semibold text-gray-900 group-hover:text-[#7B1F1F] transition-colors">GHD</h3>
+                            <p class="mt-2 text-gray-600">Excellence Professionnelle pour des résultats de salon à la maison</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Savage X Fenty -->
+                <a href="{{ route('brands.fenty') }}" class="group">
+                    <div class="relative overflow-hidden bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                        <img src="{{ asset('storage/brands/savage-fenty.webp') }}" alt="Savage X Fenty" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="text-xl font-semibold text-gray-900 group-hover:text-[#7B1F1F] transition-colors">Savage X Fenty</h3>
+                            <p class="mt-2 text-gray-600">Style et Inclusivité pour tous</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Fenty Beauty -->
+                <a href="{{ route('brands.fenty-beauty') }}" class="group">
+                    <div class="relative overflow-hidden bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                        <img src="{{ asset('storage/brands/fenty-beauty.webp') }}" alt="Fenty Beauty" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="text-xl font-semibold text-gray-900 group-hover:text-[#7B1F1F] transition-colors">Fenty Beauty</h3>
+                            <p class="mt-2 text-gray-600">Beauté inclusive et innovante</p>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
@@ -70,9 +112,9 @@
             <h2 class="mb-12 text-3xl font-bold text-center">Nos Produits</h2>
 
             <!-- Filtres et tri -->
-            <div class="flex flex-col md:flex-row justify-between items-center mb-8 space-y-4 md:space-y-0 md:space-x-4">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8 space-y-4 md:space-y-0">
                 <!-- Filtres -->
-                <div class="flex flex-wrap gap-4">
+                <div class="flex flex-wrap items-center gap-4 w-full md:w-auto">
                     <!-- Filtre par marque -->
                     <select wire:model.live="brand" class="rounded-full px-4 py-2 border border-gray-300 focus:outline-none focus:border-[#7B1F1F]">
                         <option value="">Toutes les marques</option>
@@ -97,25 +139,26 @@
                 </div>
 
                 <!-- Tri -->
-                <select wire:model.live="sortField" class="rounded-full px-4 py-2 border border-gray-300 focus:outline-none focus:border-[#7B1F1F]">
-                    <option value="created_at">Plus récents</option>
-                    <option value="price">Prix</option>
-                    <option value="name">Nom</option>
-                </select>
+                <div class="flex items-center gap-2 ml-auto">
+                    <select wire:model.live="sortField" class="rounded-full px-4 py-2 border border-gray-300 focus:outline-none focus:border-[#7B1F1F]">
+                        <option value="created_at">Plus récents</option>
+                        <option value="price">Prix</option>
+                        <option value="name">Nom</option>
+                    </select>
 
-                <!-- Direction du tri -->
-                <button wire:click="$set('sortDirection', '{{ $sortDirection === 'asc' ? 'desc' : 'asc' }}')"
-                        class="p-2 rounded-full hover:bg-gray-100">
-                    @if($sortDirection === 'asc')
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9M3 12h5M3 16h9M3 20h13"></path>
-                        </svg>
-                    @else
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9M3 12h5M3 16h9M3 20h13" transform="rotate(180 12 12)"></path>
-                        </svg>
-                    @endif
-                </button>
+                    <button wire:click="$set('sortDirection', '{{ $sortDirection === 'asc' ? 'desc' : 'asc' }}')"
+                            class="p-2 rounded-full hover:bg-gray-100">
+                        @if($sortDirection === 'asc')
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9M3 12h5M3 16h9M3 20h13"></path>
+                            </svg>
+                        @else
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9M3 12h5M3 16h9M3 20h13" transform="rotate(180 12 12)"></path>
+                            </svg>
+                        @endif
+                    </button>
+                </div>
             </div>
 
             <!-- Grille de produits -->
@@ -156,6 +199,100 @@
             <!-- Pagination -->
             <div class="mt-8">
                 {{ $products->links() }}
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistiques et Engagement -->
+    <div class="bg-white py-16">
+        <div class="container px-4 mx-auto">
+            <!-- Statistiques -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-16">
+                <div class="bg-gradient-to-br from-[#7B1F1F] to-[#5A1717] rounded-xl shadow-lg p-8 text-center text-white">
+                    <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/10 mb-6">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                    </div>
+                    <div class="text-3xl font-bold mb-2">10K+</div>
+                    <p class="text-gray-200">Clients Satisfaits</p>
+                </div>
+
+                <div class="bg-gradient-to-br from-[#7B1F1F] to-[#5A1717] rounded-xl shadow-lg p-8 text-center text-white">
+                    <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/10 mb-6">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                        </svg>
+                    </div>
+                    <div class="text-3xl font-bold mb-2">1000+</div>
+                    <p class="text-gray-200">Produits Disponibles</p>
+                </div>
+
+                <div class="bg-gradient-to-br from-[#7B1F1F] to-[#5A1717] rounded-xl shadow-lg p-8 text-center text-white">
+                    <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/10 mb-6">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+                        </svg>
+                    </div>
+                    <div class="text-3xl font-bold mb-2">24/7</div>
+                    <p class="text-gray-200">Service Client</p>
+                </div>
+
+                <div class="bg-gradient-to-br from-[#7B1F1F] to-[#5A1717] rounded-xl shadow-lg p-8 text-center text-white">
+                    <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/10 mb-6">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <div class="text-3xl font-bold mb-2">100%</div>
+                    <p class="text-gray-200">Produits Authentiques</p>
+                </div>
+            </div>
+
+            <!-- Engagement qualité -->
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Pourquoi Choisir ExpressBeauty ?</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow duration-300">
+                        <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-[#7B1F1F]/10 mb-6">
+                            <svg class="w-7 h-7 text-[#7B1F1F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold text-gray-900 mb-2">Qualité Garantie</h3>
+                        <p class="text-gray-600">Produits authentiques et sélectionnés avec soin</p>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow duration-300">
+                        <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-[#7B1F1F]/10 mb-6">
+                            <svg class="w-7 h-7 text-[#7B1F1F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold text-gray-900 mb-2">Prix Attractifs</h3>
+                        <p class="text-gray-600">Les meilleurs prix pour du haut de gamme</p>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow duration-300">
+                        <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-[#7B1F1F]/10 mb-6">
+                            <svg class="w-7 h-7 text-[#7B1F1F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold text-gray-900 mb-2">Livraison Express</h3>
+                        <p class="text-gray-600">Réception rapide de vos commandes</p>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow duration-300">
+                        <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-[#7B1F1F]/10 mb-6">
+                            <svg class="w-7 h-7 text-[#7B1F1F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold text-gray-900 mb-2">Support Premium</h3>
+                        <p class="text-gray-600">Une équipe dédiée à votre service</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
