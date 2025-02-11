@@ -17,6 +17,7 @@
     <link rel="apple-touch-icon" href="{{ asset('storage/icons/icon-152x152.png') }}">
 
     <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="{{ asset('storage/icons/favicon.svg') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('storage/icons/favicon-32x32.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('storage/icons/favicon-16x16.png') }}">
 
