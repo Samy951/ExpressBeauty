@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
@@ -55,18 +56,13 @@ class ProductController extends Controller
                 $query->orderBy('created_at', 'desc');
         }
 
-        $products = $query
-            ->paginate(12)
-            ->withQueryString()
-            ->through(function ($product) {
-                return $product;
-            });
+        $products = $query->paginate(12)->appends($request->query());
 
         // Debug information
-        \Log::info('Filtering products:', [
+        Log::info('Filtering products:', [
             'category' => $category,
             'brand' => $brand,
-            'count' => $products->count(),
+            'count' => $products->total(),
             'sql' => $query->toSql(),
             'bindings' => $query->getBindings()
         ]);
