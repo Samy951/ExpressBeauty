@@ -37,6 +37,11 @@ class ImportScrapedProducts extends Command
 
             foreach ($dysonProducts as $product) {
                 try {
+                    // Vérifier si l'image existe
+                    if (empty($product['Image_URL'])) {
+                        continue;
+                    }
+
                     Product::updateOrCreate(
                         ['name' => $product['Titre']],
                         [
@@ -44,9 +49,9 @@ class ImportScrapedProducts extends Command
                             'description' => $product['description_du_produit'],
                             'price' => (float) str_replace(['€', ','], ['', '.'], $product['Price']),
                             'image_url' => $product['Image_URL'],
-                            'specifications' => [
+                            'specifications' => json_encode([
                                 'rating' => $product['Rating']
-                            ]
+                            ])
                         ]
                     );
                 } catch (\Exception $e) {
@@ -67,18 +72,23 @@ class ImportScrapedProducts extends Command
 
             foreach ($ghdProducts as $product) {
                 try {
+                    // Vérifier si l'image existe
+                    if (empty($product['images'][0])) {
+                        continue;
+                    }
+
                     Product::updateOrCreate(
                         ['name' => $product['title']],
                         [
                             'brand' => 'GHD',
                             'description' => $product['description'],
                             'price' => (float) str_replace(['€', ','], ['', '.'], $product['price']['current']),
-                            'image_url' => $product['images'][0] ?? null,
-                            'specifications' => [
+                            'image_url' => $product['images'][0],
+                            'specifications' => json_encode([
                                 'rating' => $product['rating'],
                                 'url' => $product['url'],
                                 'timestamp' => $product['timestamp']
-                            ]
+                            ])
                         ]
                     );
                 } catch (\Exception $e) {
@@ -92,7 +102,7 @@ class ImportScrapedProducts extends Command
         }
 
         // Importer les produits Savage X Fenty
-        $savagePath = storage_path('app/scraping/savagexfentyProducts.json');
+        $savagePath = storage_path('app/scraping/savagexfenty_products.json');
         if (file_exists($savagePath)) {
             $savageProducts = json_decode(file_get_contents($savagePath), true);
             $this->info('Traitement de ' . count($savageProducts) . ' produits Savage X Fenty...');
@@ -106,7 +116,7 @@ class ImportScrapedProducts extends Command
                     if (!empty($product['images'])) {
                         // Filtrer les images de basse qualité
                         $filtered_images = array_filter($product['images'], function($img) {
-                            $low_quality_indicators = ['thumb', 'small', 'mini', 'preview', '150x', '300x'];
+                            $low_quality_indicators = ['150x200', '150x', '200x', 'thumb', 'small', 'mini', 'preview'];
                             foreach ($low_quality_indicators as $indicator) {
                                 if (stripos($img, $indicator) !== false) {
                                     return false;
@@ -124,31 +134,38 @@ class ImportScrapedProducts extends Command
                                 }
                             }
 
-                            // Si aucune image HD n'est trouvée, prendre la dernière image filtrée
+                            // Si aucune image HD n'est trouvée, prendre la première image filtrée
                             if (!$image_url) {
-                                $image_url = end($filtered_images);
+                                $image_url = reset($filtered_images);
                             }
                         } else {
-                            // Si toutes les images ont été filtrées, prendre la dernière du tableau original
-                            $image_url = end($product['images']);
+                            // Si toutes les images ont été filtrées, prendre la première du tableau original
+                            // en remplaçant la taille pour obtenir une meilleure qualité
+                            $image_url = str_replace(['150x200', '150x', '200x'], '800x1067', reset($product['images']));
                         }
+                    }
+
+                    // Ne pas importer si aucune image valide n'est trouvée
+                    if (!$image_url) {
+                        continue;
                     }
 
                     Product::updateOrCreate(
                         [
                             'name' => $product['title'],
-                            'specifications->color' => $color
+                            'brand' => 'Savage X Fenty',
+                            'specifications->url' => $product['url']
                         ],
                         [
-                            'brand' => 'Savage X Fenty',
                             'description' => $product['description'],
                             'price' => (float) str_replace(['€', ','], ['', '.'], $product['price']['current']),
                             'image_url' => $image_url,
-                            'specifications' => [
+                            'specifications' => json_encode([
                                 'url' => $product['url'],
                                 'timestamp' => $product['timestamp'],
-                                'color' => $color
-                            ]
+                                'color' => $color,
+                                'additional_images' => array_slice($product['images'], 1)
+                            ])
                         ]
                     );
                 } catch (\Exception $e) {
@@ -162,24 +179,48 @@ class ImportScrapedProducts extends Command
         }
 
         // Importer les produits Fenty Beauty
-        $fentyPath = storage_path('app/scraping/fentybeautyProducts.json');
+        $fentyPath = storage_path('app/scraping/fentybeauty_products.json');
         if (file_exists($fentyPath)) {
             $fentyProducts = json_decode(file_get_contents($fentyPath), true);
+            
             $this->info('Traitement de ' . count($fentyProducts) . ' produits Fenty Beauty...');
 
             foreach ($fentyProducts as $product) {
                 try {
+                    // Gestion simplifiée des images pour Fenty Beauty
+                    $images = $product['images'] ?? [];
+                    $valid_images = array_filter($images, function($img) {
+                        return 
+                            filter_var($img, FILTER_VALIDATE_URL) && 
+                            !str_contains($img, 'FB_logo.png') &&
+                            (
+                                str_contains($img, 'cdn.shopify.com/s/files') ||
+                                str_contains($img, 'fentybeauty.com/cdn/shop/files')
+                            );
+                    });
+
+                    // Ne pas importer si aucune image valide n'est trouvée
+                    if (empty($valid_images)) {
+                        continue;
+                    }
+
+                    $image_url = reset($valid_images);
+                    $additional_images = array_slice($valid_images, 1);
+
                     Product::updateOrCreate(
                         ['name' => $product['title']],
                         [
                             'brand' => 'Fenty Beauty',
                             'description' => $product['description'],
                             'price' => (float) str_replace(['€', ','], ['', '.'], $product['price']['current']),
-                            'image_url' => $product['images'][0] ?? null,
-                            'specifications' => [
+                            'promo_price' => (float) str_replace(['€', ','], ['', '.'], $product['price']['current']),
+                            'original_price' => isset($product['price']['original']) ? (float) str_replace(['€', ','], ['', '.'], $product['price']['original']) : null,
+                            'image_url' => $image_url,
+                            'specifications' => json_encode([
                                 'url' => $product['url'],
-                                'timestamp' => $product['timestamp']
-                            ]
+                                'timestamp' => $product['timestamp'],
+                                'additional_images' => $additional_images
+                            ])
                         ]
                     );
                 } catch (\Exception $e) {
