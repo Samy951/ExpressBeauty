@@ -17,12 +17,12 @@
                     <div class="p-8 md:p-12">
                         <h2 class="text-2xl font-bold text-gray-900 mb-6">Notre Histoire</h2>
                         <p class="text-gray-600 leading-relaxed mb-6">
-                            ExpressBeauty est votre destination en ligne pour les produits de beauté et de soins capillaires haut de gamme.
-                            Nous sélectionnons avec soin les meilleures marques pour vous offrir une expérience beauté exceptionnelle.
-                        </p>
+                ExpressBeauty est votre destination en ligne pour les produits de beauté et de soins capillaires haut de gamme.
+                Nous sélectionnons avec soin les meilleures marques pour vous offrir une expérience beauté exceptionnelle.
+            </p>
                         <p class="text-gray-600 leading-relaxed">
                             Notre mission est de rendre accessible les produits de beauté professionnels tout en vous garantissant une expérience d'achat unique.
-                        </p>
+            </p>
                     </div>
                     <div class="bg-gradient-to-br from-[#7B1F1F] to-[#5A1717] p-8 md:p-12 text-white">
                         <h2 class="text-2xl font-bold mb-8">Nos Valeurs</h2>
