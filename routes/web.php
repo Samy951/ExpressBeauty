@@ -96,6 +96,8 @@ Route::prefix('legal')->group(function () {
     Route::view('/mentions-legales', 'pages.legal.mentions')->name('legal.mentions');
     Route::view('/politique-de-confidentialite', 'pages.legal.privacy')->name('legal.privacy');
     Route::view('/conditions-generales-de-vente', 'pages.legal.cgv')->name('legal.cgv');
+    Route::view('/terms-and-conditions', 'pages.legal.terms')->name('legal.terms');
+    Route::view('/politique-de-remboursement', 'pages.legal.refund')->name('legal.refund');
 });
 
 // Route pour le paiement

@@ -118,7 +118,7 @@
                             <span class="text-4xl font-bold text-[#7B1F1F]">{{ number_format($product->promo_price, 2, ',', ' ') }} €</span>
                             <span class="text-lg text-gray-500 line-through">{{ number_format($product->original_price ?? $product->price, 2, ',', ' ') }} €</span>
                         </div>
-                        <p class="mt-1 text-sm text-gray-500">Plus que 2 exemplaires disponibles à ce prix</p>
+                        <p class="mt-1 text-sm text-gray-500">Quantité très limitée</p>
                     </div>
 
                     <!-- Bouton Commander avec Modal -->
@@ -156,7 +156,7 @@
                                 <!-- Message -->
                                 <div class="mb-6 text-center">
                                     <p class="mb-4 text-gray-600">En raison d'une forte demande et pour garantir l'accès au plus grand nombre, nous limitons les commandes à :</p>
-                                    <p class="font-semibold text-[#7B1F1F]">1 article par commande</p>
+                                    <p class="font-semibold text-[#7B1F1F]">1 article par commande et 1 commande par personne</p>
                                 </div>
 
                                 <!-- Boutons -->

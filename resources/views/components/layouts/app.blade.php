@@ -160,8 +160,14 @@
         <div class="px-4 mx-auto max-w-7xl">
             <div class="grid gap-8 md:grid-cols-4">
                 <div>
-                    <h3 class="mb-4 text-lg font-semibold">À Propos</h3>
-                    <p class="text-gray-200">ExpressBeauty, votre destination beauté en ligne pour des produits de qualité.</p>
+                    <h3 class="mb-4 text-lg font-semibold">Informations légales</h3>
+                    <ul class="space-y-2">
+                        <li><a href="{{ route('legal.mentions') }}" class="text-gray-200 hover:text-white">Mentions légales</a></li>
+                        <li><a href="{{ route('legal.privacy') }}" class="text-gray-200 hover:text-white">Politique de confidentialité</a></li>
+                        <li><a href="{{ route('legal.cgv') }}" class="text-gray-200 hover:text-white">Conditions générales de vente</a></li>
+                        <li><a href="{{ route('legal.terms') }}" class="text-gray-200 hover:text-white">Terms & Conditions</a></li>
+                        <li><a href="{{ route('legal.refund') }}" class="text-gray-200 hover:text-white">Politique de remboursement</a></li>
+                    </ul>
                 </div>
                 <div>
                     <h3 class="mb-4 text-lg font-semibold">Nos Marques</h3>
@@ -191,17 +197,6 @@
                 </div>
             </div>
             <div class="pt-8 mt-8 border-t border-gray-100/20">
-                <div class="grid grid-cols-2 gap-8 mb-8 md:grid-cols-4">
-                    <!-- Liens légaux -->
-                    <div>
-                        <h3 class="mb-4 text-lg font-semibold">Informations légales</h3>
-                        <ul class="space-y-2">
-                            <li><a href="{{ route('legal.mentions') }}" class="text-gray-200 hover:text-white">Mentions légales</a></li>
-                            <li><a href="{{ route('legal.privacy') }}" class="text-gray-200 hover:text-white">Politique de confidentialité</a></li>
-                            <li><a href="{{ route('legal.cgv') }}" class="text-gray-200 hover:text-white">Conditions générales de vente</a></li>
-                        </ul>
-                    </div>
-                </div>
                 <p class="text-center text-gray-200">&copy; {{ date('Y') }} ExpressBeauty. Tous droits réservés.</p>
             </div>
         </div>
