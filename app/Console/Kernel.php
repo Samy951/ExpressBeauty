@@ -15,12 +15,15 @@ class Kernel extends ConsoleKernel
      * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
      * @return void
      */
-    protected function schedule(Schedule $schedule)
+    protected function schedule(Schedule $schedule): void
     {
         $schedule->command('scrape:products')
                 ->daily()
                 ->at('02:00')
                 ->emailOutputOnFailure('ton@email.com');
+
+        // Générer le sitemap tous les jours à minuit
+        $schedule->command('sitemap:generate')->daily();
     }
 
     /**
