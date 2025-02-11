@@ -11,7 +11,7 @@
         <div class="max-w-5xl mx-auto">
             <!-- Informations de contact -->
             <div class="grid grid-cols-2 gap-8 mb-12 md:grid-cols-2">
-                <div class="p-8 text-center transition-shadow duration-300 bg-white rounded-lg shadow-md hover:shadow-lg">
+                <div class="p-8 text-center transition-shadow duration-300 rounded-lg shadow-md bg-gray-50 hover:shadow-lg">
                     <div class="inline-flex items-center justify-center w-16 h-16 mb-6 rounded-full bg-[#7B1F1F]/10">
                         <svg class="w-8 h-8 text-[#7B1F1F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
@@ -22,7 +22,7 @@
                     <a href="mailto:contact@expressbeauty.fr" class="inline-block mt-4 text-[#7B1F1F] hover:text-[#6B1A1A] font-medium">contact@expressbeauty.fr</a>
                 </div>
 
-                <div class="p-8 text-center transition-shadow duration-300 bg-white rounded-lg shadow-md hover:shadow-lg">
+                <div class="p-8 text-center transition-shadow duration-300 rounded-lg shadow-md bg-gray-50 hover:shadow-lg">
                     <div class="inline-flex items-center justify-center w-16 h-16 mb-6 rounded-full bg-[#7B1F1F]/10">
                         <svg class="w-8 h-8 text-[#7B1F1F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -35,7 +35,7 @@
             </div>
 
             <!-- Formulaire de contact -->
-            <div class="p-8 bg-white rounded-lg shadow-lg">
+            <div class="p-8 rounded-lg shadow-lg bg-gray-50">
                 <h2 class="mb-6 text-2xl font-bold text-gray-900">Envoyez-nous un message</h2>
                 <form class="space-y-6">
                     <div class="grid grid-cols-1 gap-6 md:grid-cols-2">

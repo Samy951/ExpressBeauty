@@ -11,7 +11,7 @@
     <!-- Livewire Styles -->
     @livewireStyles
 </head>
-<body class="bg-gray-100" x-data="{ mobileMenuOpen: false }">
+<body class="bg-white" x-data="{ mobileMenuOpen: false }">
     <!-- Navigation -->
     <nav class="bg-white shadow-lg">
         <div class="px-4 mx-auto max-w-7xl">
@@ -156,42 +156,42 @@
     </main>
 
     <!-- Footer -->
-    <footer class="py-6 mt-12 bg-white">
+    <footer class="py-6 bg-gradient-to-br from-[#7B1F1F] to-[#5A1717] text-white shadow-lg ">
         <div class="px-4 mx-auto max-w-7xl">
             <div class="grid gap-8 md:grid-cols-4">
                 <div>
-                    <h3 class="mb-4 text-lg font-semibold text-gray-900">À Propos</h3>
-                    <p class="text-gray-600">ExpressBeauty, votre destination beauté en ligne pour des produits de qualité.</p>
+                    <h3 class="mb-4 text-lg font-semibold">À Propos</h3>
+                    <p class="text-gray-200">ExpressBeauty, votre destination beauté en ligne pour des produits de qualité.</p>
                 </div>
                 <div>
-                    <h3 class="mb-4 text-lg font-semibold text-gray-900">Nos Marques</h3>
+                    <h3 class="mb-4 text-lg font-semibold">Nos Marques</h3>
                     <ul class="space-y-2">
-                        <li><a href="{{ route('brands.dyson') }}" class="text-gray-600 hover:text-[#7B1F1F]">Dyson</a></li>
-                        <li><a href="{{ route('brands.ghd') }}" class="text-gray-600 hover:text-[#7B1F1F]">GHD</a></li>
-                        <li><a href="{{ route('brands.fenty') }}" class="text-gray-600 hover:text-[#7B1F1F]">Savage X Fenty</a></li>
-                        <li><a href="{{ route('brands.fenty-beauty') }}" class="text-gray-600 hover:text-[#7B1F1F]">Fenty Beauty</a></li>
-                        <li><a href="{{ route('brands.index') }}" class="text-gray-600 hover:text-[#7B1F1F] font-medium">Voir toutes les marques</a></li>
+                        <li><a href="{{ route('products.brand.dyson') }}" class="text-gray-200 hover:text-white">Dyson</a></li>
+                        <li><a href="{{ route('products.brand.ghd') }}" class="text-gray-200 hover:text-white">GHD</a></li>
+                        <li><a href="{{ route('products.brand.fenty') }}" class="text-gray-200 hover:text-white">Savage X Fenty</a></li>
+                        <li><a href="{{ route('products.brand.fenty-beauty') }}" class="text-gray-200 hover:text-white">Fenty Beauty</a></li>
+                        <li><a href="{{ route('brands.index') }}" class="text-gray-200 hover:text-white font-medium">Voir toutes les marques</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h3 class="mb-4 text-lg font-semibold text-gray-900">Catégories</h3>
+                    <h3 class="mb-4 text-lg font-semibold">Catégories</h3>
                     <ul class="space-y-2">
-                        <li><a href="{{ route('products.category.makeup') }}" class="text-gray-600 hover:text-[#7B1F1F]">Maquillage</a></li>
-                        <li><a href="{{ route('products.category.hair') }}" class="text-gray-600 hover:text-[#7B1F1F]">Coiffure</a></li>
-                        <li><a href="{{ route('products.category.lingerie') }}" class="text-gray-600 hover:text-[#7B1F1F]">Lingerie</a></li>
-                        <li><a href="{{ route('products.index') }}" class="text-gray-600 hover:text-[#7B1F1F] font-medium">Voir tous les produits</a></li>
+                        <li><a href="{{ route('products.category.makeup') }}" class="text-gray-200 hover:text-white">Maquillage</a></li>
+                        <li><a href="{{ route('products.category.hair') }}" class="text-gray-200 hover:text-white">Coiffure</a></li>
+                        <li><a href="{{ route('products.category.lingerie') }}" class="text-gray-200 hover:text-white">Lingerie</a></li>
+                        <li><a href="{{ route('products.index') }}" class="text-gray-200 hover:text-white font-medium">Voir tous les produits</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h3 class="mb-4 text-lg font-semibold text-gray-900">Contact</h3>
+                    <h3 class="mb-4 text-lg font-semibold">Contact</h3>
                     <ul class="space-y-2">
-                        <li><a href="{{ route('contact') }}" class="text-gray-600 hover:text-[#7B1F1F]">Nous Contacter</a></li>
-                        <li><a href="{{ route('faq') }}" class="text-gray-600 hover:text-[#7B1F1F]">FAQ</a></li>
+                        <li><a href="{{ route('contact') }}" class="text-gray-200 hover:text-white">Nous Contacter</a></li>
+                        <li><a href="{{ route('faq') }}" class="text-gray-200 hover:text-white">FAQ</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="pt-8 mt-8 border-t border-gray-200">
-                <p class="text-center text-gray-500">&copy; {{ date('Y') }} ExpressBeauty. Tous droits réservés.</p>
+            <div class="pt-8 mt-8 border-t border-gray-100/20">
+                <p class="text-center text-gray-200">&copy; {{ date('Y') }} ExpressBeauty. Tous droits réservés.</p>
             </div>
         </div>
     </footer>
