@@ -10,6 +10,8 @@ class ProductsList extends Component
 {
     use WithPagination;
 
+    protected $paginationTheme = 'tailwind';
+
     public $search = '';
     public $brand = '';
     public $category = '';

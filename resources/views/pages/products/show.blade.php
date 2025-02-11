@@ -33,32 +33,59 @@
 
             <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
                 <!-- Colonne gauche : Carousel d'images -->
-                <div x-data="{ activeSlide: 0, slides: ['{{ $product->image_url }}', '{{ $product->image_url }}', '{{ $product->image_url }}'] }" class="relative bg-white rounded-lg">
+                <div x-data="{ 
+                    activeSlide: 0, 
+                    slides: [
+                        '{{ $product->image_url }}',
+                        @if(isset($product->specifications['additional_images']))
+                            @foreach($product->specifications['additional_images'] as $image)
+                                '{{ $image }}',
+                            @endforeach
+                        @endif
+                    ]
+                }" class="relative bg-white rounded-xl shadow-lg p-4">
                     <!-- Image principale -->
-                    <div class="relative overflow-hidden rounded-lg aspect-square">
+                    <div class="relative aspect-[3/4] overflow-hidden rounded-lg bg-white">
                         <template x-for="(slide, index) in slides" :key="index">
-                            <div x-show="activeSlide === index" class="absolute inset-0">
-                                <img :src="slide" :alt="'Image ' + (index + 1)" class="object-contain w-full h-full">
+                            <div x-show="activeSlide === index" 
+                                 x-transition:enter="transition ease-out duration-300"
+                                 x-transition:enter-start="opacity-0 transform scale-95"
+                                 x-transition:enter-end="opacity-100 transform scale-100"
+                                 x-transition:leave="transition ease-in duration-300"
+                                 x-transition:leave-start="opacity-100 transform scale-100"
+                                 x-transition:leave-end="opacity-0 transform scale-95"
+                                 class="absolute inset-0 flex items-center justify-center">
+                                <img :src="slide" 
+                                     :alt="'Image ' + (index + 1)" 
+                                     class="w-full h-full object-cover transform transition-transform duration-500">
                             </div>
                         </template>
                     </div>
 
                     <!-- Boutons de navigation -->
-                    <button @click="activeSlide = (activeSlide - 1 + slides.length) % slides.length" class="absolute flex items-center justify-center w-10 h-10 -translate-y-1/2 bg-white rounded-full shadow-lg left-4 top-1/2">
-                        <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <button @click="activeSlide = (activeSlide - 1 + slides.length) % slides.length" 
+                            class="absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:bg-white hover:shadow-xl">
+                        <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                         </svg>
                     </button>
-                    <button @click="activeSlide = (activeSlide + 1) % slides.length" class="absolute flex items-center justify-center w-10 h-10 -translate-y-1/2 bg-white rounded-full shadow-lg right-4 top-1/2">
-                        <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <button @click="activeSlide = (activeSlide + 1) % slides.length" 
+                            class="absolute right-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:bg-white hover:shadow-xl">
+                        <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                         </svg>
                     </button>
 
-                    <!-- Indicateurs -->
-                    <div class="absolute flex space-x-2 -translate-x-1/2 bottom-4 left-1/2">
+                    <!-- Miniatures -->
+                    <div class="mt-6 flex justify-center gap-4 px-4">
                         <template x-for="(slide, index) in slides" :key="index">
-                            <button @click="activeSlide = index" :class="{'bg-[#7B1F1F]': activeSlide === index, 'bg-gray-300': activeSlide !== index}" class="w-2 h-2 transition-colors rounded-full"></button>
+                            <button @click="activeSlide = index" 
+                                    :class="{'ring-2 ring-[#7B1F1F] ring-offset-2': activeSlide === index}"
+                                    class="w-20 h-24 rounded-lg overflow-hidden transition-all duration-300 hover:opacity-90 focus:outline-none">
+                                <img :src="slide" 
+                                     :alt="'Miniature ' + (index + 1)" 
+                                     class="w-full h-full object-cover">
+                            </button>
                         </template>
                     </div>
                 </div>

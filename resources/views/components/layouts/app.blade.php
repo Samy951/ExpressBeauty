@@ -65,11 +65,11 @@
                                  x-transition:leave-end="transform opacity-0 scale-95"
                                  class="absolute left-0 z-10 w-48 mt-2 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
                                 <div class="py-1">
-                                    <a href="{{ route('products.brand.dyson') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#7B1F1F] hover:text-white">Dyson</a>
-                                    <a href="{{ route('products.brand.ghd') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#7B1F1F] hover:text-white">GHD</a>
-                                    <a href="{{ route('products.brand.fenty') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#7B1F1F] hover:text-white">Savage X Fenty</a>
-                                    <a href="{{ route('products.brand.fenty-beauty') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#7B1F1F] hover:text-white">Fenty Beauty</a>
-                                    <div class="my-1 border-t border-gray-100"></div>
+                                    <a href="{{ route('brands.dyson') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#7B1F1F] hover:text-white">Dyson</a>
+                                    <a href="{{ route('brands.ghd') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#7B1F1F] hover:text-white">GHD</a>
+                                    <a href="{{ route('brands.fenty') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#7B1F1F] hover:text-white">Savage X Fenty</a>
+                                    <a href="{{ route('brands.fenty-beauty') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#7B1F1F] hover:text-white">Fenty Beauty</a>
+                                    <div class="border-t border-gray-100 my-1"></div>
                                     <a href="{{ route('brands.index') }}" class="block px-4 py-2 text-sm text-[#7B1F1F] font-medium hover:bg-[#7B1F1F] hover:text-white">Voir toutes les marques</a>
                                 </div>
                             </div>
@@ -134,10 +134,10 @@
                          x-transition:leave-start="transform opacity-100 scale-100"
                          x-transition:leave-end="transform opacity-0 scale-95"
                          class="pl-4">
-                        <a href="{{ route('products.brand.dyson') }}" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-[#7B1F1F] hover:bg-gray-50">Dyson</a>
-                        <a href="{{ route('products.brand.ghd') }}" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-[#7B1F1F] hover:bg-gray-50">GHD</a>
-                        <a href="{{ route('products.brand.fenty') }}" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-[#7B1F1F] hover:bg-gray-50">Savage X Fenty</a>
-                        <a href="{{ route('products.brand.fenty-beauty') }}" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-[#7B1F1F] hover:bg-gray-50">Fenty Beauty</a>
+                        <a href="{{ route('brands.dyson') }}" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-[#7B1F1F] hover:bg-gray-50">Dyson</a>
+                        <a href="{{ route('brands.ghd') }}" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-[#7B1F1F] hover:bg-gray-50">GHD</a>
+                        <a href="{{ route('brands.fenty') }}" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-[#7B1F1F] hover:bg-gray-50">Savage X Fenty</a>
+                        <a href="{{ route('brands.fenty-beauty') }}" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-[#7B1F1F] hover:bg-gray-50">Fenty Beauty</a>
                         <a href="{{ route('brands.index') }}" class="block px-3 py-2 text-base font-medium text-[#7B1F1F] hover:text-white hover:bg-[#7B1F1F]">Voir toutes les marques</a>
                     </div>
                 </div>
@@ -164,10 +164,10 @@
                 <div>
                     <h3 class="mb-4 text-lg font-semibold text-gray-900">Nos Marques</h3>
                     <ul class="space-y-2">
-                        <li><a href="{{ route('products.brand.dyson') }}" class="text-gray-600 hover:text-[#7B1F1F]">Dyson</a></li>
-                        <li><a href="{{ route('products.brand.ghd') }}" class="text-gray-600 hover:text-[#7B1F1F]">GHD</a></li>
-                        <li><a href="{{ route('products.brand.fenty') }}" class="text-gray-600 hover:text-[#7B1F1F]">Savage X Fenty</a></li>
-                        <li><a href="{{ route('products.brand.fenty-beauty') }}" class="text-gray-600 hover:text-[#7B1F1F]">Fenty Beauty</a></li>
+                        <li><a href="{{ route('brands.dyson') }}" class="text-gray-600 hover:text-[#7B1F1F]">Dyson</a></li>
+                        <li><a href="{{ route('brands.ghd') }}" class="text-gray-600 hover:text-[#7B1F1F]">GHD</a></li>
+                        <li><a href="{{ route('brands.fenty') }}" class="text-gray-600 hover:text-[#7B1F1F]">Savage X Fenty</a></li>
+                        <li><a href="{{ route('brands.fenty-beauty') }}" class="text-gray-600 hover:text-[#7B1F1F]">Fenty Beauty</a></li>
                         <li><a href="{{ route('brands.index') }}" class="text-gray-600 hover:text-[#7B1F1F] font-medium">Voir toutes les marques</a></li>
                     </ul>
                 </div>

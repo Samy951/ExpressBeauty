@@ -25,7 +25,11 @@ class CategoryController extends Controller
     {
         $products = Product::where('category', $category)
             ->orderBy('created_at', 'desc')
-            ->paginate(20);
+            ->paginate(20)
+            ->withQueryString()
+            ->through(function ($product) {
+                return $product;
+            });
 
         $categoryNames = [
             'hair' => 'Soins Capillaires',

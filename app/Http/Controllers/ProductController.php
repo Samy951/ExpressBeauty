@@ -55,7 +55,12 @@ class ProductController extends Controller
                 $query->orderBy('created_at', 'desc');
         }
 
-        $products = $query->paginate(12);
+        $products = $query
+            ->paginate(12)
+            ->withQueryString()
+            ->through(function ($product) {
+                return $product;
+            });
 
         // Debug information
         \Log::info('Filtering products:', [

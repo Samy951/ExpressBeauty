@@ -59,7 +59,11 @@ class BrandController extends Controller
         // Récupérer les produits de la marque avec pagination
         $products = Product::where('brand', $brandName)
             ->orderBy('created_at', 'desc')
-            ->paginate(12);
+            ->paginate(12)
+            ->withQueryString()
+            ->through(function ($product) {
+                return $product;
+            });
 
         // Informations sur la marque
         $brandInfo = [

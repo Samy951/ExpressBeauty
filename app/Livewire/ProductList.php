@@ -12,6 +12,8 @@ class ProductList extends Component
 {
     use WithPagination;
 
+    protected $paginationTheme = 'tailwind';
+
     #[Url]
     public $search = '';
 
