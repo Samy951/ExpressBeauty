@@ -54,51 +54,67 @@
         </div>
     </div>
 
-    <!-- Section Nos Marques Phares -->
+    <!-- Section "Nos Marques Phares" -->
     <div class="py-16 bg-white">
         <div class="container px-4 mx-auto">
-            <h2 class="mb-12 text-3xl font-bold text-center">Nos Marques Phares</h2>
-            <div class="grid grid-cols-2 gap-4 sm:gap-8 md:grid-cols-2 lg:grid-cols-4">
+            <h2 class="mb-12 text-3xl font-bold text-center">Nos Marques</h2>
+            <div class="grid grid-cols-1 gap-8 md:grid-cols-4">
                 <!-- Dyson -->
-                <a href="{{ route('brands.dyson') }}" class="group">
-                    <div class="relative overflow-hidden bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
-                        <img src="{{ asset('storage/brands/dyson.webp') }}" alt="Dyson" class="w-full h-48 object-cover">
-                        <div class="p-4">
-                            <h3 class="text-xl font-semibold text-gray-900 group-hover:text-[#7B1F1F] transition-colors">Dyson</h3>
-                            <p class="mt-2 text-gray-600">Innovation et Performance dans le domaine des appareils de coiffure</p>
+                <a href="{{ route('brands.dyson') }}" class="group block">
+                    <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 flex flex-col h-[350px] overflow-hidden">
+                        <div class="flex items-center justify-center h-[220px] bg-white p-8">
+                            <img src="{{ asset('storage/brands/dyson.webp') }}"
+                                 alt="Dyson"
+                                 class="w-4/5 h-4/5 object-contain mix-blend-multiply filter contrast-125">
+                        </div>
+                        <div class="flex flex-col justify-center h-[130px] p-6 text-center">
+                            <h3 class="text-2xl font-semibold text-gray-900 group-hover:text-[#7B1F1F] transition-colors mb-3">Dyson</h3>
+                            <p class="text-gray-600 text-sm">Innovation et Performance dans le domaine des appareils de coiffure</p>
                         </div>
                     </div>
                 </a>
 
                 <!-- GHD -->
-                <a href="{{ route('brands.ghd') }}" class="group">
-                    <div class="relative overflow-hidden bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
-                        <img src="{{ asset('storage/brands/ghd.webp') }}" alt="GHD" class="w-full h-48 object-cover">
-                        <div class="p-4">
-                            <h3 class="text-xl font-semibold text-gray-900 group-hover:text-[#7B1F1F] transition-colors">GHD</h3>
-                            <p class="mt-2 text-gray-600">Excellence Professionnelle pour des résultats de salon à la maison</p>
+                <a href="{{ route('brands.ghd') }}" class="group block">
+                    <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 flex flex-col h-[350px] overflow-hidden">
+                        <div class="flex items-center justify-center h-[220px] bg-black p-8">
+                            <img src="{{ asset('storage/brands/ghd.webp') }}"
+                                 alt="GHD"
+                                 class="w-4/5 h-4/5 object-contain brightness-150">
+                        </div>
+                        <div class="flex flex-col justify-center h-[130px] p-6 text-center">
+                            <h3 class="text-2xl font-semibold text-gray-900 group-hover:text-[#7B1F1F] transition-colors mb-3">GHD</h3>
+                            <p class="text-gray-600 text-sm">Excellence Professionnelle pour des résultats de salon à la maison</p>
                         </div>
                     </div>
                 </a>
 
                 <!-- Savage X Fenty -->
-                <a href="{{ route('brands.fenty') }}" class="group">
-                    <div class="relative overflow-hidden bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
-                        <img src="{{ asset('storage/brands/savage-fenty.webp') }}" alt="Savage X Fenty" class="w-full h-48 object-cover">
-                        <div class="p-4">
-                            <h3 class="text-xl font-semibold text-gray-900 group-hover:text-[#7B1F1F] transition-colors">Savage X Fenty</h3>
-                            <p class="mt-2 text-gray-600">Style et Inclusivité pour tous</p>
+                <a href="{{ route('brands.fenty') }}" class="group block">
+                    <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 flex flex-col h-[350px] overflow-hidden">
+                        <div class="flex items-center justify-center h-[220px] bg-white p-8">
+                            <img src="{{ asset('storage/brands/savage-fenty.webp') }}"
+                                 alt="Savage X Fenty"
+                                 class="w-4/5 h-4/5 object-contain mix-blend-multiply filter contrast-125">
+                        </div>
+                        <div class="flex flex-col justify-center h-[130px] p-6 text-center">
+                            <h3 class="text-2xl font-semibold text-gray-900 group-hover:text-[#7B1F1F] transition-colors mb-3">Savage X Fenty</h3>
+                            <p class="text-gray-600 text-sm">Style et Inclusivité pour tous</p>
                         </div>
                     </div>
                 </a>
 
                 <!-- Fenty Beauty -->
-                <a href="{{ route('brands.fenty-beauty') }}" class="group">
-                    <div class="relative overflow-hidden bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
-                        <img src="{{ asset('storage/brands/fenty-beauty.webp') }}" alt="Fenty Beauty" class="w-full h-48 object-cover">
-                        <div class="p-4">
-                            <h3 class="text-xl font-semibold text-gray-900 group-hover:text-[#7B1F1F] transition-colors">Fenty Beauty</h3>
-                            <p class="mt-2 text-gray-600">Beauté inclusive et innovante</p>
+                <a href="{{ route('brands.fenty-beauty') }}" class="group block">
+                    <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 flex flex-col h-[350px] overflow-hidden">
+                        <div class="flex items-center justify-center h-[220px] bg-white p-8">
+                            <img src="{{ asset('storage/brands/fenty-beauty.webp') }}"
+                                 alt="Fenty Beauty"
+                                 class="w-4/5 h-4/5 object-contain mix-blend-multiply filter contrast-125">
+                        </div>
+                        <div class="flex flex-col justify-center h-[130px] p-6 text-center">
+                            <h3 class="text-2xl font-semibold text-gray-900 group-hover:text-[#7B1F1F] transition-colors mb-3">Fenty Beauty</h3>
+                            <p class="text-gray-600 text-sm">Beauté inclusive et innovante</p>
                         </div>
                     </div>
                 </a>
@@ -275,7 +291,7 @@
                 <div class="flex flex-col items-center text-center">
                     <div class="w-12 h-12 rounded-full bg-[#F5E6E0] flex items-center justify-center mb-4">
                         <svg class="w-6 h-6 text-[#7B1F1F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path>
                         </svg>
                     </div>
                     <h3 class="font-semibold text-gray-900 mb-2">Prix Attractifs</h3>
