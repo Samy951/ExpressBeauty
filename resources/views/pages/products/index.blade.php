@@ -64,7 +64,7 @@
 
         <!-- Grille de produits -->
         <div class="container px-4 py-8 mx-auto">
-            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            <div class="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3 lg:grid-cols-4">
                 @foreach($products as $product)
                 <div class="w-full group">
                     <div class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 h-[400px] flex flex-col">

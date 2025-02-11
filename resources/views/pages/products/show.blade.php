@@ -31,7 +31,7 @@
                 </ol>
             </nav>
 
-            <div class="grid gap-12 md:grid-cols-2">
+            <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
                 <!-- Colonne gauche : Carousel d'images -->
                 <div x-data="{ activeSlide: 0, slides: ['{{ $product->image_url }}', '{{ $product->image_url }}', '{{ $product->image_url }}'] }" class="relative bg-white rounded-lg">
                     <!-- Image principale -->

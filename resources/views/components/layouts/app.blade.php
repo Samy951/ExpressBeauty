@@ -44,7 +44,7 @@
                                     <a href="{{ route('products.category.makeup') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#7B1F1F] hover:text-white">Maquillage</a>
                                     <a href="{{ route('products.category.hair') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#7B1F1F] hover:text-white">Coiffure</a>
                                     <a href="{{ route('products.category.lingerie') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#7B1F1F] hover:text-white">Lingerie</a>
-                                    <div class="border-t border-gray-100 my-1"></div>
+                                    <div class="my-1 border-t border-gray-100"></div>
                                     <a href="{{ route('products.index') }}" class="block px-4 py-2 text-sm text-[#7B1F1F] font-medium hover:bg-[#7B1F1F] hover:text-white">Voir tous les produits</a>
                                 </div>
                             </div>
@@ -69,7 +69,7 @@
                                     <a href="{{ route('products.brand.ghd') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#7B1F1F] hover:text-white">GHD</a>
                                     <a href="{{ route('products.brand.fenty') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#7B1F1F] hover:text-white">Savage X Fenty</a>
                                     <a href="{{ route('products.brand.fenty-beauty') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#7B1F1F] hover:text-white">Fenty Beauty</a>
-                                    <div class="border-t border-gray-100 my-1"></div>
+                                    <div class="my-1 border-t border-gray-100"></div>
                                     <a href="{{ route('brands.index') }}" class="block px-4 py-2 text-sm text-[#7B1F1F] font-medium hover:bg-[#7B1F1F] hover:text-white">Voir toutes les marques</a>
                                 </div>
                             </div>
@@ -156,7 +156,7 @@
     <!-- Footer -->
     <footer class="py-6 mt-12 bg-white">
         <div class="px-4 mx-auto max-w-7xl">
-            <div class="grid grid-cols-1 gap-8 md:grid-cols-4">
+            <div class="grid gap-8 md:grid-cols-4">
                 <div>
                     <h3 class="mb-4 text-lg font-semibold text-gray-900">À Propos</h3>
                     <p class="text-gray-600">ExpressBeauty, votre destination beauté en ligne pour des produits de qualité.</p>

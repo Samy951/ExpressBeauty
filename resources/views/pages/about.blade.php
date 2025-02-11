@@ -72,7 +72,7 @@
             </div>
 
             <!-- Statistiques -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-8 mb-16">
                 <div class="bg-white rounded-xl shadow-lg p-8 text-center">
                     <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#7B1F1F]/10 mb-6">
                         <svg class="w-8 h-8 text-[#7B1F1F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -107,7 +107,7 @@
             <!-- Engagement qualité -->
             <div class="bg-gradient-to-r from-gray-50 to-gray-100 rounded-2xl p-8 md:p-12">
                 <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center">Notre Engagement Qualité</h2>
-                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     <div class="flex flex-col items-center text-center">
                         <div class="w-12 h-12 rounded-full bg-[#7B1F1F] text-white flex items-center justify-center mb-4">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

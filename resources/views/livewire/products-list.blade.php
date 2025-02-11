@@ -58,7 +58,7 @@
     <div class="py-16 bg-white">
         <div class="container px-4 mx-auto">
             <h2 class="mb-12 text-3xl font-bold text-center">Nos Marques Phares</h2>
-            <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+            <div class="grid grid-cols-2 gap-4 sm:gap-8 md:grid-cols-2 lg:grid-cols-4">
                 <!-- Dyson -->
                 <a href="{{ route('brands.dyson') }}" class="group">
                     <div class="relative overflow-hidden bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
@@ -162,7 +162,7 @@
             </div>
 
             <!-- Grille de produits -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
                 @forelse($products as $product)
                     <div class="group">
                         <div class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 h-[400px] flex flex-col">
@@ -218,7 +218,7 @@
     <div class="bg-white py-16">
         <div class="container px-4 mx-auto">
             <!-- Statistiques -->
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-16">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
                 <div class="bg-gradient-to-br from-[#7B1F1F] to-[#5A1717] rounded-xl shadow-lg p-8 text-center text-white">
                     <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/10 mb-6">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -261,48 +261,45 @@
             </div>
 
             <!-- Engagement qualité -->
-            <div class="max-w-6xl mx-auto">
-                <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Pourquoi Choisir ExpressBeauty ?</h2>
-                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <div class="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow duration-300">
-                        <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-[#7B1F1F]/10 mb-6">
-                            <svg class="w-7 h-7 text-[#7B1F1F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="font-semibold text-gray-900 mb-2">Qualité Garantie</h3>
-                        <p class="text-gray-600">Produits authentiques et sélectionnés avec soin</p>
+            <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-12 h-12 rounded-full bg-[#F5E6E0] flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-[#7B1F1F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
                     </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Qualité Garantie</h3>
+                    <p class="text-gray-600">Produits authentiques et sélectionnés avec soin</p>
+                </div>
 
-                    <div class="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow duration-300">
-                        <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-[#7B1F1F]/10 mb-6">
-                            <svg class="w-7 h-7 text-[#7B1F1F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="font-semibold text-gray-900 mb-2">Prix Attractifs</h3>
-                        <p class="text-gray-600">Les meilleurs prix pour du haut de gamme</p>
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-12 h-12 rounded-full bg-[#F5E6E0] flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-[#7B1F1F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
                     </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Prix Attractifs</h3>
+                    <p class="text-gray-600">Les meilleurs prix pour du haut de gamme</p>
+                </div>
 
-                    <div class="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow duration-300">
-                        <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-[#7B1F1F]/10 mb-6">
-                            <svg class="w-7 h-7 text-[#7B1F1F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="font-semibold text-gray-900 mb-2">Livraison Express</h3>
-                        <p class="text-gray-600">Réception rapide de vos commandes</p>
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-12 h-12 rounded-full bg-[#F5E6E0] flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-[#7B1F1F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
                     </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Livraison Express</h3>
+                    <p class="text-gray-600">Réception rapide de vos commandes</p>
+                </div>
 
-                    <div class="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow duration-300">
-                        <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-[#7B1F1F]/10 mb-6">
-                            <svg class="w-7 h-7 text-[#7B1F1F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="font-semibold text-gray-900 mb-2">Support Premium</h3>
-                        <p class="text-gray-600">Une équipe dédiée à votre service</p>
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-12 h-12 rounded-full bg-[#F5E6E0] flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-[#7B1F1F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
                     </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Support Premium</h3>
+                    <p class="text-gray-600">Une équipe dédiée à votre service</p>
                 </div>
             </div>
         </div>

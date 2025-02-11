@@ -14,7 +14,7 @@
         </p>
 
         <!-- Grille des marques -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+        <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
             @foreach($brands as $brand)
             <div class="group">
                 <a href="{{ $brand['route'] }}" class="block">
@@ -23,19 +23,19 @@
                         <div class="absolute inset-0">
                             @if($brand['name'] === 'GHD')
                             <div class="w-full h-full bg-black flex items-center justify-center p-8">
-                                <img src="{{ asset($brand['image']) }}" 
-                                     alt="{{ $brand['name'] }}" 
+                                <img src="{{ asset($brand['image']) }}"
+                                     alt="{{ $brand['name'] }}"
                                      class="w-full h-full object-contain">
                             </div>
                             @else
                             <div class="w-full h-full bg-white flex items-center justify-center p-12">
-                                <img src="{{ asset($brand['image']) }}" 
-                                     alt="{{ $brand['name'] }}" 
+                                <img src="{{ asset($brand['image']) }}"
+                                     alt="{{ $brand['name'] }}"
                                      class="w-full h-full object-contain">
                             </div>
                             @endif
                         </div>
-                            
+
                         <!-- Hover Overlay -->
                         <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                             <div class="text-center text-white p-4">

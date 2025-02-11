@@ -10,7 +10,7 @@
     <div class="container px-4 py-12 mx-auto">
         <div class="max-w-5xl mx-auto">
             <!-- Informations de contact -->
-            <div class="grid grid-cols-1 gap-8 mb-12 md:grid-cols-2">
+            <div class="grid grid-cols-2 gap-8 mb-12 md:grid-cols-2">
                 <div class="p-8 text-center transition-shadow duration-300 bg-white rounded-lg shadow-md hover:shadow-lg">
                     <div class="inline-flex items-center justify-center w-16 h-16 mb-6 rounded-full bg-[#7B1F1F]/10">
                         <svg class="w-8 h-8 text-[#7B1F1F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
