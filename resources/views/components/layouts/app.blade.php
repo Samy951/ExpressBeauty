@@ -3,10 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="ExpressBeauty - Votre destination beauté en ligne. Découvrez notre sélection de produits Dyson, GHD, Fenty Beauty et Savage X Fenty à prix réduits.">
+    <meta name="description" content="@yield('description', 'ExpressBeauty - Votre destination beauté en ligne. Découvrez notre sélection de produits Dyson, GHD, Fenty Beauty et Savage X Fenty à prix réduits.')">
     <meta name="keywords" content="beauté, cosmétiques, Dyson, GHD, Fenty Beauty, Savage X Fenty, maquillage, soins capillaires, lingerie">
     <meta name="author" content="ExpressBeauty">
     <meta name="robots" content="index, follow">
+
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#7B1F1F">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="ExpressBeauty">
+    <link rel="apple-touch-icon" href="{{ asset('storage/icons/icon-152x152.png') }}">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('storage/icons/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('storage/icons/favicon-16x16.png') }}">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
@@ -14,6 +26,8 @@
     <meta property="og:title" content="@yield('title', 'ExpressBeauty - Produits de Beauté')">
     <meta property="og:description" content="@yield('description', 'ExpressBeauty - Votre destination beauté en ligne. Découvrez notre sélection de produits Dyson, GHD, Fenty Beauty et Savage X Fenty à prix réduits.')">
     <meta property="og:image" content="{{ asset('storage/og-image.jpg') }}">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="ExpressBeauty">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
@@ -24,6 +38,36 @@
 
     <!-- Canonical URL -->
     <link rel="canonical" href="{{ url()->current() }}">
+
+    <!-- Preconnect to required origins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- DNS Prefetch -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+
+    <!-- Schema.org markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "ExpressBeauty",
+        "url": "{{ config('app.url') }}",
+        "logo": "{{ asset('storage/expressBeauty.svg') }}",
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+33-1-XX-XX-XX-XX",
+            "contactType": "customer service",
+            "availableLanguage": "French"
+        },
+        "sameAs": [
+            "https://www.facebook.com/expressbeauty",
+            "https://www.instagram.com/expressbeauty",
+            "https://www.tiktok.com/@expressbeauty"
+        ]
+    }
+    </script>
 
     <title>@yield('title', 'ExpressBeauty - Produits de Beauté')</title>
 

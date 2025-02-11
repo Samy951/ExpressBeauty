@@ -1,8 +1,23 @@
 User-agent: *
 Allow: /
+Allow: /products/
+Allow: /brands/
+Allow: /categories/
+Allow: /about
+Allow: /contact
+
 Disallow: /checkout
 Disallow: /admin
 Disallow: /login
 Disallow: /register
+Disallow: /storage/
+Disallow: /vendor/
+Disallow: /*.json$
+Disallow: /*.js$
+Disallow: /*.css$
+Disallow: /*?*
+
+# Paramètres de crawl
+Crawl-delay: 10
 
 Sitemap: https://expressbeauty.fr/sitemap.xml
