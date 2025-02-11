@@ -84,9 +84,9 @@
             <div class="flex justify-between h-16">
                 <!-- Logo et Navigation principale -->
                 <div class="flex items-center">
-                    <div class="flex-shrink-0">
+                    <div class="flex-shrink-0 flex items-center justify-start">
                         <a href="/" class="block">
-                            <img src="{{ asset('storage/expressBeauty.svg') }}" alt="ExpressBeauty" class="h-[57px] w-[193px]">
+                            <img src="{{ asset('storage/expressBeauty.svg') }}" alt="ExpressBeauty" class="h-[45px] w-[160px] md:h-[57px] md:w-[193px]">
                         </a>
                     </div>
                     <div class="hidden space-x-8 md:flex md:ml-10">

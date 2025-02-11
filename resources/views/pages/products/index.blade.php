@@ -24,15 +24,15 @@
             <div class="flex flex-col items-center justify-between space-y-4 md:flex-row md:space-y-0">
                 <!-- Filtres de marque et catégorie (visibles uniquement sur la page principale des produits) -->
                 @if(request()->route()->getName() === 'products.index')
-                <div class="flex space-x-4">
-                    <select x-model="brand" @change="updateFilters()" class="rounded-full px-4 py-2 border border-gray-300 focus:outline-none focus:border-[#7B1F1F]">
+                <div class="flex flex-col w-full space-y-2 md:flex-row md:space-y-0 md:space-x-4 md:w-auto">
+                    <select x-model="brand" @change="updateFilters()" class="w-full px-4 py-2 border rounded-full border-gray-300 focus:outline-none focus:border-[#7B1F1F] md:w-auto">
                         <option value="">Toutes les marques</option>
                         <option value="Dyson">Dyson</option>
                         <option value="GHD">GHD</option>
                         <option value="Savage X Fenty">Savage X Fenty</option>
                         <option value="Fenty Beauty">Fenty Beauty</option>
                     </select>
-                    <select x-model="category" @change="updateFilters()" class="rounded-full px-4 py-2 border border-gray-300 focus:outline-none focus:border-[#7B1F1F]">
+                    <select x-model="category" @change="updateFilters()" class="w-full px-4 py-2 border rounded-full border-gray-300 focus:outline-none focus:border-[#7B1F1F] md:w-auto">
                         <option value="">Toutes les catégories</option>
                         <option value="makeup">Maquillage</option>
                         <option value="hair">Soins Capillaires</option>
@@ -42,8 +42,8 @@
                 @endif
 
                 <!-- Tri (toujours visible) -->
-                <div class="flex items-center space-x-4 {{ request()->route()->getName() === 'products.index' ? '' : 'w-full justify-end' }}">
-                    <select x-model="sort" @change="updateFilters()" class="rounded-full px-4 py-2 border border-gray-300 focus:outline-none focus:border-[#7B1F1F]">
+                <div class="flex items-center w-full md:w-auto {{ request()->route()->getName() === 'products.index' ? '' : 'justify-end' }}">
+                    <select x-model="sort" @change="updateFilters()" class="w-full px-4 py-2 border rounded-full border-gray-300 focus:outline-none focus:border-[#7B1F1F] md:w-auto">
                         <option value="created_at">Plus récents</option>
                         <option value="price-asc">Prix croissant</option>
                         <option value="price-desc">Prix décroissant</option>
