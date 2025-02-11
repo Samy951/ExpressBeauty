@@ -128,37 +128,111 @@
                     </a>
 
                     <!-- Carousel Avis Clients -->
-                    <div x-data="{ activeReview: 0, reviews: [
-                        { name: 'Anaïs J.', text: 'Un incontournable, très belle surprise !', rating: 5, verified: true },
-                        { name: 'Marie L.', text: 'Excellent produit, je recommande vivement !', rating: 5, verified: true },
-                        { name: 'Sophie D.', text: 'Parfait, correspond totalement à mes attentes.', rating: 5, verified: true }
-                    ]}" class="w-full bg-white">
-                        <div class="relative">
+                    <div x-data="{ 
+                        activeReview: 0,
+                        allReviews: [
+                            { name: 'Anaïs J.', text: 'Produit de très bonne qualité, la livraison a été rapide. Je recommande vivement !', rating: 5, verified: true, date: '8 Février 2025', avatar: '👩🏻' },
+                            { name: 'Thomas M.', text: 'Excellent rapport qualité-prix, je suis très satisfait de mon achat.', rating: 5, verified: true, date: '5 Février 2025', avatar: '👨🏼' },
+                            { name: 'Sophie D.', text: 'Exactement ce que je cherchais ! Le produit correspond parfaitement à la description.', rating: 5, verified: true, date: '2 Février 2025', avatar: '👩🏽' },
+                            { name: 'Laurent P.', text: 'Très satisfait de mon achat. Le service client est également très réactif.', rating: 5, verified: true, date: '30 Janvier 2025', avatar: '👨🏻' },
+                            { name: 'Emma L.', text: 'Très bonne qualité de fabrication, je suis agréablement surprise !', rating: 5, verified: true, date: '28 Janvier 2025', avatar: '👩🏼' },
+                            { name: 'Marie C.', text: 'Super produit, je l\'utilise tous les jours ! La qualité est au rendez-vous.', rating: 5, verified: true, date: '25 Janvier 2025', avatar: '👩🏻' },
+                            { name: 'Alexandre B.', text: 'Très bon produit, quelques petits détails pourraient être améliorés.', rating: 4, verified: true, date: '22 Janvier 2025', avatar: '👨🏽' },
+                            { name: 'Sarah K.', text: 'Produit conforme à mes attentes. Emballage soigné et livraison rapide.', rating: 5, verified: true, date: '20 Janvier 2025', avatar: '👩🏽' },
+                            { name: 'Nicolas R.', text: 'Très satisfait de la qualité, je recommande fortement.', rating: 5, verified: true, date: '18 Janvier 2025', avatar: '👨🏼' },
+                            { name: 'Julie M.', text: 'Excellent produit, je recommande à 100% !', rating: 5, verified: true, date: '15 Janvier 2025', avatar: '👩🏻' },
+                            { name: 'Camille D.', text: 'Très contente de mon achat, la qualité est vraiment au rendez-vous.', rating: 5, verified: true, date: '12 Janvier 2025', avatar: '👩🏼' },
+                            { name: 'Pierre L.', text: 'Bon produit dans l\'ensemble, répond bien à mes besoins.', rating: 4, verified: true, date: '10 Janvier 2025', avatar: '👨🏻' },
+                            { name: 'Léa B.', text: 'Super satisfaite de mon achat, je recommande vivement !', rating: 5, verified: true, date: '8 Janvier 2025', avatar: '👩🏽' },
+                            { name: 'Marc T.', text: 'Très bonne expérience d\'achat, produit de qualité.', rating: 5, verified: true, date: '5 Janvier 2025', avatar: '👨🏼' },
+                            { name: 'Chloé F.', text: 'Excellent produit, conforme à la description. Je recommande !', rating: 5, verified: true, date: '2 Janvier 2025', avatar: '👩🏻' }
+                        ],
+                        reviews: [],
+                        init() {
+                            // Utiliser l'ID du produit pour générer un seed constant
+                            const productId = {{ $product->id }};
+                            const numReviews = 8; // Nombre d'avis à afficher par produit
+                            
+                            // Fonction de mélange avec seed
+                            const seededShuffle = (array, seed) => {
+                                let currentIndex = array.length;
+                                let temporaryValue, randomIndex;
+                                
+                                // Créer un générateur de nombres pseudo-aléatoires basé sur le seed
+                                const random = () => {
+                                    seed = (seed * 9301 + 49297) % 233280;
+                                    return seed / 233280;
+                                };
+
+                                while (currentIndex !== 0) {
+                                    randomIndex = Math.floor(random() * currentIndex);
+                                    currentIndex -= 1;
+                                    temporaryValue = array[currentIndex];
+                                    array[currentIndex] = array[randomIndex];
+                                    array[randomIndex] = temporaryValue;
+                                }
+
+                                return array;
+                            };
+
+                            // Copier et mélanger les avis de manière déterministe
+                            const shuffledReviews = seededShuffle([...this.allReviews], productId);
+                            this.reviews = shuffledReviews.slice(0, numReviews);
+                        }
+                    }" 
+                    x-init="init()"
+                    class="w-full bg-white rounded-xl shadow-lg p-6 mt-8">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4 text-center">Avis de nos clients</h3>
+                        
+                        <div class="relative overflow-hidden">
                             <!-- Navigation -->
                             <button @click="activeReview = (activeReview - 1 + reviews.length) % reviews.length"
-                                    class="absolute left-0 flex items-center justify-center w-8 h-8 text-gray-400 -translate-y-1/2 top-1/2 hover:text-gray-600">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    class="absolute left-0 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:bg-[#7B1F1F] hover:text-white z-10">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                                 </svg>
                             </button>
 
                             <!-- Avis -->
-                            <div class="px-12 py-6">
+                            <div class="relative h-[180px]">
                                 <template x-for="(review, index) in reviews" :key="index">
                                     <div x-show="activeReview === index"
-                                         class="text-center">
-                                        <p class="mb-4 text-lg text-gray-800" x-text="review.text"></p>
+                                         x-transition:enter="transition ease-out duration-300"
+                                         x-transition:enter-start="opacity-0 transform translate-x-full"
+                                         x-transition:enter-end="opacity-100 transform translate-x-0"
+                                         x-transition:leave="transition ease-in duration-300"
+                                         x-transition:leave-start="opacity-100 transform translate-x-0"
+                                         x-transition:leave-end="opacity-0 transform -translate-x-full"
+                                         class="absolute inset-0 flex flex-col items-center justify-center px-8">
+                                        <div class="mb-2 transform transition-all duration-300">
+                                            <span x-text="review.avatar" class="text-3xl"></span>
+                                        </div>
+                                        <p class="mb-2 text-base text-gray-800 italic text-center" x-text="review.text"></p>
                                         <div class="flex flex-col items-center">
-                                            <div class="flex items-center gap-2 mb-2">
+                                            <div class="flex items-center gap-2 mb-1">
                                                 <span class="font-medium text-gray-900" x-text="review.name"></span>
-                                                <span x-show="review.verified" class="bg-green-50 text-green-700 text-xs px-2 py-0.5 rounded-full">Vérifié</span>
-                                            </div>
-                                            <div class="flex">
-                                                <template x-for="star in review.rating">
-                                                    <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                                <span x-show="review.verified" 
+                                                      class="bg-green-50 text-green-700 text-xs px-2 py-0.5 rounded-full flex items-center gap-1">
+                                                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                                     </svg>
-                                                </template>
+                                                    Vérifié
+                                                </span>
+                                            </div>
+                                            <div class="flex items-center gap-1">
+                                                <div class="flex">
+                                                    <template x-for="star in review.rating">
+                                                        <svg class="w-3 h-3 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                                        </svg>
+                                                    </template>
+                                                    <template x-for="star in (5 - review.rating)">
+                                                        <svg class="w-3 h-3 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
+                                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                                        </svg>
+                                                    </template>
+                                                </div>
+                                                <span class="text-xs text-gray-500" x-text="review.date"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -166,11 +240,20 @@
                             </div>
 
                             <button @click="activeReview = (activeReview + 1) % reviews.length"
-                                    class="absolute right-0 flex items-center justify-center w-8 h-8 text-gray-400 -translate-y-1/2 top-1/2 hover:text-gray-600">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    class="absolute right-0 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:bg-[#7B1F1F] hover:text-white z-10">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                                 </svg>
                             </button>
+
+                            <!-- Indicateurs -->
+                            <div class="flex justify-center gap-1.5 mt-2">
+                                <template x-for="(review, index) in reviews" :key="index">
+                                    <button @click="activeReview = index"
+                                            :class="{'bg-[#7B1F1F]': activeReview === index, 'bg-gray-300': activeReview !== index}"
+                                            class="w-1.5 h-1.5 rounded-full transition-all duration-300"></button>
+                                </template>
+                            </div>
                         </div>
                     </div>
                 </div>

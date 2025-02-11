@@ -37,8 +37,16 @@ class ImportScrapedProducts extends Command
 
             foreach ($dysonProducts as $product) {
                 try {
-                    // Vérifier si l'image existe
-                    if (empty($product['Image_URL'])) {
+                    // Vérifier et valider les images
+                    $images = [];
+                    if (!empty($product['Image_URL']) && 
+                        filter_var($product['Image_URL'], FILTER_VALIDATE_URL) && 
+                        str_contains($product['Image_URL'], 'dyson-h.assetsadobe2.com')) {
+                        $images[] = $product['Image_URL'];
+                    }
+
+                    // Ne pas importer si aucune image valide n'est trouvée
+                    if (empty($images)) {
                         continue;
                     }
 
@@ -48,9 +56,10 @@ class ImportScrapedProducts extends Command
                             'brand' => 'Dyson',
                             'description' => $product['description_du_produit'],
                             'price' => (float) str_replace(['€', ','], ['', '.'], $product['Price']),
-                            'image_url' => $product['Image_URL'],
+                            'image_url' => $images[0],
                             'specifications' => json_encode([
-                                'rating' => $product['Rating']
+                                'rating' => $product['Rating'],
+                                'additional_images' => array_slice($images, 1)
                             ])
                         ]
                     );
@@ -114,34 +123,22 @@ class ImportScrapedProducts extends Command
                     // Amélioration de la sélection d'image
                     $image_url = null;
                     if (!empty($product['images'])) {
-                        // Filtrer les images de basse qualité
+                        // Vérifier si les URLs sont valides
                         $filtered_images = array_filter($product['images'], function($img) {
-                            $low_quality_indicators = ['150x200', '150x', '200x', 'thumb', 'small', 'mini', 'preview'];
-                            foreach ($low_quality_indicators as $indicator) {
-                                if (stripos($img, $indicator) !== false) {
-                                    return false;
-                                }
-                            }
-                            return true;
+                            return 
+                                filter_var($img, FILTER_VALIDATE_URL) && 
+                                (
+                                    str_contains($img, 'cdn.savagex.com') ||
+                                    str_contains($img, 'savagex.com')
+                                );
                         });
 
                         if (!empty($filtered_images)) {
-                            // Chercher d'abord les images HD ou haute qualité
-                            foreach ($filtered_images as $img) {
-                                if (preg_match('/(hd|HD|high|large|original|full|zoom|[0-9]{4,}x[0-9]{4,})/', $img)) {
-                                    $image_url = $img;
-                                    break;
-                                }
-                            }
-
-                            // Si aucune image HD n'est trouvée, prendre la première image filtrée
-                            if (!$image_url) {
-                                $image_url = reset($filtered_images);
-                            }
-                        } else {
-                            // Si toutes les images ont été filtrées, prendre la première du tableau original
-                            // en remplaçant la taille pour obtenir une meilleure qualité
-                            $image_url = str_replace(['150x200', '150x', '200x'], '800x1067', reset($product['images']));
+                            // Prendre la première image comme image principale
+                            $image_url = reset($filtered_images);
+                            
+                            // Stocker toutes les autres images comme images additionnelles
+                            $additional_images = array_slice($filtered_images, 1);
                         }
                     }
 
@@ -164,7 +161,7 @@ class ImportScrapedProducts extends Command
                                 'url' => $product['url'],
                                 'timestamp' => $product['timestamp'],
                                 'color' => $color,
-                                'additional_images' => array_slice($product['images'], 1)
+                                'additional_images' => $additional_images
                             ])
                         ]
                     );
