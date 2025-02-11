@@ -33,8 +33,8 @@
 
             <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
                 <!-- Colonne gauche : Carousel d'images -->
-                <div x-data="{ 
-                    activeSlide: 0, 
+                <div x-data="{
+                    activeSlide: 0,
                     slides: [
                         '{{ $product->image_url }}',
                         @if(isset($product->specifications['additional_images']))
@@ -43,11 +43,11 @@
                             @endforeach
                         @endif
                     ]
-                }" class="relative bg-white rounded-xl shadow-lg p-4">
+                }" class="relative p-4 bg-white shadow-lg rounded-xl">
                     <!-- Image principale -->
                     <div class="relative aspect-[3/4] overflow-hidden rounded-lg bg-white">
                         <template x-for="(slide, index) in slides" :key="index">
-                            <div x-show="activeSlide === index" 
+                            <div x-show="activeSlide === index"
                                  x-transition:enter="transition ease-out duration-300"
                                  x-transition:enter-start="opacity-0 transform scale-95"
                                  x-transition:enter-end="opacity-100 transform scale-100"
@@ -55,36 +55,36 @@
                                  x-transition:leave-start="opacity-100 transform scale-100"
                                  x-transition:leave-end="opacity-0 transform scale-95"
                                  class="absolute inset-0 flex items-center justify-center">
-                                <img :src="slide" 
-                                     :alt="'Image ' + (index + 1)" 
-                                     class="w-full h-full object-cover transform transition-transform duration-500">
+                                <img :src="slide"
+                                     :alt="'Image ' + (index + 1)"
+                                     class="object-cover w-full h-full transition-transform duration-500 transform">
                             </div>
                         </template>
                     </div>
 
                     <!-- Boutons de navigation -->
-                    <button @click="activeSlide = (activeSlide - 1 + slides.length) % slides.length" 
-                            class="absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:bg-white hover:shadow-xl">
+                    <button @click="activeSlide = (activeSlide - 1 + slides.length) % slides.length"
+                            class="absolute flex items-center justify-center w-12 h-12 transition-all duration-300 -translate-y-1/2 rounded-full shadow-lg left-6 top-1/2 bg-white/90 backdrop-blur-sm hover:bg-white hover:shadow-xl">
                         <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                         </svg>
                     </button>
-                    <button @click="activeSlide = (activeSlide + 1) % slides.length" 
-                            class="absolute right-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:bg-white hover:shadow-xl">
+                    <button @click="activeSlide = (activeSlide + 1) % slides.length"
+                            class="absolute flex items-center justify-center w-12 h-12 transition-all duration-300 -translate-y-1/2 rounded-full shadow-lg right-6 top-1/2 bg-white/90 backdrop-blur-sm hover:bg-white hover:shadow-xl">
                         <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                         </svg>
                     </button>
 
                     <!-- Miniatures -->
-                    <div class="mt-6 flex justify-center gap-4 px-4">
+                    <div class="flex justify-center gap-4 px-4 mt-6">
                         <template x-for="(slide, index) in slides" :key="index">
-                            <button @click="activeSlide = index" 
+                            <button @click="activeSlide = index"
                                     :class="{'ring-2 ring-[#7B1F1F] ring-offset-2': activeSlide === index}"
-                                    class="w-20 h-24 rounded-lg overflow-hidden transition-all duration-300 hover:opacity-90 focus:outline-none">
-                                <img :src="slide" 
-                                     :alt="'Miniature ' + (index + 1)" 
-                                     class="w-full h-full object-cover">
+                                    class="w-20 h-24 overflow-hidden transition-all duration-300 rounded-lg hover:opacity-90 focus:outline-none">
+                                <img :src="slide"
+                                     :alt="'Miniature ' + (index + 1)"
+                                     class="object-cover w-full h-full">
                             </button>
                         </template>
                     </div>
@@ -121,14 +121,61 @@
                         <p class="mt-1 text-sm text-gray-500">Plus que 2 exemplaires disponibles à ce prix</p>
                     </div>
 
-                    <!-- Bouton Commander -->
-                    <a href="{{ route('checkout', $product) }}"
-                       class="w-full bg-[#7B1F1F] text-white text-center py-4 rounded-lg font-semibold mb-2 hover:bg-[#7B1F1F]/90 transition-colors">
-                        Commander | {{ number_format($product->promo_price, 2, ',', ' ') }} €
-                    </a>
+                    <!-- Bouton Commander avec Modal -->
+                    <div x-data="{ showModal: false }">
+                        <!-- Bouton Commander -->
+                        <button @click="showModal = true"
+                                class="w-full bg-[#7B1F1F] text-white text-center py-4 rounded-lg font-semibold mb-2 hover:bg-[#7B1F1F]/90 transition-colors">
+                            Commander | {{ number_format($product->promo_price, 2, ',', ' ') }} €
+                        </button>
+
+                        <!-- Modal de confirmation -->
+                        <div x-show="showModal"
+                             x-transition:enter="transition ease-out duration-300"
+                             x-transition:enter-start="opacity-0"
+                             x-transition:enter-end="opacity-100"
+                             x-transition:leave="transition ease-in duration-200"
+                             x-transition:leave-start="opacity-100"
+                             x-transition:leave-end="opacity-0"
+                             class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+                             @click.self="showModal = false">
+
+                            <div class="relative w-full max-w-md p-6 mx-4 bg-white rounded-lg shadow-xl"
+                                 @click.away="showModal = false">
+
+                                <!-- Icône d'information -->
+                                <div class="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-full bg-[#7B1F1F]/10">
+                                    <svg class="w-8 h-8 text-[#7B1F1F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                </div>
+
+                                <!-- Titre -->
+                                <h3 class="mb-4 text-xl font-bold text-center text-gray-900">Information importante</h3>
+
+                                <!-- Message -->
+                                <div class="mb-6 text-center">
+                                    <p class="mb-4 text-gray-600">En raison d'une forte demande et pour garantir l'accès au plus grand nombre, nous limitons les commandes à :</p>
+                                    <p class="font-semibold text-[#7B1F1F]">1 article par commande</p>
+                                </div>
+
+                                <!-- Boutons -->
+                                <div class="flex justify-center space-x-4">
+                                    <button @click="showModal = false"
+                                            class="px-4 py-2 text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none">
+                                        Annuler
+                                    </button>
+                                    <a href="{{ route('checkout', $product) }}"
+                                       class="px-4 py-2 text-white rounded-lg bg-[#7B1F1F] hover:bg-[#6B1A1A] focus:outline-none">
+                                        Continuer la commande
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <!-- Carousel Avis Clients -->
-                    <div x-data="{ 
+                    <div x-data="{
                         activeReview: 0,
                         allReviews: [
                             { name: 'Anaïs J.', text: 'Produit de très bonne qualité, la livraison a été rapide. Je recommande vivement !', rating: 5, verified: true, date: '8 Février 2025', avatar: '👩🏻' },
@@ -152,12 +199,12 @@
                             // Utiliser l'ID du produit pour générer un seed constant
                             const productId = {{ $product->id }};
                             const numReviews = 8; // Nombre d'avis à afficher par produit
-                            
+
                             // Fonction de mélange avec seed
                             const seededShuffle = (array, seed) => {
                                 let currentIndex = array.length;
                                 let temporaryValue, randomIndex;
-                                
+
                                 // Créer un générateur de nombres pseudo-aléatoires basé sur le seed
                                 const random = () => {
                                     seed = (seed * 9301 + 49297) % 233280;
@@ -179,11 +226,11 @@
                             const shuffledReviews = seededShuffle([...this.allReviews], productId);
                             this.reviews = shuffledReviews.slice(0, numReviews);
                         }
-                    }" 
+                    }"
                     x-init="init()"
-                    class="w-full bg-white rounded-xl shadow-lg p-6 mt-8">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-4 text-center">Avis de nos clients</h3>
-                        
+                    class="w-full p-6 mt-8 bg-white shadow-lg rounded-xl">
+                        <h3 class="mb-4 text-lg font-semibold text-center text-gray-900">Avis de nos clients</h3>
+
                         <div class="relative overflow-hidden">
                             <!-- Navigation -->
                             <button @click="activeReview = (activeReview - 1 + reviews.length) % reviews.length"
@@ -204,14 +251,14 @@
                                          x-transition:leave-start="opacity-100 transform translate-x-0"
                                          x-transition:leave-end="opacity-0 transform -translate-x-full"
                                          class="absolute inset-0 flex flex-col items-center justify-center px-8">
-                                        <div class="mb-2 transform transition-all duration-300">
+                                        <div class="mb-2 transition-all duration-300 transform">
                                             <span x-text="review.avatar" class="text-3xl"></span>
                                         </div>
-                                        <p class="mb-2 text-base text-gray-800 italic text-center" x-text="review.text"></p>
+                                        <p class="mb-2 text-base italic text-center text-gray-800" x-text="review.text"></p>
                                         <div class="flex flex-col items-center">
                                             <div class="flex items-center gap-2 mb-1">
                                                 <span class="font-medium text-gray-900" x-text="review.name"></span>
-                                                <span x-show="review.verified" 
+                                                <span x-show="review.verified"
                                                       class="bg-green-50 text-green-700 text-xs px-2 py-0.5 rounded-full flex items-center gap-1">
                                                     <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                                                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
