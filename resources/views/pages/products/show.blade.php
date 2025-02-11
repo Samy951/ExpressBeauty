@@ -35,7 +35,7 @@
                 <!-- Colonne gauche : Carousel d'images -->
                 <div x-data="{ activeSlide: 0, slides: ['{{ $product->image_url }}', '{{ $product->image_url }}', '{{ $product->image_url }}'] }" class="relative bg-white rounded-lg">
                     <!-- Image principale -->
-                    <div class="relative aspect-square overflow-hidden rounded-lg">
+                    <div class="relative overflow-hidden rounded-lg aspect-square">
                         <template x-for="(slide, index) in slides" :key="index">
                             <div x-show="activeSlide === index" class="absolute inset-0">
                                 <img :src="slide" :alt="'Image ' + (index + 1)" class="object-contain w-full h-full">
@@ -44,21 +44,21 @@
                     </div>
 
                     <!-- Boutons de navigation -->
-                    <button @click="activeSlide = (activeSlide - 1 + slides.length) % slides.length" class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center">
+                    <button @click="activeSlide = (activeSlide - 1 + slides.length) % slides.length" class="absolute flex items-center justify-center w-10 h-10 -translate-y-1/2 bg-white rounded-full shadow-lg left-4 top-1/2">
                         <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                         </svg>
                     </button>
-                    <button @click="activeSlide = (activeSlide + 1) % slides.length" class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center">
+                    <button @click="activeSlide = (activeSlide + 1) % slides.length" class="absolute flex items-center justify-center w-10 h-10 -translate-y-1/2 bg-white rounded-full shadow-lg right-4 top-1/2">
                         <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                         </svg>
                     </button>
 
                     <!-- Indicateurs -->
-                    <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
+                    <div class="absolute flex space-x-2 -translate-x-1/2 bottom-4 left-1/2">
                         <template x-for="(slide, index) in slides" :key="index">
-                            <button @click="activeSlide = index" :class="{'bg-[#7B1F1F]': activeSlide === index, 'bg-gray-300': activeSlide !== index}" class="w-2 h-2 rounded-full transition-colors"></button>
+                            <button @click="activeSlide = index" :class="{'bg-[#7B1F1F]': activeSlide === index, 'bg-gray-300': activeSlide !== index}" class="w-2 h-2 transition-colors rounded-full"></button>
                         </template>
                     </div>
                 </div>
@@ -71,7 +71,7 @@
                     </div>
 
                     <!-- Nom du produit -->
-                    <h1 class="text-3xl font-bold text-gray-900 mb-4">{{ $product->name }}</h1>
+                    <h1 class="mb-4 text-3xl font-bold text-gray-900">{{ $product->name }}</h1>
 
                     <!-- Avis clients -->
                     <div class="flex items-center gap-4 mb-6">
@@ -99,7 +99,6 @@
                        class="w-full bg-[#7B1F1F] text-white text-center py-4 rounded-lg font-semibold mb-2 hover:bg-[#7B1F1F]/90 transition-colors">
                         Commander | {{ number_format($product->promo_price, 2, ',', ' ') }} €
                     </a>
-                    <p class="mb-8 text-xs text-center text-gray-500">Sweepstakes Disclaimer *</p>
 
                     <!-- Carousel Avis Clients -->
                     <div x-data="{ activeReview: 0, reviews: [
@@ -110,7 +109,7 @@
                         <div class="relative">
                             <!-- Navigation -->
                             <button @click="activeReview = (activeReview - 1 + reviews.length) % reviews.length"
-                                    class="absolute left-0 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gray-600">
+                                    class="absolute left-0 flex items-center justify-center w-8 h-8 text-gray-400 -translate-y-1/2 top-1/2 hover:text-gray-600">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                                 </svg>
@@ -121,7 +120,7 @@
                                 <template x-for="(review, index) in reviews" :key="index">
                                     <div x-show="activeReview === index"
                                          class="text-center">
-                                        <p class="text-lg text-gray-800 mb-4" x-text="review.text"></p>
+                                        <p class="mb-4 text-lg text-gray-800" x-text="review.text"></p>
                                         <div class="flex flex-col items-center">
                                             <div class="flex items-center gap-2 mb-2">
                                                 <span class="font-medium text-gray-900" x-text="review.name"></span>
@@ -140,7 +139,7 @@
                             </div>
 
                             <button @click="activeReview = (activeReview + 1) % reviews.length"
-                                    class="absolute right-0 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gray-600">
+                                    class="absolute right-0 flex items-center justify-center w-8 h-8 text-gray-400 -translate-y-1/2 top-1/2 hover:text-gray-600">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                                 </svg>

@@ -40,6 +40,9 @@ Route::prefix('products')->group(function () {
     Route::get('/brand/fenty', [ProductController::class, 'index'])
         ->defaults('brand', 'Savage X Fenty')
         ->name('products.brand.fenty');
+    Route::get('/brand/fenty-beauty', [ProductController::class, 'index'])
+        ->defaults('brand', 'Fenty Beauty')
+        ->name('products.brand.fenty-beauty');
 
     // Détail d'un produit
     Route::get('/{product}', [ProductController::class, 'show'])->name('products.show');
