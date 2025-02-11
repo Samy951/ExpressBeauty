@@ -91,6 +91,13 @@ Route::view('/contact', 'pages.contact')->name('contact');
 Route::view('/faq', 'pages.faq')->name('faq');
 Route::view('/order-tracking', 'pages.order-tracking')->name('order.tracking');
 
+// Pages légales
+Route::prefix('legal')->group(function () {
+    Route::view('/mentions-legales', 'pages.legal.mentions')->name('legal.mentions');
+    Route::view('/politique-de-confidentialite', 'pages.legal.privacy')->name('legal.privacy');
+    Route::view('/conditions-generales-de-vente', 'pages.legal.cgv')->name('legal.cgv');
+});
+
 // Route pour le paiement
 Route::get('/checkout/{product}', function(App\Models\Product $product) {
     return view('pages.checkout', ['product' => $product]);

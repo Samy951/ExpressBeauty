@@ -191,6 +191,17 @@
                 </div>
             </div>
             <div class="pt-8 mt-8 border-t border-gray-200">
+                <div class="grid grid-cols-2 gap-8 mb-8 md:grid-cols-4">
+                    <!-- Liens légaux -->
+                    <div>
+                        <h3 class="mb-4 text-lg font-semibold text-gray-900">Informations légales</h3>
+                        <ul class="space-y-2">
+                            <li><a href="{{ route('legal.mentions') }}" class="text-gray-600 hover:text-[#7B1F1F]">Mentions légales</a></li>
+                            <li><a href="{{ route('legal.privacy') }}" class="text-gray-600 hover:text-[#7B1F1F]">Politique de confidentialité</a></li>
+                            <li><a href="{{ route('legal.cgv') }}" class="text-gray-600 hover:text-[#7B1F1F]">Conditions générales de vente</a></li>
+                        </ul>
+                    </div>
+                </div>
                 <p class="text-center text-gray-500">&copy; {{ date('Y') }} ExpressBeauty. Tous droits réservés.</p>
             </div>
         </div>
