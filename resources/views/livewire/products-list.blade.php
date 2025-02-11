@@ -2,7 +2,7 @@
     <!-- Bannière de déstockage -->
     <div class="bg-[#7B1F1F] text-white py-2 text-center">
         <p class="text-sm">
-            ⚡ DÉSTOCKAGE : JUSQU'À -70% SUR TOUT ! LIMITÉ À UN PRODUIT PAR PERSONNE, FAITES VITE ! ⚡
+            ⚡ DÉSTOCKAGE : JUSQU'À -95% SUR TOUT ! LIMITÉ À UN PRODUIT PAR PERSONNE, FAITES VITE ! ⚡
         </p>
     </div>
 
@@ -12,7 +12,7 @@
         <div class="container relative flex flex-col items-center justify-center h-full px-4 mx-auto text-center text-white">
             <h1 class="mb-6 text-5xl font-bold">Offres Déstockage !</h1>
             <p class="max-w-2xl mb-8 text-xl">
-                Jusqu'à -70% sur des incontournables beauté, disponibles jusqu'à épuisement des stocks ! Limité à un produit par personne.
+                Jusqu'à -95% sur des incontournables beauté, disponibles jusqu'à épuisement des stocks ! Limité à un produit par personne.
             </p>
             <a href="/products" class="bg-[#7B1F1F] text-white px-8 py-3 rounded-full text-lg font-medium hover:bg-[#6B1A1A] transition-colors">
                 PROFITEZ EN MAINTENANT
@@ -60,61 +60,61 @@
             <h2 class="mb-12 text-3xl font-bold text-center">Nos Marques</h2>
             <div class="grid grid-cols-1 gap-8 md:grid-cols-4">
                 <!-- Dyson -->
-                <a href="{{ route('brands.dyson') }}" class="group block">
+                <a href="{{ route('brands.dyson') }}" class="block group">
                     <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 flex flex-col h-[350px] overflow-hidden">
                         <div class="flex items-center justify-center h-[220px] bg-white p-8">
                             <img src="{{ asset('storage/brands/dyson.webp') }}"
                                  alt="Dyson"
-                                 class="w-4/5 h-4/5 object-contain mix-blend-multiply filter contrast-125">
+                                 class="object-contain w-4/5 h-4/5 mix-blend-multiply filter contrast-125">
                         </div>
                         <div class="flex flex-col justify-center h-[130px] p-6 text-center">
                             <h3 class="text-2xl font-semibold text-gray-900 group-hover:text-[#7B1F1F] transition-colors mb-3">Dyson</h3>
-                            <p class="text-gray-600 text-sm">Innovation et Performance dans le domaine des appareils de coiffure</p>
+                            <p class="text-sm text-gray-600">Innovation et Performance dans le domaine des appareils de coiffure</p>
                         </div>
                     </div>
                 </a>
 
                 <!-- GHD -->
-                <a href="{{ route('brands.ghd') }}" class="group block">
+                <a href="{{ route('brands.ghd') }}" class="block group">
                     <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 flex flex-col h-[350px] overflow-hidden">
                         <div class="flex items-center justify-center h-[220px] bg-black p-8">
                             <img src="{{ asset('storage/brands/ghd.webp') }}"
                                  alt="GHD"
-                                 class="w-4/5 h-4/5 object-contain brightness-150">
+                                 class="object-contain w-4/5 h-4/5 brightness-150">
                         </div>
                         <div class="flex flex-col justify-center h-[130px] p-6 text-center">
                             <h3 class="text-2xl font-semibold text-gray-900 group-hover:text-[#7B1F1F] transition-colors mb-3">GHD</h3>
-                            <p class="text-gray-600 text-sm">Excellence Professionnelle pour des résultats de salon à la maison</p>
+                            <p class="text-sm text-gray-600">Excellence Professionnelle pour des résultats de salon à la maison</p>
                         </div>
                     </div>
                 </a>
 
                 <!-- Savage X Fenty -->
-                <a href="{{ route('brands.fenty') }}" class="group block">
+                <a href="{{ route('brands.fenty') }}" class="block group">
                     <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 flex flex-col h-[350px] overflow-hidden">
                         <div class="flex items-center justify-center h-[220px] bg-white p-8">
                             <img src="{{ asset('storage/brands/savage-fenty.webp') }}"
                                  alt="Savage X Fenty"
-                                 class="w-4/5 h-4/5 object-contain mix-blend-multiply filter contrast-125">
+                                 class="object-contain w-4/5 h-4/5 mix-blend-multiply filter contrast-125">
                         </div>
                         <div class="flex flex-col justify-center h-[130px] p-6 text-center">
                             <h3 class="text-2xl font-semibold text-gray-900 group-hover:text-[#7B1F1F] transition-colors mb-3">Savage X Fenty</h3>
-                            <p class="text-gray-600 text-sm">Style et Inclusivité pour tous</p>
+                            <p class="text-sm text-gray-600">Style et Inclusivité pour tous</p>
                         </div>
                     </div>
                 </a>
 
                 <!-- Fenty Beauty -->
-                <a href="{{ route('brands.fenty-beauty') }}" class="group block">
+                <a href="{{ route('brands.fenty-beauty') }}" class="block group">
                     <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 flex flex-col h-[350px] overflow-hidden">
                         <div class="flex items-center justify-center h-[220px] bg-white p-8">
                             <img src="{{ asset('storage/brands/fenty-beauty.webp') }}"
                                  alt="Fenty Beauty"
-                                 class="w-4/5 h-4/5 object-contain mix-blend-multiply filter contrast-125">
+                                 class="object-contain w-4/5 h-4/5 mix-blend-multiply filter contrast-125">
                         </div>
                         <div class="flex flex-col justify-center h-[130px] p-6 text-center">
                             <h3 class="text-2xl font-semibold text-gray-900 group-hover:text-[#7B1F1F] transition-colors mb-3">Fenty Beauty</h3>
-                            <p class="text-gray-600 text-sm">Beauté inclusive et innovante</p>
+                            <p class="text-sm text-gray-600">Beauté inclusive et innovante</p>
                         </div>
                     </div>
                 </a>
@@ -128,9 +128,9 @@
             <h2 class="mb-12 text-3xl font-bold text-center">Nos Produits</h2>
 
             <!-- Filtres et tri -->
-            <div class="flex flex-col md:flex-row justify-between items-center mb-8 space-y-4 md:space-y-0">
+            <div class="flex flex-col items-center justify-between mb-8 space-y-4 md:flex-row md:space-y-0">
                 <!-- Filtres -->
-                <div class="flex flex-wrap items-center gap-4 w-full md:w-auto">
+                <div class="flex flex-wrap items-center w-full gap-4 md:w-auto">
                     <!-- Filtre par marque -->
                     <select wire:model.live="brand" class="rounded-full px-4 py-2 border border-gray-300 focus:outline-none focus:border-[#7B1F1F]">
                         <option value="">Toutes les marques</option>
@@ -178,7 +178,7 @@
             </div>
 
             <!-- Grille de produits -->
-            <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+            <div class="grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 sm:gap-6">
                 @forelse($products as $product)
                     <div class="group">
                         <div class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 h-[400px] flex flex-col">
@@ -187,7 +187,7 @@
                                 <div class="relative w-full h-[250px]">
                                     <img src="{{ $product->image_url }}"
                                          alt="{{ $product->name }}"
-                                         class="absolute inset-0 w-full h-full object-cover object-center rounded-t-lg">
+                                         class="absolute inset-0 object-cover object-center w-full h-full rounded-t-lg">
                                 </div>
                                 <!-- Badge de marque -->
                                 <div class="absolute top-2 left-2">
@@ -196,9 +196,9 @@
                                     </span>
                                 </div>
                                 <!-- Infos produit -->
-                                <div class="p-4 flex flex-col justify-between flex-grow">
+                                <div class="flex flex-col justify-between flex-grow p-4">
                                     <h3 class="text-sm font-medium text-gray-900 line-clamp-2">{{ $product->name }}</h3>
-                                    <div class="mt-2 flex flex-col">
+                                    <div class="flex flex-col mt-2">
                                         <!-- Badge de réduction -->
                                         @php
                                             $reduction = round((($product->original_price ?? $product->price) - $product->promo_price) / ($product->original_price ?? $product->price) * 100);
@@ -217,7 +217,7 @@
                         </div>
                     </div>
                 @empty
-                    <div class="col-span-full text-center py-12">
+                    <div class="py-12 text-center col-span-full">
                         <p class="text-gray-500">Aucun produit trouvé</p>
                     </div>
                 @endforelse
@@ -231,47 +231,47 @@
     </div>
 
     <!-- Statistiques et Engagement -->
-    <div class="bg-white py-16">
+    <div class="py-16 bg-white">
         <div class="container px-4 mx-auto">
             <!-- Statistiques -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
+            <div class="grid grid-cols-2 gap-8 mb-16 md:grid-cols-4">
                 <div class="bg-gradient-to-br from-[#7B1F1F] to-[#5A1717] rounded-xl shadow-lg p-8 text-center text-white">
-                    <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/10 mb-6">
+                    <div class="inline-flex items-center justify-center w-16 h-16 mb-6 rounded-full bg-white/10">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
                         </svg>
                     </div>
-                    <div class="text-3xl font-bold mb-2">10K+</div>
+                    <div class="mb-2 text-3xl font-bold">10K+</div>
                     <p class="text-gray-200">Clients Satisfaits</p>
                 </div>
 
                 <div class="bg-gradient-to-br from-[#7B1F1F] to-[#5A1717] rounded-xl shadow-lg p-8 text-center text-white">
-                    <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/10 mb-6">
+                    <div class="inline-flex items-center justify-center w-16 h-16 mb-6 rounded-full bg-white/10">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
                         </svg>
                     </div>
-                    <div class="text-3xl font-bold mb-2">1000+</div>
+                    <div class="mb-2 text-3xl font-bold">1000+</div>
                     <p class="text-gray-200">Produits Disponibles</p>
                 </div>
 
                 <div class="bg-gradient-to-br from-[#7B1F1F] to-[#5A1717] rounded-xl shadow-lg p-8 text-center text-white">
-                    <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/10 mb-6">
+                    <div class="inline-flex items-center justify-center w-16 h-16 mb-6 rounded-full bg-white/10">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
                         </svg>
                     </div>
-                    <div class="text-3xl font-bold mb-2">24/7</div>
+                    <div class="mb-2 text-3xl font-bold">24/7</div>
                     <p class="text-gray-200">Service Client</p>
                 </div>
 
                 <div class="bg-gradient-to-br from-[#7B1F1F] to-[#5A1717] rounded-xl shadow-lg p-8 text-center text-white">
-                    <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/10 mb-6">
+                    <div class="inline-flex items-center justify-center w-16 h-16 mb-6 rounded-full bg-white/10">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                         </svg>
                     </div>
-                    <div class="text-3xl font-bold mb-2">100%</div>
+                    <div class="mb-2 text-3xl font-bold">100%</div>
                     <p class="text-gray-200">Produits Authentiques</p>
                 </div>
             </div>
@@ -284,7 +284,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                         </svg>
                     </div>
-                    <h3 class="font-semibold text-gray-900 mb-2">Qualité Garantie</h3>
+                    <h3 class="mb-2 font-semibold text-gray-900">Qualité Garantie</h3>
                     <p class="text-gray-600">Produits authentiques et sélectionnés avec soin</p>
                 </div>
 
@@ -294,7 +294,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path>
                         </svg>
                     </div>
-                    <h3 class="font-semibold text-gray-900 mb-2">Prix Attractifs</h3>
+                    <h3 class="mb-2 font-semibold text-gray-900">Prix Attractifs</h3>
                     <p class="text-gray-600">Les meilleurs prix pour du haut de gamme</p>
                 </div>
 
@@ -304,7 +304,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                         </svg>
                     </div>
-                    <h3 class="font-semibold text-gray-900 mb-2">Livraison Express</h3>
+                    <h3 class="mb-2 font-semibold text-gray-900">Livraison Express</h3>
                     <p class="text-gray-600">Réception rapide de vos commandes</p>
                 </div>
 
@@ -314,7 +314,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path>
                         </svg>
                     </div>
-                    <h3 class="font-semibold text-gray-900 mb-2">Support Premium</h3>
+                    <h3 class="mb-2 font-semibold text-gray-900">Support Premium</h3>
                     <p class="text-gray-600">Une équipe dédiée à votre service</p>
                 </div>
             </div>

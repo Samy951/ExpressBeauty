@@ -39,8 +39,8 @@ class ImportScrapedProducts extends Command
                 try {
                     // Vérifier et valider les images
                     $images = [];
-                    if (!empty($product['Image_URL']) && 
-                        filter_var($product['Image_URL'], FILTER_VALIDATE_URL) && 
+                    if (!empty($product['Image_URL']) &&
+                        filter_var($product['Image_URL'], FILTER_VALIDATE_URL) &&
                         str_contains($product['Image_URL'], 'dyson-h.assetsadobe2.com')) {
                         $images[] = $product['Image_URL'];
                     }
@@ -111,7 +111,7 @@ class ImportScrapedProducts extends Command
         }
 
         // Importer les produits Savage X Fenty
-        $savagePath = storage_path('app/scraping/savagexfenty_products.json');
+        $savagePath = storage_path('app/scraping/savagexfentyProducts.json');
         if (file_exists($savagePath)) {
             $savageProducts = json_decode(file_get_contents($savagePath), true);
             $this->info('Traitement de ' . count($savageProducts) . ' produits Savage X Fenty...');
@@ -125,8 +125,8 @@ class ImportScrapedProducts extends Command
                     if (!empty($product['images'])) {
                         // Vérifier si les URLs sont valides
                         $filtered_images = array_filter($product['images'], function($img) {
-                            return 
-                                filter_var($img, FILTER_VALIDATE_URL) && 
+                            return
+                                filter_var($img, FILTER_VALIDATE_URL) &&
                                 (
                                     str_contains($img, 'cdn.savagex.com') ||
                                     str_contains($img, 'savagex.com')
@@ -136,7 +136,7 @@ class ImportScrapedProducts extends Command
                         if (!empty($filtered_images)) {
                             // Prendre la première image comme image principale
                             $image_url = reset($filtered_images);
-                            
+
                             // Stocker toutes les autres images comme images additionnelles
                             $additional_images = array_slice($filtered_images, 1);
                         }
@@ -176,10 +176,10 @@ class ImportScrapedProducts extends Command
         }
 
         // Importer les produits Fenty Beauty
-        $fentyPath = storage_path('app/scraping/fentybeauty_products.json');
+        $fentyPath = storage_path('app/scraping/fentybeautyProducts.json');
         if (file_exists($fentyPath)) {
             $fentyProducts = json_decode(file_get_contents($fentyPath), true);
-            
+
             $this->info('Traitement de ' . count($fentyProducts) . ' produits Fenty Beauty...');
 
             foreach ($fentyProducts as $product) {
@@ -187,8 +187,8 @@ class ImportScrapedProducts extends Command
                     // Gestion simplifiée des images pour Fenty Beauty
                     $images = $product['images'] ?? [];
                     $valid_images = array_filter($images, function($img) {
-                        return 
-                            filter_var($img, FILTER_VALIDATE_URL) && 
+                        return
+                            filter_var($img, FILTER_VALIDATE_URL) &&
                             !str_contains($img, 'FB_logo.png') &&
                             (
                                 str_contains($img, 'cdn.shopify.com/s/files') ||
