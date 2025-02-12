@@ -38,17 +38,33 @@
             }">
                 <div class="flex items-center space-x-24 animate-scroll" :style="'transform: translateX(' + position + '%)'">
                     <!-- Groupe de logos qui se répète -->
-                    <img src="{{ asset('storage/brands/marie-claire.webp') }}" alt="Marie Claire" class="w-[160px] h-[80px] object-contain transition-all duration-300 opacity-70 hover:opacity-100">
-                    <img src="{{ asset('storage/brands/cosmopolitan.webp') }}" alt="Cosmopolitan" class="w-[160px] h-[80px] object-contain transition-all duration-300 opacity-70 hover:opacity-100">
-                    <img src="{{ asset('storage/brands/sephora.webp') }}" alt="Sephora" class="w-[160px] h-[80px] object-contain transition-all duration-300 opacity-70 hover:opacity-100">
-                    <img src="{{ asset('storage/brands/allure.webp') }}" alt="Allure" class="w-[160px] h-[80px] object-contain transition-all duration-300 opacity-70 hover:opacity-100">
-                    <img src="{{ asset('storage/brands/elle.webp') }}" alt="Elle" class="w-[160px] h-[80px] object-contain transition-all duration-300 opacity-70 hover:opacity-100">
-                    <!-- Répétition des logos pour l'effet infini -->
-                    <img src="{{ asset('storage/brands/marie-claire.webp') }}" alt="Marie Claire" class="w-[160px] h-[80px] object-contain transition-all duration-300 opacity-70 hover:opacity-100">
-                    <img src="{{ asset('storage/brands/cosmopolitan.webp') }}" alt="Cosmopolitan" class="w-[160px] h-[80px] object-contain transition-all duration-300 opacity-70 hover:opacity-100">
-                    <img src="{{ asset('storage/brands/sephora.webp') }}" alt="Sephora" class="w-[160px] h-[80px] object-contain transition-all duration-300 opacity-70 hover:opacity-100">
-                    <img src="{{ asset('storage/brands/allure.webp') }}" alt="Allure" class="w-[160px] h-[80px] object-contain transition-all duration-300 opacity-70 hover:opacity-100">
-                    <img src="{{ asset('storage/brands/elle.webp') }}" alt="Elle" class="w-[160px] h-[80px] object-contain transition-all duration-300 opacity-70 hover:opacity-100">
+                    <style>
+                        @keyframes marquee {
+                            0% { transform: translateX(0); }
+                            100% { transform: translateX(-100%); }
+                        }
+                        .animate-scroll {
+                            animation: marquee 10s linear infinite;
+                        }
+                        @media (min-width: 640px) {
+                            .animate-scroll {
+                                animation: marquee 20s linear infinite;
+                            }
+                        }
+                    </style>
+                    <div class="flex items-center space-x-24 animate-scroll">
+                        <img src="{{ asset('storage/brands/marie-claire.webp') }}" alt="Marie Claire" class="w-[160px] h-[80px] object-contain transition-all duration-300 opacity-70 hover:opacity-100">
+                        <img src="{{ asset('storage/brands/cosmopolitan.webp') }}" alt="Cosmopolitan" class="w-[160px] h-[80px] object-contain transition-all duration-300 opacity-70 hover:opacity-100">
+                        <img src="{{ asset('storage/brands/sephora.webp') }}" alt="Sephora" class="w-[160px] h-[80px] object-contain transition-all duration-300 opacity-70 hover:opacity-100">
+                        <img src="{{ asset('storage/brands/allure.webp') }}" alt="Allure" class="w-[160px] h-[80px] object-contain transition-all duration-300 opacity-70 hover:opacity-100">
+                        <img src="{{ asset('storage/brands/elle.webp') }}" alt="Elle" class="w-[160px] h-[80px] object-contain transition-all duration-300 opacity-70 hover:opacity-100">
+                        <!-- Répétition des logos pour l'effet infini -->
+                        <img src="{{ asset('storage/brands/marie-claire.webp') }}" alt="Marie Claire" class="w-[160px] h-[80px] object-contain transition-all duration-300 opacity-70 hover:opacity-100">
+                        <img src="{{ asset('storage/brands/cosmopolitan.webp') }}" alt="Cosmopolitan" class="w-[160px] h-[80px] object-contain transition-all duration-300 opacity-70 hover:opacity-100">
+                        <img src="{{ asset('storage/brands/sephora.webp') }}" alt="Sephora" class="w-[160px] h-[80px] object-contain transition-all duration-300 opacity-70 hover:opacity-100">
+                        <img src="{{ asset('storage/brands/allure.webp') }}" alt="Allure" class="w-[160px] h-[80px] object-contain transition-all duration-300 opacity-70 hover:opacity-100">
+                        <img src="{{ asset('storage/brands/elle.webp') }}" alt="Elle" class="w-[160px] h-[80px] object-contain transition-all duration-300 opacity-70 hover:opacity-100">
+                    </div>
                 </div>
             </div>
         </div>
