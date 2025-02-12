@@ -212,7 +212,7 @@
                                 <div class="relative w-full h-[250px]">
                                     <img src="{{ $product->image_url }}"
                                          alt="{{ $product->name }}"
-                                         class="absolute inset-0 object-cover object-center w-full h-full rounded-t-lg">
+                                         class="absolute inset-0 w-full h-full {{ $product->brand === 'Dyson' ? 'object-contain' : 'object-cover' }} object-center rounded-t-lg">
                                 </div>
                                 <!-- Badge de marque -->
                                 <div class="absolute top-2 left-2">

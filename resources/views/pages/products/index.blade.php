@@ -73,7 +73,7 @@
                             <div class="relative w-full h-[250px]">
                                 <img src="{{ $product->image_url }}"
                                      alt="{{ $product->name }}"
-                                     class="absolute inset-0 object-cover object-center w-full h-full transition-opacity rounded-t-lg group-hover:opacity-75">
+                                     class="absolute inset-0 w-full h-full {{ $product->brand === 'Dyson' ? 'object-contain' : 'object-cover' }} object-center transition-opacity rounded-t-lg group-hover:opacity-75">
                             </div>
                             <!-- Badge de marque -->
                             <div class="absolute z-10 top-2 left-2">
