@@ -1,6 +1,6 @@
 {
-    "name": "ExpressBeauty",
-    "short_name": "ExpressBeauty",
+    "name": "Express Beauty",
+    "short_name": "Express Beauty",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
@@ -13,7 +13,7 @@
             "type": "image/png"
         }
     ],
-    "theme_color": "#ffffff",
-    "background_color": "#ffffff",
+    "theme_color": "#FF0000",
+    "background_color": "#FF0000",
     "display": "standalone"
-} 
+}
