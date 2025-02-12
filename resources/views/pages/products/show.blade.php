@@ -121,6 +121,110 @@
                         <p class="mt-1 text-sm text-gray-500">Quantité très limitée</p>
                     </div>
 
+                    <!-- Sélecteur de taille pour SavageXFenty -->
+                    @if($product->brand === 'Savage X Fenty')
+                        <div class="mb-8" x-data="{ 
+                            productName: '{{ strtolower($product->name) }}',
+                            selectedSize: '',
+                            selectedBustSize: '',
+                            selectedCupSize: '',
+                            bustSizes: ['85', '90', '95', '100', '105', '110', '115', '120'],
+                            cupSizes: ['A', 'B', 'C', 'D', 'E', 'F'],
+                            regularSizes: ['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL', '4XL'],
+                            isBra() {
+                                const words = this.productName.split(' ');
+                                return words.includes('bra') || words.includes('bralette') || this.productName.endsWith(' bra');
+                            }
+                        }">
+                            <div class="mb-2">
+                                <span class="text-sm font-medium text-gray-700">TAILLE</span>
+                            </div>
+
+                            <!-- Sélection pour autres vêtements -->
+                            <template x-if="!isBra()">
+                                <div>
+                                    <div class="flex flex-wrap gap-2">
+                                        <template x-for="size in regularSizes" :key="size">
+                                            <div class="relative">
+                                                <input type="radio" 
+                                                       :id="'size-' + size" 
+                                                       name="size" 
+                                                       :value="size"
+                                                       x-model="selectedSize"
+                                                       class="peer hidden">
+                                                <label :for="'size-' + size"
+                                                       :class="{'border-[#7B1F1F] text-[#7B1F1F] font-semibold ring-2 ring-[#7B1F1F] ring-offset-2': selectedSize === size}"
+                                                       class="flex items-center justify-center w-12 h-12 rounded-full border border-gray-300 cursor-pointer text-sm transition-all duration-200 hover:border-[#7B1F1F] hover:text-[#7B1F1F]">
+                                                    <span x-text="size"></span>
+                                                </label>
+                                            </div>
+                                        </template>
+                                    </div>
+                                    <!-- Taille sélectionnée -->
+                                    <div x-show="selectedSize" class="mt-2 text-sm text-gray-600">
+                                        Taille sélectionnée : <span class="font-medium" x-text="selectedSize"></span>
+                                    </div>
+                                </div>
+                            </template>
+
+                            <!-- Sélection pour soutien-gorge -->
+                            <template x-if="isBra()">
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block mb-2 text-sm font-medium text-gray-700">TOUR DE POITRINE</label>
+                                        <div class="flex flex-wrap gap-2">
+                                            <template x-for="size in bustSizes" :key="size">
+                                                <div class="relative">
+                                                    <input type="radio" 
+                                                           :id="'bust-' + size" 
+                                                           :name="'bust-size'" 
+                                                           :value="size"
+                                                           x-model="selectedBustSize"
+                                                           class="peer hidden">
+                                                    <label :for="'bust-' + size"
+                                                           :class="{'border-[#7B1F1F] text-[#7B1F1F] font-semibold ring-2 ring-[#7B1F1F] ring-offset-2': selectedBustSize === size}"
+                                                           class="flex items-center justify-center w-12 h-12 rounded-full border border-gray-300 cursor-pointer text-sm transition-all duration-200 hover:border-[#7B1F1F] hover:text-[#7B1F1F]">
+                                                        <span x-text="size"></span>
+                                                    </label>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label class="block mb-2 text-sm font-medium text-gray-700">BONNET</label>
+                                        <div class="flex flex-wrap gap-2">
+                                            <template x-for="size in cupSizes" :key="size">
+                                                <div class="relative">
+                                                    <input type="radio" 
+                                                           :id="'cup-' + size" 
+                                                           :name="'cup-size'" 
+                                                           :value="size"
+                                                           x-model="selectedCupSize"
+                                                           class="peer hidden">
+                                                    <label :for="'cup-' + size"
+                                                           :class="{'border-[#7B1F1F] text-[#7B1F1F] font-semibold ring-2 ring-[#7B1F1F] ring-offset-2': selectedCupSize === size}"
+                                                           class="flex items-center justify-center w-12 h-12 rounded-full border border-gray-300 cursor-pointer text-sm transition-all duration-200 hover:border-[#7B1F1F] hover:text-[#7B1F1F]">
+                                                        <span x-text="size"></span>
+                                                    </label>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </div>
+                                    <!-- Taille sélectionnée -->
+                                    <div x-show="selectedBustSize && selectedCupSize" class="mt-2 text-sm text-gray-600">
+                                        Taille sélectionnée : <span class="font-medium" x-text="selectedBustSize + selectedCupSize"></span>
+                                    </div>
+                                </div>
+                            </template>
+
+                            <!-- Message d'erreur si aucune taille n'est sélectionnée -->
+                            <div x-show="showModal && ((!isBra() && !selectedSize) || (isBra() && (!selectedBustSize || !selectedCupSize)))" 
+                                 class="mt-2 text-sm text-red-600">
+                                Veuillez sélectionner une taille avant de continuer
+                            </div>
+                        </div>
+                    @endif
+
                     <!-- Bouton Commander avec Modal -->
                     <div x-data="{ showModal: false }">
                         <!-- Bouton Commander -->
