@@ -154,7 +154,7 @@
                                                        class="peer hidden">
                                                 <label :for="'size-' + size"
                                                        :class="{'border-[#7B1F1F] text-[#7B1F1F] font-semibold ring-2 ring-[#7B1F1F] ring-offset-2': selectedSize === size}"
-                                                       class="flex items-center justify-center w-12 h-12 rounded-full border border-gray-300 cursor-pointer text-sm transition-all duration-200 hover:border-[#7B1F1F] hover:text-[#7B1F1F]">
+                                                       class="flex items-center justify-center w-8 h-8 sm:w-12 sm:h-12 rounded-full border border-gray-300 cursor-pointer text-xs sm:text-sm transition-all duration-200 hover:border-[#7B1F1F] hover:text-[#7B1F1F]">
                                                     <span x-text="size"></span>
                                                 </label>
                                             </div>
@@ -183,7 +183,7 @@
                                                            class="peer hidden">
                                                     <label :for="'bust-' + size"
                                                            :class="{'border-[#7B1F1F] text-[#7B1F1F] font-semibold ring-2 ring-[#7B1F1F] ring-offset-2': selectedBustSize === size}"
-                                                           class="flex items-center justify-center w-12 h-12 rounded-full border border-gray-300 cursor-pointer text-sm transition-all duration-200 hover:border-[#7B1F1F] hover:text-[#7B1F1F]">
+                                                           class="flex items-center justify-center w-8 h-8 sm:w-12 sm:h-12 rounded-full border border-gray-300 cursor-pointer text-xs sm:text-sm transition-all duration-200 hover:border-[#7B1F1F] hover:text-[#7B1F1F]">
                                                         <span x-text="size"></span>
                                                     </label>
                                                 </div>
@@ -203,7 +203,7 @@
                                                            class="peer hidden">
                                                     <label :for="'cup-' + size"
                                                            :class="{'border-[#7B1F1F] text-[#7B1F1F] font-semibold ring-2 ring-[#7B1F1F] ring-offset-2': selectedCupSize === size}"
-                                                           class="flex items-center justify-center w-12 h-12 rounded-full border border-gray-300 cursor-pointer text-sm transition-all duration-200 hover:border-[#7B1F1F] hover:text-[#7B1F1F]">
+                                                           class="flex items-center justify-center w-8 h-8 sm:w-12 sm:h-12 rounded-full border border-gray-300 cursor-pointer text-xs sm:text-sm transition-all duration-200 hover:border-[#7B1F1F] hover:text-[#7B1F1F]">
                                                         <span x-text="size"></span>
                                                     </label>
                                                 </div>
