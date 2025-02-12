@@ -27,16 +27,25 @@
 
             <div class="relative overflow-hidden" x-data="{
                 position: 0,
+                isMobile: window.innerWidth < 640,
                 init() {
                     this.scroll();
+                    window.addEventListener('resize', () => {
+                        this.isMobile = window.innerWidth < 640;
+                    });
                 },
                 scroll() {
+                    const speed = this.isMobile ? 0.15 : 0.1;
                     setInterval(() => {
-                        this.position = (this.position - 0.1) % 100;
+                        if (this.position <= -100) {
+                            this.position = 0;
+                        } else {
+                            this.position -= speed;
+                        }
                     }, 20);
                 }
             }">
-                <div class="flex items-center space-x-24 animate-scroll" :style="'transform: translateX(' + position + '%)'">
+                <div class="flex items-center space-x-24" :style="'transform: translateX(' + position + '%)'">
                     <!-- Groupe de logos qui se répète -->
                     <style>
                         @keyframes marquee {
