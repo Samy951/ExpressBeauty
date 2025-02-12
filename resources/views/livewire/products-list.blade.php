@@ -132,7 +132,7 @@
                 <!-- Filtres -->
                 <div class="flex flex-col w-full gap-4 md:flex-row md:w-auto">
                     <!-- Filtre par marque -->
-                    <select wire:model.live="brand" class="w-full px-4 py-2 border rounded-full border-gray-300 focus:outline-none focus:border-[#7B1F1F] md:w-auto">
+                    <select wire:model.live="brand" class="w-full px-6 py-2.5 border rounded-full border-gray-300 focus:outline-none focus:border-[#7B1F1F] md:w-[250px] appearance-none bg-white text-gray-700 font-medium shadow-sm hover:border-[#7B1F1F] transition-colors duration-200 pr-12">
                         <option value="">Toutes les marques</option>
                         @foreach($brands as $brandOption)
                             <option value="{{ $brandOption }}">{{ $brandOption }}</option>
@@ -140,7 +140,7 @@
                     </select>
 
                     <!-- Filtre par catégorie -->
-                    <select wire:model.live="category" class="w-full px-4 py-2 border rounded-full border-gray-300 focus:outline-none focus:border-[#7B1F1F] md:w-auto">
+                    <select wire:model.live="category" class="w-full px-6 py-2.5 border rounded-full border-gray-300 focus:outline-none focus:border-[#7B1F1F] md:w-[250px] appearance-none bg-white text-gray-700 font-medium shadow-sm hover:border-[#7B1F1F] transition-colors duration-200 pr-12">
                         <option value="">Toutes les catégories</option>
                         @foreach($categories as $value => $label)
                             <option value="{{ $value }}">{{ $label }}</option>
@@ -151,25 +151,25 @@
                     <input type="text"
                            wire:model.live.debounce.300ms="search"
                            placeholder="Rechercher un produit..."
-                           class="w-full px-4 py-2 border rounded-full border-gray-300 focus:outline-none focus:border-[#7B1F1F] md:w-auto">
+                           class="w-full px-6 py-2.5 border rounded-full border-gray-300 focus:outline-none focus:border-[#7B1F1F] md:w-[250px] appearance-none bg-white text-gray-700 font-medium shadow-sm hover:border-[#7B1F1F] transition-colors duration-200">
                 </div>
 
                 <!-- Tri -->
                 <div class="flex items-center w-full gap-2 md:w-auto md:ml-4">
-                    <select wire:model.live="sortField" class="w-full px-4 py-2 border rounded-full border-gray-300 focus:outline-none focus:border-[#7B1F1F] md:w-auto">
+                    <select wire:model.live="sortField" class="w-full px-6 py-2.5 border rounded-full border-gray-300 focus:outline-none focus:border-[#7B1F1F] md:w-[250px] appearance-none bg-white text-gray-700 font-medium shadow-sm hover:border-[#7B1F1F] transition-colors duration-200 pr-12">
                         <option value="created_at">Plus récents</option>
                         <option value="price">Prix</option>
                         <option value="name">Nom</option>
                     </select>
 
                     <button wire:click="$set('sortDirection', '{{ $sortDirection === 'asc' ? 'desc' : 'asc' }}')"
-                            class="p-2 transition-colors duration-200 rounded-full hover:bg-gray-100">
+                            class="p-2.5 transition-colors duration-200 rounded-full hover:bg-gray-100 border border-gray-300 hover:border-[#7B1F1F]">
                         @if($sortDirection === 'asc')
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9M3 12h5M3 16h9M3 20h13"></path>
                             </svg>
                         @else
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9M3 12h5M3 16h9M3 20h13" transform="rotate(180 12 12)"></path>
                             </svg>
                         @endif
