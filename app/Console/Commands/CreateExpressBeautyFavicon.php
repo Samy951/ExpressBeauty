@@ -17,20 +17,12 @@ class CreateExpressBeautyFavicon extends Command
         
         // Ajout du "E" stylisé
         $img->text('E', 256, 256, function($font) {
-            $font->file(public_path('fonts/Montserrat-Bold.ttf'));
+            $font->file(1); // Utilisation de la police système 1
             $font->size(300);
             $font->color('#8B1D1D');
             $font->align('center');
             $font->valign('center');
         });
-        
-        // Ajout du petit cœur
-        $heart = Image::canvas(100, 100, function ($draw) {
-            $draw->circle(50, 50, 25, function ($draw) {
-                $draw->background('#8B1D1D');
-            });
-        });
-        $img->insert($heart, 'top-right', 20, 20);
 
         // Sauvegarde dans différentes tailles
         $sizes = [16, 32, 180, 192, 512];
@@ -42,16 +34,18 @@ class CreateExpressBeautyFavicon extends Command
                 $constraint->upsize();
             });
             
-            if ($size == 16 || $size == 32) {
-                $resized->save(public_path("favicon-{$size}x{$size}.ico"));
-            } else {
-                $resized->save(public_path("favicon-{$size}x{$size}.png"));
-            }
+            $resized->save(public_path("favicon-{$size}x{$size}.png"));
         }
 
         // Création spécifique pour apple-touch-icon
         $img->resize(180, 180)
             ->save(public_path('apple-touch-icon.png'));
+
+        // Création du fichier favicon.ico (copie du favicon-32x32.png)
+        copy(
+            public_path('favicon-32x32.png'),
+            public_path('favicon.ico')
+        );
 
         $this->info('Favicon ExpressBeauty créé avec succès !');
     }
