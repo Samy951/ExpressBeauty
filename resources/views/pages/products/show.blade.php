@@ -322,7 +322,27 @@
                         </svg>
                     </button>
                     <div x-show="open" class="px-4 pb-4">
-                        <p class="text-gray-600">{{ $product->description }}</p>
+                        @php
+                            $description = $product->description;
+                            
+                            // Ajout d'espaces entre les mots
+                            $description = preg_replace('/([a-z])([A-Z])/', '$1 $2', $description);
+                            
+                            // Ajout de retours à la ligne après les points
+                            $description = str_replace('.', ".\n", $description);
+                            
+                            // Ajout de retours à la ligne avant les caractéristiques
+                            $description = preg_replace('/(Taille|Tissu|Bordure|Ourlet)/', "\n$1", $description);
+                            
+                            // Nettoyage des espaces multiples et des lignes vides
+                            $description = preg_replace('/\s+/', ' ', $description);
+                            $description = preg_replace("/\n\s+/", "\n", $description);
+                            $description = trim($description);
+                        @endphp
+
+                        <div class="text-gray-600 whitespace-pre-line">
+                            {{ $description }}
+                        </div>
                     </div>
                 </div>
 
