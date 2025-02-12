@@ -1,11 +1,16 @@
+# Règles globales pour tous les robots
 User-agent: *
+
+# Pages autorisées
 Allow: /
 Allow: /products/
 Allow: /brands/
 Allow: /categories/
 Allow: /about
 Allow: /contact
+Allow: /sitemap.xml
 
+# Pages interdites
 Disallow: /checkout
 Disallow: /admin
 Disallow: /login
@@ -16,8 +21,26 @@ Disallow: /*.json$
 Disallow: /*.js$
 Disallow: /*.css$
 Disallow: /*?*
+Disallow: /*?q=*
+Disallow: /search?
+Disallow: /cgi-bin/
+Disallow: /tmp/
 
-# Paramètres de crawl
-Crawl-delay: 10
+# Paramètres de crawl spécifiques pour Googlebot
+User-agent: Googlebot
+Crawl-delay: 1
+Allow: /*.js$
+Allow: /*.css$
 
+# Paramètres de crawl spécifiques pour Bingbot
+User-agent: Bingbot
+Crawl-delay: 2
+
+# Paramètres de crawl spécifiques pour les images
+User-agent: Googlebot-Image
+Allow: /storage/products/
+Allow: /storage/brands/
+Disallow: /storage/private/
+
+# Sitemap
 Sitemap: https://expressbeauty.fr/sitemap.xml
