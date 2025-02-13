@@ -180,52 +180,72 @@ class ImportScrapedProducts extends Command
         if (file_exists($fentyPath)) {
             $fentyProducts = json_decode(file_get_contents($fentyPath), true);
 
+            // Supprimer d'abord tous les produits Fenty Beauty existants
+            Product::where('brand', 'Fenty Beauty')->delete();
+            $this->info('Anciens produits Fenty Beauty supprimés.');
+
             $this->info('Traitement de ' . count($fentyProducts) . ' produits Fenty Beauty...');
+            $imported = 0;
 
             foreach ($fentyProducts as $product) {
                 try {
-                    // Gestion simplifiée des images pour Fenty Beauty
-                    $images = $product['images'] ?? [];
-                    $valid_images = array_filter($images, function($img) {
-                        return
-                            filter_var($img, FILTER_VALIDATE_URL) &&
-                            !str_contains($img, 'FB_logo.png') &&
-                            (
-                                str_contains($img, 'cdn.shopify.com/s/files') ||
-                                str_contains($img, 'fentybeauty.com/cdn/shop/files')
-                            );
+                    // Gestion des images
+                    $images = is_array($product['images']) ? $product['images'] : [$product['images']];
+                    $image_url = null;
+                    $additional_images = [];
+
+                    // Aplatir le tableau d'images si nécessaire
+                    $flattened_images = [];
+                    array_walk_recursive($images, function($item) use (&$flattened_images) {
+                        if (filter_var($item, FILTER_VALIDATE_URL)) {
+                            $flattened_images[] = $item;
+                        }
                     });
 
+                    if (!empty($flattened_images)) {
+                        $image_url = $flattened_images[0];
+                        $additional_images = array_slice($flattened_images, 1);
+                    }
+
                     // Ne pas importer si aucune image valide n'est trouvée
-                    if (empty($valid_images)) {
+                    if (!$image_url) {
+                        $this->warn("Pas d'image valide pour : " . $product['title']);
                         continue;
                     }
 
-                    $image_url = reset($valid_images);
-                    $additional_images = array_slice($valid_images, 1);
+                    // Nettoyer le prix
+                    $price = str_replace(['€', ','], ['', '.'], $product['price']['current']);
+                    $price = (float) trim($price);
 
-                    Product::updateOrCreate(
-                        ['name' => $product['title']],
-                        [
-                            'brand' => 'Fenty Beauty',
-                            'description' => $product['description'],
-                            'price' => (float) str_replace(['€', ','], ['', '.'], $product['price']['current']),
-                            'promo_price' => (float) str_replace(['€', ','], ['', '.'], $product['price']['current']),
-                            'original_price' => isset($product['price']['original']) ? (float) str_replace(['€', ','], ['', '.'], $product['price']['original']) : null,
-                            'image_url' => $image_url,
-                            'specifications' => json_encode([
-                                'url' => $product['url'],
-                                'timestamp' => $product['timestamp'],
-                                'additional_images' => $additional_images
-                            ])
-                        ]
-                    );
+                    $original_price = null;
+                    if (isset($product['price']['original'])) {
+                        $original_price = str_replace(['€', ','], ['', '.'], $product['price']['original']);
+                        $original_price = (float) trim($original_price);
+                    }
+
+                    Product::create([
+                        'name' => $product['title'],
+                        'brand' => 'Fenty Beauty',
+                        'category' => 'makeup',
+                        'description' => $product['description'],
+                        'price' => $price,
+                        'original_price' => $original_price ?? $price,
+                        'image_url' => $image_url,
+                        'specifications' => json_encode([
+                            'url' => $product['url'],
+                            'timestamp' => $product['timestamp'],
+                            'additional_images' => $additional_images,
+                            'details' => $product['details'] ?? []
+                        ])
+                    ]);
+
+                    $imported++;
                 } catch (\Exception $e) {
                     $this->error('Erreur lors de l\'importation du produit Fenty Beauty: ' . $product['title']);
                     $this->error($e->getMessage());
                 }
             }
-            $this->info('Produits Fenty Beauty importés avec succès.');
+            $this->info("$imported produits Fenty Beauty importés avec succès.");
         } else {
             $this->error('Fichier Fenty Beauty non trouvé: ' . $fentyPath);
         }

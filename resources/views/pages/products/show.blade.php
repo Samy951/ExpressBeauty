@@ -92,6 +92,20 @@
 
                 <!-- Colonne droite : Informations produit -->
                 <div class="flex flex-col">
+                    <!-- Script de tracking TikTok pour la vue du produit -->
+                    <script>
+                        ttq.track('ViewContent', {
+                            content_type: 'product',
+                            content_id: '{{ $product->id }}',
+                            content_name: '{{ $product->name }}',
+                            content_category: '{{ $product->category }}',
+                            currency: 'EUR',
+                            price: {{ $product->promo_price }},
+                            value: {{ $product->promo_price }},
+                            brand: '{{ $product->brand }}'
+                        });
+                    </script>
+
                     <!-- Marque -->
                     <div class="mb-4">
                         <span class="text-sm font-medium text-gray-500">{{ $product->brand }}</span>
@@ -228,7 +242,16 @@
                     <!-- Bouton Commander avec Modal -->
                     <div x-data="{ showModal: false }">
                         <!-- Bouton Commander -->
-                        <button @click="showModal = true"
+                        <button @click="showModal = true; ttq.track('AddToCart', {
+                            content_type: 'product',
+                            content_id: '{{ $product->id }}',
+                            content_name: '{{ $product->name }}',
+                            content_category: '{{ $product->category }}',
+                            currency: 'EUR',
+                            price: {{ $product->promo_price }},
+                            value: {{ $product->promo_price }},
+                            brand: '{{ $product->brand }}'
+                        });"
                                 class="w-full bg-[#7B1F1F] text-white text-center py-4 rounded-lg font-semibold mb-2 hover:bg-[#7B1F1F]/90 transition-colors">
                             Commander | {{ number_format($product->promo_price, 2, ',', ' ') }} €
                         </button>

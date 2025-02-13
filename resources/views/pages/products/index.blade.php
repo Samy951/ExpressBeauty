@@ -68,7 +68,18 @@
                 @foreach($products as $product)
                 <div class="w-full group">
                     <div class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 h-[400px] flex flex-col">
-                        <a href="{{ route('products.show', $product->id) }}" class="flex flex-col h-full">
+                        <a href="{{ route('products.show', $product->id) }}" 
+                           @click="ttq.track('ClickProduct', {
+                               content_type: 'product',
+                               content_id: '{{ $product->id }}',
+                               content_name: '{{ $product->name }}',
+                               content_category: '{{ $product->category }}',
+                               currency: 'EUR',
+                               price: {{ $product->promo_price }},
+                               value: {{ $product->promo_price }},
+                               brand: '{{ $product->brand }}'
+                           })"
+                           class="flex flex-col h-full">
                             <!-- Image du produit avec dimensions fixes -->
                             <div class="relative w-full h-[250px]">
                                 <img src="{{ $product->image_url }}"
