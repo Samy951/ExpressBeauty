@@ -13,24 +13,24 @@ class PriceService
         ],
         [
             'min' => 30,
-            'max' => 50,
+            'max' => 40,
             'promo' => 9.95,
             'link' => 'https://www.bcdxmn8trk.com/6MW5NB/3QQG7/'
         ],
         [
-            'min' => 50,
-            'max' => 100,
+            'min' => 40,
+            'max' => 50,
             'promo' => 13.99,
             'link' => 'https://www.bcdxmn8trk.com/6MW5NB/55M6S/'
         ],
         [
-            'min' => 100,
-            'max' => 200,
+            'min' => 50,
+            'max' => 80,
             'promo' => 19.99,
             'link' => 'https://www.bcdxmn8trk.com/6MW5NB/6JHXF/'
         ],
         [
-            'min' => 200,
+            'min' => 80,
             'max' => PHP_FLOAT_MAX,
             'promo' => 29.95,
             'link' => 'https://www.bcdxmn8trk.com/6MW5NB/5T3K4H/'
