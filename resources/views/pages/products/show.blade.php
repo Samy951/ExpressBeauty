@@ -240,18 +240,24 @@
                     @endif
 
                     <!-- Bouton Commander avec Modal -->
+                    <script>
+                        function trackAddToCart(productData) {
+                            ttq.track('AddToCart', productData);
+                        }
+                    </script>
+
                     <div x-data="{ showModal: false }">
                         <!-- Bouton Commander -->
-                        <button @click="showModal = true; ttq.track('AddToCart', {
+                        <button @click="showModal = true; trackAddToCart({
                             content_type: 'product',
-                            content_id: '{{ $product->id }}',
-                            content_name: '{{ $product->name }}',
-                            content_category: '{{ $product->category }}',
+                            content_id: {{ $product->id }},
+                            content_name: {{ json_encode($product->name) }},
+                            content_category: {{ json_encode($product->category) }},
                             currency: 'EUR',
                             price: {{ $product->promo_price }},
                             value: {{ $product->promo_price }},
-                            brand: '{{ $product->brand }}'
-                        });"
+                            brand: {{ json_encode($product->brand) }}
+                        })"
                                 class="w-full bg-[#7B1F1F] text-white text-center py-4 rounded-lg font-semibold mb-2 hover:bg-[#7B1F1F]/90 transition-colors">
                             Commander | {{ number_format($product->promo_price, 2, ',', ' ') }} €
                         </button>
