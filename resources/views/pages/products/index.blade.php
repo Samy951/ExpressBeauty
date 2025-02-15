@@ -69,16 +69,16 @@
                 <div class="w-full group">
                     <div class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 h-[400px] flex flex-col">
                         <a href="{{ route('products.show', $product->id) }}" 
-                           @click="ttq.track('ClickProduct', {
+                           onclick="trackTikTok('ClickProduct', {
                                content_type: 'product',
-                               content_id: '{{ $product->id }}',
-                               content_name: '{{ $product->name }}',
-                               content_category: '{{ $product->category }}',
+                               content_id: {{ $product->id }},
+                               content_name: {{ Js::from($product->name) }},
+                               content_category: {{ Js::from($product->category) }},
                                currency: 'EUR',
                                price: {{ $product->promo_price }},
                                value: {{ $product->promo_price }},
-                               brand: '{{ $product->brand }}'
-                           })"
+                               brand: {{ Js::from($product->brand) }}
+                           }); return true;"
                            class="flex flex-col h-full">
                             <!-- Image du produit avec dimensions fixes -->
                             <div class="relative w-full h-[250px]">

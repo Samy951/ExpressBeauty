@@ -86,6 +86,16 @@
       ttq.load('CUMBMTJC77U4QKJNCVI0');
       ttq.page();
     }(window, document, 'ttq');
+
+    // Fonction helper sécurisée pour le tracking TikTok
+    function trackTikTok(event, data) {
+        if (typeof ttq !== 'undefined' && ttq.track) {
+            console.log('Tracking event:', event, data);
+            ttq.track(event, data);
+        } else {
+            console.warn('TikTok pixel not initialized');
+        }
+    }
     </script>
     <!-- TikTok Pixel Code End -->
 </head>
