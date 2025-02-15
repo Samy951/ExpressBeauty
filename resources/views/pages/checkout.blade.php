@@ -142,16 +142,56 @@
             $iframeUrl = rtrim($product->payment_link, '/') . '?source_id=' . rawurlencode($sourceId);
         @endphp
 
-        <!-- Iframe de paiement -->
-        <iframe
-            src="{{ $iframeUrl }}"
-            class="w-full border-0"
-            height="1000"
-            scrolling="yes"
-            title="Formulaire de paiement sécurisé"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
-        </iframe>
+        <div class="relative" x-data="{ loading: true }">
+            <!-- Loading spinner -->
+            <div x-show="loading" class="absolute inset-0 flex items-center justify-center bg-white bg-opacity-75">
+                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-[#7B1F1F]"></div>
+            </div>
+
+            <!-- Iframe de paiement -->
+            <iframe
+                id="paymentFrame"
+                src="{{ $iframeUrl }}"
+                class="w-full border-0"
+                height="1000"
+                scrolling="yes"
+                title="Formulaire de paiement sécurisé"
+                frameborder="0"
+                x-on:load="loading = false"
+                sandbox="allow-forms allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const iframe = document.getElementById('paymentFrame');
+                let redirectAttempted = false;
+
+                function checkIframeRedirect() {
+                    if (redirectAttempted) return;
+                    
+                    try {
+                        const currentUrl = iframe.contentWindow.location.href;
+                        if (currentUrl !== "{{ $iframeUrl }}" && currentUrl !== "about:blank") {
+                            redirectAttempted = true;
+                            window.location.href = currentUrl;
+                        }
+                    } catch (e) {
+                        // CORS error, probablement une redirection en cours
+                        console.log('Redirection détectée');
+                        redirectAttempted = true;
+                        window.location.href = "{{ $iframeUrl }}";
+                    }
+                }
+
+                // Vérifier toutes les 500ms
+                setInterval(checkIframeRedirect, 500);
+
+                // Vérifier aussi lors du chargement de l'iframe
+                iframe.addEventListener('load', checkIframeRedirect);
+            });
+        </script>
     </div>
 
     <!-- Livewire Scripts -->
