@@ -68,17 +68,17 @@
                 @foreach($products as $product)
                 <div class="w-full group">
                     <div class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 h-[400px] flex flex-col">
-                        <a href="{{ route('products.show', $product->id) }}" 
-                           onclick="trackTikTok('ClickProduct', {
+                        <a href="{{ route('products.show', $product->id) }}"
+                           onclick="try { ttq.track('ClickProduct', {
                                content_type: 'product',
                                content_id: {{ $product->id }},
-                               content_name: {{ Js::from($product->name) }},
-                               content_category: {{ Js::from($product->category) }},
+                               content_name: '{{ addslashes($product->name) }}',
+                               content_category: '{{ addslashes($product->category) }}',
                                currency: 'EUR',
                                price: {{ $product->promo_price }},
                                value: {{ $product->promo_price }},
-                               brand: {{ Js::from($product->brand) }}
-                           }); return true;"
+                               brand: '{{ addslashes($product->brand) }}'
+                           }); } catch(e) { console.error('TikTok tracking error:', e); } return true;"
                            class="flex flex-col h-full">
                             <!-- Image du produit avec dimensions fixes -->
                             <div class="relative w-full h-[250px]">
@@ -98,7 +98,11 @@
                                 <div class="flex items-center justify-between">
                                     <!-- Badge de réduction -->
                                     @php
-                                        $reduction = round((($product->original_price ?? $product->price) - $product->promo_price) / ($product->original_price ?? $product->price) * 100);
+                                        try {
+                                            $reduction = round((($product->original_price ?? $product->price) - $product->promo_price) / ($product->original_price ?? $product->price) * 100);
+                                        } catch (\Exception $e) {
+                                            $reduction = 0;
+                                        }
                                     @endphp
                                     <div class="flex items-center gap-2">
                                         <span class="bg-[#7B1F1F] text-white px-2 py-1 text-xs font-bold rounded">-{{ $reduction }}%</span>

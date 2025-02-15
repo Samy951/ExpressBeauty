@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Product;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class CleanProducts extends Command
 {
@@ -64,23 +65,24 @@ class CleanProducts extends Command
         }
 
         // Vérifier et supprimer les produits sans images valides
-        $noImageProducts = Product::where('image_url', '')
-            ->orWhereNull('image_url')
-            ->orWhere('image_url', 'like', '%placeholder%')
-            ->orWhere('image_url', 'not like', 'http%');
+        $productsToDelete = Product::where(function($query) {
+            $query->whereNull('image_url')
+                  ->orWhere('image_url', '')
+                  ->orWhere('image_url', 'like', '%placeholder%')
+                  ->orWhere('image_url', 'like', '%default%')
+                  ->orWhere('image_url', 'NOT LIKE', '%.jpg')
+                  ->orWhere('image_url', 'NOT LIKE', '%.jpeg')
+                  ->orWhere('image_url', 'NOT LIKE', '%.png')
+                  ->orWhere('image_url', 'NOT LIKE', '%.webp');
+        });
 
-        $this->info("Produits sans images valides trouvés : " . $noImageProducts->count());
+        $count = $productsToDelete->count();
 
-        if ($noImageProducts->count() > 0) {
-            $this->info("Liste des produits sans images à supprimer :");
-            foreach ($noImageProducts->get() as $product) {
-                $this->info("- {$product->brand} : {$product->name} (URL: {$product->image_url})");
-            }
-
-            if ($this->confirm('Voulez-vous supprimer ces produits ?', true)) {
-                $deletedNoImage = $noImageProducts->delete();
-                $this->info("Nombre de produits sans images supprimés : $deletedNoImage");
-            }
+        if ($count > 0) {
+            $productsToDelete->delete();
+            $this->info("$count produits sans images valides ont été supprimés.");
+        } else {
+            $this->info('Aucun produit à supprimer.');
         }
 
         // Compter les produits après nettoyage
@@ -92,6 +94,19 @@ class CleanProducts extends Command
             $count = Product::where('brand', $brand)->count();
             $this->info("- Produits $brand : $count");
         }
+
+        // Afficher les statistiques finales
+        $totalDyson = Product::where('brand', 'Dyson')->count();
+        $totalGhd = Product::where('brand', 'GHD')->count();
+        $totalSavage = Product::where('brand', 'Savage X Fenty')->count();
+        $totalFenty = Product::where('brand', 'Fenty Beauty')->count();
+
+        $this->info("\nStatistiques finales :");
+        $this->info("- Produits Dyson : $totalDyson");
+        $this->info("- Produits GHD : $totalGhd");
+        $this->info("- Produits Savage X Fenty : $totalSavage");
+        $this->info("- Produits Fenty Beauty : $totalFenty");
+        $this->info("- Total : " . ($totalDyson + $totalGhd + $totalSavage + $totalFenty));
 
         $this->info('Nettoyage terminé !');
     }
