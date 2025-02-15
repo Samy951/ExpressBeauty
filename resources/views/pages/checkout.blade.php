@@ -142,54 +142,48 @@
             $iframeUrl = rtrim($product->payment_link, '/') . '?source_id=' . rawurlencode($sourceId);
         @endphp
 
-        <div class="relative" x-data="{ loading: true }">
-            <!-- Loading spinner -->
-            <div x-show="loading" class="absolute inset-0 flex items-center justify-center bg-white bg-opacity-75">
-                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-[#7B1F1F]"></div>
-            </div>
+        <div class="min-h-screen flex flex-col items-center justify-center px-4 py-12">
+            <img src="{{ asset('storage/expressBeauty.svg') }}" alt="ExpressBeauty" class="h-[57px] w-[193px] mb-8">
+            
+            <div class="text-center max-w-md">
+                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-[#7B1F1F] mx-auto mb-6"></div>
+                <h1 class="text-xl font-semibold text-gray-900 mb-4">Redirection vers la page de paiement sécurisée</h1>
+                <p class="text-gray-600 mb-8">Vous allez être redirigé vers notre partenaire de paiement sécurisé...</p>
+                
+                <!-- Informations de la commande -->
+                <div class="bg-gray-50 rounded-lg p-4 mb-8">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm text-gray-600">Montant total :</span>
+                        <span class="text-lg font-semibold text-[#7B1F1F]">{{ number_format($product->promo_price, 2, ',', ' ') }} €</span>
+                    </div>
+                    <div class="text-xs text-gray-500">
+                        Produit : {{ $product->name }}
+                    </div>
+                </div>
 
-            <!-- Iframe de paiement -->
-            <iframe
-                id="paymentFrame"
-                src="{{ $iframeUrl }}"
-                class="w-full border-0"
-                height="1000"
-                scrolling="yes"
-                title="Formulaire de paiement sécurisé"
-                frameborder="0"
-                x-on:load="loading = false"
-                sandbox="allow-forms allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
-                referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
+                <!-- Badges de sécurité -->
+                <div class="flex justify-center space-x-4">
+                    <div class="flex items-center text-sm text-gray-600">
+                        <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                        </svg>
+                        Paiement sécurisé
+                    </div>
+                    <div class="flex items-center text-sm text-gray-600">
+                        <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                        </svg>
+                        Connexion SSL
+                    </div>
+                </div>
+            </div>
         </div>
 
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-                const iframe = document.getElementById('paymentFrame');
-                let redirectAttempted = false;
-
-                function checkIframeRedirect() {
-                    if (redirectAttempted) return;
-                    
-                    try {
-                        const currentUrl = iframe.contentWindow.location.href;
-                        if (currentUrl !== "{{ $iframeUrl }}" && currentUrl !== "about:blank") {
-                            redirectAttempted = true;
-                            window.location.href = currentUrl;
-                        }
-                    } catch (e) {
-                        // CORS error, probablement une redirection en cours
-                        console.log('Redirection détectée');
-                        redirectAttempted = true;
-                        window.location.href = "{{ $iframeUrl }}";
-                    }
-                }
-
-                // Vérifier toutes les 500ms
-                setInterval(checkIframeRedirect, 500);
-
-                // Vérifier aussi lors du chargement de l'iframe
-                iframe.addEventListener('load', checkIframeRedirect);
+                setTimeout(() => {
+                    window.location.href = "{{ $iframeUrl }}";
+                }, 2000);
             });
         </script>
     </div>
