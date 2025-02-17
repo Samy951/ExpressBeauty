@@ -43,7 +43,7 @@
                             @endforeach
                         @endif
                     ]
-                }" class="relative p-4 bg-white shadow-lg rounded-xl">
+                }" class="relative p-4 bg-white rounded-xl shadow-lg">
                     <!-- Image principale -->
                     <div class="relative aspect-[3/4] overflow-hidden rounded-lg bg-white">
                         <template x-for="(slide, index) in slides" :key="index">
@@ -54,7 +54,7 @@
                                  x-transition:leave="transition ease-in duration-300"
                                  x-transition:leave-start="opacity-100 transform scale-100"
                                  x-transition:leave-end="opacity-0 transform scale-95"
-                                 class="absolute inset-0 flex items-center justify-center">
+                                 class="flex absolute inset-0 justify-center items-center">
                                 <img :src="slide"
                                      :alt="'Image ' + (index + 1)"
                                      class="object-cover w-full h-full transition-transform duration-500 transform">
@@ -64,24 +64,24 @@
 
                     <!-- Boutons de navigation -->
                     <button @click="activeSlide = (activeSlide - 1 + slides.length) % slides.length"
-                            class="absolute flex items-center justify-center w-12 h-12 transition-all duration-300 -translate-y-1/2 rounded-full shadow-lg left-6 top-1/2 bg-white/90 backdrop-blur-sm hover:bg-white hover:shadow-xl">
+                            class="flex absolute left-6 top-1/2 justify-center items-center w-12 h-12 rounded-full shadow-lg backdrop-blur-sm transition-all duration-300 -translate-y-1/2 bg-white/90 hover:bg-white hover:shadow-xl">
                         <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                         </svg>
                     </button>
                     <button @click="activeSlide = (activeSlide + 1) % slides.length"
-                            class="absolute flex items-center justify-center w-12 h-12 transition-all duration-300 -translate-y-1/2 rounded-full shadow-lg right-6 top-1/2 bg-white/90 backdrop-blur-sm hover:bg-white hover:shadow-xl">
+                            class="flex absolute right-6 top-1/2 justify-center items-center w-12 h-12 rounded-full shadow-lg backdrop-blur-sm transition-all duration-300 -translate-y-1/2 bg-white/90 hover:bg-white hover:shadow-xl">
                         <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                         </svg>
                     </button>
 
                     <!-- Miniatures -->
-                    <div class="flex justify-center gap-4 px-4 mt-6">
+                    <div class="flex gap-4 justify-center px-4 mt-6">
                         <template x-for="(slide, index) in slides" :key="index">
                             <button @click="activeSlide = index"
                                     :class="{'ring-2 ring-[#7B1F1F] ring-offset-2': activeSlide === index}"
-                                    class="w-20 h-24 overflow-hidden transition-all duration-300 rounded-lg hover:opacity-90 focus:outline-none">
+                                    class="overflow-hidden w-20 h-24 rounded-lg transition-all duration-300 hover:opacity-90 focus:outline-none">
                                 <img :src="slide"
                                      :alt="'Miniature ' + (index + 1)"
                                      class="object-cover w-full h-full">
@@ -115,7 +115,7 @@
                     <h1 class="mb-4 text-3xl font-bold text-gray-900">{{ $product->name }}</h1>
 
                     <!-- Avis clients -->
-                    <div class="flex items-center gap-4 mb-6">
+                    <div class="flex gap-4 items-center mb-6">
                         <div class="flex">
                             @for($i = 1; $i <= 5; $i++)
                                 <svg class="w-5 h-5 {{ $i <= 4 ? 'text-yellow-400' : 'text-gray-300' }}" fill="currentColor" viewBox="0 0 20 20">
@@ -123,12 +123,12 @@
                                 </svg>
                             @endfor
                         </div>
-                        <span class="text-sm text-gray-600">96% de nos clients recommandent ce produit (4926 Avis Clients)</span>
+                        <span class="text-sm text-gray-600">96% de nos clients recommandent ce produit</span>
                     </div>
 
                     <!-- Prix -->
                     <div class="mb-8">
-                        <div class="flex items-baseline gap-3">
+                        <div class="flex gap-3 items-baseline">
                             <span class="text-4xl font-bold text-[#7B1F1F]">{{ number_format($product->promo_price, 2, ',', ' ') }} €</span>
                             <span class="text-lg text-gray-500 line-through">{{ number_format($product->original_price ?? $product->price, 2, ',', ' ') }} €</span>
                         </div>
@@ -137,7 +137,7 @@
 
                     <!-- Sélecteur de taille pour SavageXFenty -->
                     @if($product->brand === 'Savage X Fenty')
-                        <div class="mb-8" x-data="{ 
+                        <div class="mb-8" x-data="{
                             productName: '{{ strtolower($product->name) }}',
                             selectedSize: '',
                             selectedBustSize: '',
@@ -160,12 +160,12 @@
                                     <div class="flex flex-wrap gap-2">
                                         <template x-for="size in regularSizes" :key="size">
                                             <div class="relative">
-                                                <input type="radio" 
-                                                       :id="'size-' + size" 
-                                                       name="size" 
+                                                <input type="radio"
+                                                       :id="'size-' + size"
+                                                       name="size"
                                                        :value="size"
                                                        x-model="selectedSize"
-                                                       class="peer hidden">
+                                                       class="hidden peer">
                                                 <label :for="'size-' + size"
                                                        :class="{'border-[#7B1F1F] text-[#7B1F1F] font-semibold ring-2 ring-[#7B1F1F] ring-offset-2': selectedSize === size}"
                                                        class="flex items-center justify-center w-8 h-8 sm:w-12 sm:h-12 rounded-full border border-gray-300 cursor-pointer text-xs sm:text-sm transition-all duration-200 hover:border-[#7B1F1F] hover:text-[#7B1F1F]">
@@ -189,12 +189,12 @@
                                         <div class="flex flex-wrap gap-2">
                                             <template x-for="size in bustSizes" :key="size">
                                                 <div class="relative">
-                                                    <input type="radio" 
-                                                           :id="'bust-' + size" 
-                                                           :name="'bust-size'" 
+                                                    <input type="radio"
+                                                           :id="'bust-' + size"
+                                                           :name="'bust-size'"
                                                            :value="size"
                                                            x-model="selectedBustSize"
-                                                           class="peer hidden">
+                                                           class="hidden peer">
                                                     <label :for="'bust-' + size"
                                                            :class="{'border-[#7B1F1F] text-[#7B1F1F] font-semibold ring-2 ring-[#7B1F1F] ring-offset-2': selectedBustSize === size}"
                                                            class="flex items-center justify-center w-8 h-8 sm:w-12 sm:h-12 rounded-full border border-gray-300 cursor-pointer text-xs sm:text-sm transition-all duration-200 hover:border-[#7B1F1F] hover:text-[#7B1F1F]">
@@ -209,12 +209,12 @@
                                         <div class="flex flex-wrap gap-2">
                                             <template x-for="size in cupSizes" :key="size">
                                                 <div class="relative">
-                                                    <input type="radio" 
-                                                           :id="'cup-' + size" 
-                                                           :name="'cup-size'" 
+                                                    <input type="radio"
+                                                           :id="'cup-' + size"
+                                                           :name="'cup-size'"
                                                            :value="size"
                                                            x-model="selectedCupSize"
-                                                           class="peer hidden">
+                                                           class="hidden peer">
                                                     <label :for="'cup-' + size"
                                                            :class="{'border-[#7B1F1F] text-[#7B1F1F] font-semibold ring-2 ring-[#7B1F1F] ring-offset-2': selectedCupSize === size}"
                                                            class="flex items-center justify-center w-8 h-8 sm:w-12 sm:h-12 rounded-full border border-gray-300 cursor-pointer text-xs sm:text-sm transition-all duration-200 hover:border-[#7B1F1F] hover:text-[#7B1F1F]">
@@ -232,7 +232,7 @@
                             </template>
 
                             <!-- Message d'erreur si aucune taille n'est sélectionnée -->
-                            <div x-show="showModal && ((!isBra() && !selectedSize) || (isBra() && (!selectedBustSize || !selectedCupSize)))" 
+                            <div x-show="showModal && ((!isBra() && !selectedSize) || (isBra() && (!selectedBustSize || !selectedCupSize)))"
                                  class="mt-2 text-sm text-red-600">
                                 Veuillez sélectionner une taille avant de continuer
                             </div>
@@ -270,10 +270,10 @@
                              x-transition:leave="transition ease-in duration-200"
                              x-transition:leave-start="opacity-100"
                              x-transition:leave-end="opacity-0"
-                             class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+                             class="flex fixed inset-0 z-50 justify-center items-center bg-black bg-opacity-50"
                              @click.self="showModal = false">
 
-                            <div class="relative w-full max-w-md p-6 mx-4 bg-white rounded-lg shadow-xl"
+                            <div class="relative p-6 mx-4 w-full max-w-md bg-white rounded-lg shadow-xl"
                                  @click.away="showModal = false">
 
                                 <!-- Icône d'information -->
@@ -361,10 +361,10 @@
                         }
                     }"
                     x-init="init()"
-                    class="w-full p-6 mt-8 bg-white shadow-lg rounded-xl">
+                    class="p-6 mt-8 w-full bg-white rounded-xl shadow-lg">
                         <h3 class="mb-4 text-lg font-semibold text-center text-gray-900">Avis de nos clients</h3>
 
-                        <div class="relative overflow-hidden">
+                        <div class="overflow-hidden relative">
                             <!-- Navigation -->
                             <button @click="activeReview = (activeReview - 1 + reviews.length) % reviews.length"
                                     class="absolute left-0 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:bg-[#7B1F1F] hover:text-white z-10">
@@ -383,23 +383,23 @@
                                          x-transition:leave="transition ease-in duration-300"
                                          x-transition:leave-start="opacity-100 transform translate-x-0"
                                          x-transition:leave-end="opacity-0 transform -translate-x-full"
-                                         class="absolute inset-0 flex flex-col items-center justify-center px-8">
+                                         class="flex absolute inset-0 flex-col justify-center items-center px-8">
                                         <div class="mb-2 transition-all duration-300 transform">
                                             <span x-text="review.avatar" class="text-3xl"></span>
                                         </div>
                                         <p class="mb-2 text-base italic text-center text-gray-800" x-text="review.text"></p>
                                         <div class="flex flex-col items-center">
-                                            <div class="flex items-center gap-2 mb-1">
+                                            <div class="flex gap-2 items-center mb-1">
                                                 <span class="font-medium text-gray-900" x-text="review.name"></span>
                                                 <span x-show="review.verified"
-                                                      class="bg-green-50 text-green-700 text-xs px-2 py-0.5 rounded-full flex items-center gap-1">
+                                                      class="flex gap-1 items-center px-2 py-0.5 text-xs text-green-700 bg-green-50 rounded-full">
                                                     <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                                                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                                     </svg>
                                                     Vérifié
                                                 </span>
                                             </div>
-                                            <div class="flex items-center gap-1">
+                                            <div class="flex gap-1 items-center">
                                                 <div class="flex">
                                                     <template x-for="star in review.rating">
                                                         <svg class="w-3 h-3 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
@@ -427,7 +427,7 @@
                             </button>
 
                             <!-- Indicateurs -->
-                            <div class="flex justify-center gap-1.5 mt-2">
+                            <div class="flex gap-1.5 justify-center mt-2">
                                 <template x-for="(review, index) in reviews" :key="index">
                                     <button @click="activeReview = index"
                                             :class="{'bg-[#7B1F1F]': activeReview === index, 'bg-gray-300': activeReview !== index}"
@@ -443,8 +443,8 @@
             <div class="mt-12 space-y-2">
                 <!-- Description -->
                 <div x-data="{ open: false }" class="border-t border-b border-gray-200">
-                    <button @click="open = !open" class="flex items-center justify-between w-full px-4 py-4">
-                        <div class="flex items-center gap-3">
+                    <button @click="open = !open" class="flex justify-between items-center px-4 py-4 w-full">
+                        <div class="flex gap-3 items-center">
                             <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                             </svg>
@@ -457,16 +457,16 @@
                     <div x-show="open" class="px-4 pb-4">
                         @php
                             $description = $product->description;
-                            
+
                             // Ajout d'espaces entre les mots
                             $description = preg_replace('/([a-z])([A-Z])/', '$1 $2', $description);
-                            
+
                             // Ajout de retours à la ligne après les points
                             $description = str_replace('.', ".\n", $description);
-                            
+
                             // Ajout de retours à la ligne avant les caractéristiques
                             $description = preg_replace('/(Taille|Tissu|Bordure|Ourlet)/', "\n$1", $description);
-                            
+
                             // Nettoyage des espaces multiples et des lignes vides
                             $description = preg_replace('/\s+/', ' ', $description);
                             $description = preg_replace("/\n\s+/", "\n", $description);
@@ -481,8 +481,8 @@
 
                 <!-- Livraison & Retours -->
                 <div x-data="{ open: false }" class="border-b border-gray-200">
-                    <button @click="open = !open" class="flex items-center justify-between w-full px-4 py-4">
-                        <div class="flex items-center gap-3">
+                    <button @click="open = !open" class="flex justify-between items-center px-4 py-4 w-full">
+                        <div class="flex gap-3 items-center">
                             <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"></path>
                             </svg>
@@ -499,8 +499,8 @@
 
                 <!-- Garantie de Qualité -->
                 <div x-data="{ open: false }" class="border-b border-gray-200">
-                    <button @click="open = !open" class="flex items-center justify-between w-full px-4 py-4">
-                        <div class="flex items-center gap-3">
+                    <button @click="open = !open" class="flex justify-between items-center px-4 py-4 w-full">
+                        <div class="flex gap-3 items-center">
                             <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
                             </svg>
@@ -517,8 +517,8 @@
 
                 <!-- Sécurité des Paiements -->
                 <div x-data="{ open: false }" class="border-b border-gray-200">
-                    <button @click="open = !open" class="flex items-center justify-between w-full px-4 py-4">
-                        <div class="flex items-center gap-3">
+                    <button @click="open = !open" class="flex justify-between items-center px-4 py-4 w-full">
+                        <div class="flex gap-3 items-center">
                             <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
                             </svg>
