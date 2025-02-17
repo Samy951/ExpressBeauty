@@ -22,8 +22,13 @@ class Kernel extends ConsoleKernel
                 ->at('02:00')
                 ->emailOutputOnFailure('ton@email.com');
 
-        // Générer le sitemap tous les jours à minuit
-        $schedule->command('sitemap:generate')->daily();
+        // Générer le sitemap tous les jours à minuit et pinger Google
+        $schedule->command('sitemap:generate')
+                ->dailyAt('01:00')
+                ->then(function () {
+                    // Ping Google
+                    file_get_contents('https://www.google.com/ping?sitemap=' . urlencode('https://showroombeauty.fr/sitemap.xml'));
+                });
     }
 
     /**

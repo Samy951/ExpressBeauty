@@ -2,11 +2,33 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="@yield('description', 'Showroom Beauty - Votre destination beauté en ligne. Découvrez notre sélection de produits Dyson, GHD, Fenty Beauty et Savage X Fenty à prix réduits.')">
-    <meta name="keywords" content="beauté, cosmétiques, Dyson, GHD, Fenty Beauty, Savage X Fenty, maquillage, soins capillaires, lingerie">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="2EN0SajTcMlpMKWh5gO_qYE9G5UxDTk0YG" />
+    <meta name="description" content="@yield('description', 'Showroom Beauty - Votre destination beauté en ligne. Découvrez notre sélection de produits Dyson, GHD, Fenty Beauty et Savage X Fenty à prix réduits. Livraison rapide en France 🇫🇷. Produits 100% authentiques garantis.')">
+    <meta name="keywords" content="beauté, cosmétiques, Dyson, GHD, Fenty Beauty, Savage X Fenty, maquillage, soins capillaires, lingerie, produits de beauté, beauté en ligne, cosmétiques en ligne, beauté france, produits de luxe, marques de luxe">
     <meta name="author" content="Showroom Beauty">
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="revisit-after" content="7 days">
+    <meta name="language" content="fr">
+    <meta name="geo.region" content="FR">
+    <meta name="geo.placename" content="France">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Showroom Beauty">
+    <meta name="application-name" content="Showroom Beauty">
+    <meta name="msapplication-TileColor" content="#7B1F1F">
+    <meta name="theme-color" content="#7B1F1F">
+
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
 
     <!-- PWA -->
     <link rel="manifest" href="{{ asset('site.webmanifest?v=5') }}">
@@ -24,18 +46,28 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:title" content="@yield('title', 'Showroom Beauty - Produits de Beauté')">
-    <meta property="og:description" content="@yield('description', 'Showroom Beauty - Votre destination beauté en ligne. Découvrez notre sélection de produits Dyson, GHD, Fenty Beauty et Savage X Fenty à prix réduits.')">
+    <meta property="og:title" content="@yield('title', 'Showroom Beauty - Votre Destination Beauté de Luxe en France')">
+    <meta property="og:description" content="@yield('description', 'Showroom Beauty - Votre destination beauté en ligne. Découvrez notre sélection de produits Dyson, GHD, Fenty Beauty et Savage X Fenty à prix réduits. Livraison rapide en France.')">
     <meta property="og:image" content="{{ asset('storage/og-image.jpg') }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="og:locale" content="fr_FR">
     <meta property="og:site_name" content="Showroom Beauty">
+    <meta property="og:price:currency" content="EUR">
+    <meta property="og:price:amount" content="@yield('product_price', '')">
+    <meta property="og:availability" content="@yield('product_availability', 'instock')">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@ShowroomBeauty">
+    <meta name="twitter:creator" content="@ShowroomBeauty">
     <meta name="twitter:url" content="{{ url()->current() }}">
-    <meta name="twitter:title" content="@yield('title', 'Showroom Beauty - Produits de Beauté')">
+    <meta name="twitter:title" content="@yield('title', 'Showroom Beauty - Votre Destination Beauté de Luxe en France')">
     <meta name="twitter:description" content="@yield('description', 'Showroom Beauty - Votre destination beauté en ligne. Découvrez notre sélection de produits Dyson, GHD, Fenty Beauty et Savage X Fenty à prix réduits.')">
     <meta name="twitter:image" content="{{ asset('storage/og-image.jpg') }}">
+    <meta name="twitter:image:alt" content="Showroom Beauty - Produits de beauté de luxe">
+    <meta name="twitter:label1" content="Prix en EUR">
+    <meta name="twitter:data1" content="@yield('product_price', 'À partir de 29€')">
 
     <!-- Canonical URL -->
     <link rel="canonical" href="{{ url()->current() }}">
@@ -56,17 +88,164 @@
         "name": "Showroom Beauty",
         "url": "{{ config('app.url') }}",
         "logo": "{{ asset('storage/showroomBeauty.svg') }}",
+        "image": "{{ asset('storage/og-image.jpg') }}",
+        "description": "Votre destination beauté en ligne. Découvrez notre sélection de produits Dyson, GHD, Fenty Beauty et Savage X Fenty à prix réduits.",
         "contactPoint": {
             "@type": "ContactPoint",
-            "telephone": "+33-1-XX-XX-XX-XX",
             "contactType": "customer service",
-            "availableLanguage": "French"
+            "availableLanguage": ["French"],
+            "areaServed": "FR"
+        },
+        "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "France"
         },
         "sameAs": [
             "https://www.facebook.com/showroombeauty",
             "https://www.instagram.com/showroombeauty",
             "https://www.tiktok.com/@showroombeauty"
         ]
+    }
+    </script>
+
+    <!-- Schema.org FAQ Markup -->
+    @if(request()->routeIs('home'))
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [{
+            "@type": "Question",
+            "name": "Comment sont garantis les produits Showroom Beauty ?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Tous nos produits sont 100% authentiques et garantis. Nous travaillons directement avec les marques officielles comme Dyson, GHD, Fenty Beauty et Savage X Fenty."
+            }
+        }, {
+            "@type": "Question",
+            "name": "Quels sont les délais de livraison ?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Nous livrons partout en France métropolitaine sous 2-3 jours ouvrés. La livraison est gratuite pour toute commande supérieure à 49€."
+            }
+        }, {
+            "@type": "Question",
+            "name": "Quelle est la politique de retour ?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Vous disposez de 14 jours pour retourner votre produit dans son emballage d'origine. Les frais de retour sont gratuits."
+            }
+        }, {
+            "@type": "Question",
+            "name": "Les produits sont-ils moins chers que dans les boutiques officielles ?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Oui, nous proposons des prix réduits sur toute notre gamme de produits grâce à nos partenariats directs avec les marques."
+            }
+        }]
+    }
+    </script>
+    @endif
+
+    <!-- Schema.org markup pour la page produit -->
+    @if(request()->routeIs('products.show') && isset($product))
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "{{ $product->name ?? '' }}",
+        "description": "{{ $product->description ?? '' }}",
+        "image": "{{ $product->image_url ?? '' }}",
+        "sku": "{{ $product->sku ?? '' }}",
+        "mpn": "{{ $product->reference ?? '' }}",
+        "brand": {
+            "@type": "Brand",
+            "name": "{{ $product->brand->name ?? '' }}"
+        },
+        "offers": {
+            "@type": "Offer",
+            "priceCurrency": "EUR",
+            "price": "{{ $product->price ?? '' }}",
+            "priceValidUntil": "{{ now()->addMonths(1)->format('Y-m-d') }}",
+            "availability": "{{ $product->stock > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock' }}",
+            "seller": {
+                "@type": "Organization",
+                "name": "Showroom Beauty"
+            },
+            "shippingDetails": {
+                "@type": "OfferShippingDetails",
+                "shippingRate": {
+                    "@type": "MonetaryAmount",
+                    "value": "{{ $product->price >= 49 ? '0' : '4.90' }}",
+                    "currency": "EUR"
+                },
+                "shippingDestination": {
+                    "@type": "DefinedRegion",
+                    "addressCountry": "FR"
+                },
+                "deliveryTime": {
+                    "@type": "ShippingDeliveryTime",
+                    "handlingTime": {
+                        "@type": "QuantitativeValue",
+                        "minValue": "1",
+                        "maxValue": "2",
+                        "unitCode": "DAY"
+                    },
+                    "transitTime": {
+                        "@type": "QuantitativeValue",
+                        "minValue": "1",
+                        "maxValue": "3",
+                        "unitCode": "DAY"
+                    }
+                }
+            }
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "{{ $product->average_rating ?? '4.8' }}",
+            "reviewCount": "{{ $product->reviews_count ?? '0' }}"
+        }
+    }
+    </script>
+    @endif
+
+    <!-- Schema.org markup pour l'organisation -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Showroom Beauty",
+        "url": "{{ config('app.url') }}",
+        "logo": "{{ asset('storage/showroomBeauty.svg') }}",
+        "image": "{{ asset('storage/og-image.jpg') }}",
+        "description": "Votre destination beauté en ligne. Découvrez notre sélection de produits Dyson, GHD, Fenty Beauty et Savage X Fenty à prix réduits.",
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+33612345678",
+            "contactType": "customer service",
+            "availableLanguage": ["French"],
+            "areaServed": "FR"
+        },
+        "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "France",
+            "addressRegion": "Île-de-France",
+            "postalCode": "75000",
+            "addressLocality": "Paris"
+        },
+        "sameAs": [
+            "https://www.facebook.com/showroombeauty",
+            "https://www.instagram.com/showroombeauty",
+            "https://www.tiktok.com/@showroombeauty"
+        ],
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+                "@type": "EntryPoint",
+                "urlTemplate": "{{ config('app.url') }}/search?q={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+        }
     }
     </script>
 
@@ -220,6 +399,15 @@
             </div>
         </div>
     </nav>
+
+    {{-- Breadcrumbs temporairement désactivés
+    @if(Route::currentRouteName() && Route::currentRouteName() !== 'home')
+        @try
+            {{ Breadcrumbs::render(Route::currentRouteName()) }}
+        @catch (\Throwable $e)
+        @endtry
+    @endif
+    --}}
 
     <!-- Contenu principal -->
     <main>
