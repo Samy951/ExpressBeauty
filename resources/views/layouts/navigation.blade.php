@@ -1,12 +1,12 @@
 <nav class="bg-white shadow-lg">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between h-16">
+    <div class="container px-4 mx-auto sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
             <div class="flex-shrink-0">
                 <a href="/" class="block">
-                    <img src="{{ asset('storage/showroomBeauty.svg') }}" alt="Showroom Beauty" class="h-[55px] w-[220px] md:h-[70px] md:w-[280px]">
+                    <img src="{{ asset('storage/showroomBeauty.svg') }}" alt="Showroom Beauty" class="h-[55px] w-[220px] md:h-[70px] md:w-[280px] mb-2">
                 </a>
             </div>
-            <div class="hidden md:flex md:items-center space-x-6">
+            <div class="hidden space-x-6 md:flex md:items-center">
                 <a href="{{ route('home') }}" class="text-gray-700 hover:text-[#7B1F1F] px-3 py-2 text-sm font-medium {{ request()->routeIs('home') ? 'text-[#7B1F1F]' : '' }}">Accueil</a>
                 <a href="{{ route('products.index') }}" class="text-gray-700 hover:text-[#7B1F1F] px-3 py-2 text-sm font-medium {{ request()->routeIs('products.*') ? 'text-[#7B1F1F]' : '' }}">Produits</a>
                 <div class="py-1">

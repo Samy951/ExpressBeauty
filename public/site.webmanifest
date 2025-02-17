@@ -1,6 +1,8 @@
 {
     "name": "Showroom Beauty",
     "short_name": "Showroom Beauty",
+    "description": "Votre destination beauté en ligne pour des produits authentiques",
+    "start_url": "/",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
@@ -13,7 +15,8 @@
             "type": "image/png"
         }
     ],
-    "theme_color": "#FF0000",
-    "background_color": "#FF0000",
-    "display": "standalone"
+    "theme_color": "#7B1F1F",
+    "background_color": "#7B1F1F",
+    "display": "standalone",
+    "orientation": "portrait"
 }
