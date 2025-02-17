@@ -43,4 +43,4 @@ Allow: /storage/brands/
 Disallow: /storage/private/
 
 # Sitemap
-Sitemap: https://expressbeauty.fr/sitemap.xml
+Sitemap: https://showroombeauty.fr/sitemap.xml

@@ -2,7 +2,7 @@
     <!-- Bannière -->
     <div class="bg-[#7B1F1F] text-white py-12">
         <div class="container px-4 mx-auto text-center">
-            <h1 class="text-4xl font-bold mb-4">À Propos d'ExpressBeauty</h1>
+            <h1 class="text-4xl font-bold mb-4">À Propos de Showroom Beauty</h1>
             <p class="text-xl text-gray-200 max-w-3xl mx-auto">
                 Votre destination en ligne pour les produits de beauté et de soins capillaires haut de gamme
             </p>
@@ -16,7 +16,7 @@
                 <div class="bg-gray-50 p-8 md:p-12 rounded-2xl shadow-lg">
                     <h2 class="text-2xl font-bold text-gray-900 mb-6">Notre Histoire</h2>
                     <p class="text-gray-600 leading-relaxed mb-6">
-                        ExpressBeauty est votre destination en ligne pour les produits de beauté et de soins capillaires haut de gamme.
+                        Showroom Beauty est votre destination en ligne pour les produits de beauté et de soins capillaires haut de gamme.
                         Nous sélectionnons avec soin les meilleures marques pour vous offrir une expérience beauté exceptionnelle.
                     </p>
                     <p class="text-gray-600 leading-relaxed">

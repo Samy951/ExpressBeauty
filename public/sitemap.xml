@@ -3,64 +3,64 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <url>
-        <loc>https://expressbeauty.fr/</loc>
+        <loc>https://showroombeauty.fr/</loc>
         <lastmod>2024-02-20</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
         <image:image>
-            <image:loc>https://expressbeauty.fr/storage/AdobeStock_132642948.jpeg</image:loc>
-            <image:title>ExpressBeauty - Votre destination beauté en ligne</image:title>
+            <image:loc>https://showroombeauty.fr/storage/AdobeStock_132642948.jpeg</image:loc>
+            <image:title>Showroom Beauty - Votre destination beauté en ligne</image:title>
         </image:image>
     </url>
     <url>
-        <loc>https://expressbeauty.fr/products</loc>
+        <loc>https://showroombeauty.fr/products</loc>
         <lastmod>2024-02-20</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>https://expressbeauty.fr/about</loc>
+        <loc>https://showroombeauty.fr/about</loc>
         <lastmod>2024-02-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://expressbeauty.fr/brands/fenty-beauty</loc>
+        <loc>https://showroombeauty.fr/brands/fenty-beauty</loc>
         <lastmod>2024-02-20</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
         <image:image>
-            <image:loc>https://expressbeauty.fr/storage/brands/fenty-beauty.webp</image:loc>
+            <image:loc>https://showroombeauty.fr/storage/brands/fenty-beauty.webp</image:loc>
             <image:title>Fenty Beauty by Rihanna - Produits de beauté authentiques</image:title>
         </image:image>
     </url>
     <url>
-        <loc>https://expressbeauty.fr/brands/savage-fenty</loc>
+        <loc>https://showroombeauty.fr/brands/savage-fenty</loc>
         <lastmod>2024-02-20</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
         <image:image>
-            <image:loc>https://expressbeauty.fr/storage/brands/savage-fenty.webp</image:loc>
+            <image:loc>https://showroombeauty.fr/storage/brands/savage-fenty.webp</image:loc>
             <image:title>Savage X Fenty by Rihanna - Lingerie authentique</image:title>
         </image:image>
     </url>
     <url>
-        <loc>https://expressbeauty.fr/brands/dyson</loc>
+        <loc>https://showroombeauty.fr/brands/dyson</loc>
         <lastmod>2024-02-20</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
         <image:image>
-            <image:loc>https://expressbeauty.fr/storage/brands/dyson.webp</image:loc>
+            <image:loc>https://showroombeauty.fr/storage/brands/dyson.webp</image:loc>
             <image:title>Dyson - Appareils de coiffure professionnels</image:title>
         </image:image>
     </url>
     <url>
-        <loc>https://expressbeauty.fr/brands/ghd</loc>
+        <loc>https://showroombeauty.fr/brands/ghd</loc>
         <lastmod>2024-02-20</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
         <image:image>
-            <image:loc>https://expressbeauty.fr/storage/brands/ghd.webp</image:loc>
+            <image:loc>https://showroombeauty.fr/storage/brands/ghd.webp</image:loc>
             <image:title>GHD - Appareils de coiffure haut de gamme</image:title>
         </image:image>
     </url>

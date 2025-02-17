@@ -1,4 +1,4 @@
-@section('title', 'Politique de remboursement - ExpressBeauty')
+@section('title', 'Politique de remboursement - Showroom Beauty')
 
 <x-layouts.app>
     <!-- En-tête avec fond dégradé -->
@@ -48,7 +48,7 @@
                         <h2 class="text-xl font-semibold mb-4 text-[#7B1F1F]">Adresse de retour</h2>
                         <div class="p-4 bg-gray-50 rounded-lg">
                             <p class="text-gray-600">
-                                ExpressBeauty - Service Retours<br>
+                                Showroom Beauty - Service Retours<br>
                                 123 Avenue des Champs-Élysées<br>
                                 75008 Paris<br>
                                 France
@@ -60,7 +60,7 @@
                         <h2 class="text-xl font-semibold mb-4">Contact</h2>
                         <p class="mb-4">Pour toute question concernant notre politique de remboursement, contactez-nous :</p>
                         <ul class="pl-6 list-disc space-y-2">
-                            <li>Email : contact@expressbeauty.fr</li>
+                            <li>Email : contact@showroombeauty.fr</li>
                             <li>Téléphone : +33 (0)1 XX XX XX XX</li>
                             <li>Du lundi au vendredi, de 9h à 18h</li>
                         </ul>

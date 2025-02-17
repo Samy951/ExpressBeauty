@@ -5,7 +5,7 @@
             <div class="flex items-center">
                 <div class="flex-shrink-0 flex items-center justify-start">
                     <a href="/" class="block">
-                        <img src="{{ asset('storage/expressBeauty.svg') }}" alt="ExpressBeauty" class="h-[45px] w-[160px] md:h-[57px] md:w-[193px]">
+                        <img src="{{ asset('storage/showroomBeauty.svg') }}" alt="Showroom Beauty" class="h-[45px] w-[160px] md:h-[57px] md:w-[193px]">
                     </a>
                 </div>
                 <div class="hidden space-x-8 md:flex md:ml-10">
@@ -52,4 +52,4 @@
             <a href="{{ route('contact') }}" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-[#7B1F1F] hover:bg-gray-50">Contact</a>
         </div>
     </div>
-</nav> 
+</nav>

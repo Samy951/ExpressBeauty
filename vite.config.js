@@ -8,4 +8,20 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    build: {
+        manifest: true,
+        outDir: "public/build",
+        rollupOptions: {
+            output: {
+                manualChunks: undefined,
+            },
+        },
+    },
+    server: {
+        host: "0.0.0.0",
+        hmr: {
+            host: "showroombeauty.fr",
+            protocol: "wss",
+        },
+    },
 });

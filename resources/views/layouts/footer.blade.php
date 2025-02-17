@@ -47,7 +47,7 @@
             </div>
         </div>
         <div class="pt-8 mt-8 border-t border-gray-700">
-            <p class="text-sm text-gray-400">&copy; {{ date('Y') }} ExpressBeauty. Tous droits réservés.</p>
+            <p class="text-sm text-gray-400">&copy; {{ date('Y') }} Showroom Beauty. Tous droits réservés.</p>
         </div>
     </div>
-</footer> 
+</footer>

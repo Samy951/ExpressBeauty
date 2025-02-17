@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="@yield('description', 'ExpressBeauty - Votre destination beauté en ligne. Découvrez notre sélection de produits Dyson, GHD, Fenty Beauty et Savage X Fenty à prix réduits.')">
+    <meta name="description" content="@yield('description', 'Showroom Beauty - Votre destination beauté en ligne. Découvrez notre sélection de produits Dyson, GHD, Fenty Beauty et Savage X Fenty à prix réduits.')">
     <meta name="keywords" content="beauté, cosmétiques, Dyson, GHD, Fenty Beauty, Savage X Fenty, maquillage, soins capillaires, lingerie">
-    <meta name="author" content="ExpressBeauty">
+    <meta name="author" content="Showroom Beauty">
     <meta name="robots" content="index, follow">
 
     <!-- PWA -->
@@ -13,7 +13,7 @@
     <meta name="theme-color" content="#7B1F1F">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="ExpressBeauty">
+    <meta name="apple-mobile-web-app-title" content="Showroom Beauty">
     <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png?v=4') }}">
 
     <!-- Favicons -->
@@ -24,17 +24,17 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:title" content="@yield('title', 'ExpressBeauty - Produits de Beauté')">
-    <meta property="og:description" content="@yield('description', 'ExpressBeauty - Votre destination beauté en ligne. Découvrez notre sélection de produits Dyson, GHD, Fenty Beauty et Savage X Fenty à prix réduits.')">
+    <meta property="og:title" content="@yield('title', 'Showroom Beauty - Produits de Beauté')">
+    <meta property="og:description" content="@yield('description', 'Showroom Beauty - Votre destination beauté en ligne. Découvrez notre sélection de produits Dyson, GHD, Fenty Beauty et Savage X Fenty à prix réduits.')">
     <meta property="og:image" content="{{ asset('storage/og-image.jpg') }}">
     <meta property="og:locale" content="fr_FR">
-    <meta property="og:site_name" content="ExpressBeauty">
+    <meta property="og:site_name" content="Showroom Beauty">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="{{ url()->current() }}">
-    <meta name="twitter:title" content="@yield('title', 'ExpressBeauty - Produits de Beauté')">
-    <meta name="twitter:description" content="@yield('description', 'ExpressBeauty - Votre destination beauté en ligne. Découvrez notre sélection de produits Dyson, GHD, Fenty Beauty et Savage X Fenty à prix réduits.')">
+    <meta name="twitter:title" content="@yield('title', 'Showroom Beauty - Produits de Beauté')">
+    <meta name="twitter:description" content="@yield('description', 'Showroom Beauty - Votre destination beauté en ligne. Découvrez notre sélection de produits Dyson, GHD, Fenty Beauty et Savage X Fenty à prix réduits.')">
     <meta name="twitter:image" content="{{ asset('storage/og-image.jpg') }}">
 
     <!-- Canonical URL -->
@@ -53,9 +53,9 @@
     {
         "@context": "https://schema.org",
         "@type": "Organization",
-        "name": "ExpressBeauty",
+        "name": "Showroom Beauty",
         "url": "{{ config('app.url') }}",
-        "logo": "{{ asset('storage/expressBeauty.svg') }}",
+        "logo": "{{ asset('storage/showroomBeauty.svg') }}",
         "contactPoint": {
             "@type": "ContactPoint",
             "telephone": "+33-1-XX-XX-XX-XX",
@@ -63,14 +63,14 @@
             "availableLanguage": "French"
         },
         "sameAs": [
-            "https://www.facebook.com/expressbeauty",
-            "https://www.instagram.com/expressbeauty",
-            "https://www.tiktok.com/@expressbeauty"
+            "https://www.facebook.com/showroombeauty",
+            "https://www.instagram.com/showroombeauty",
+            "https://www.tiktok.com/@showroombeauty"
         ]
     }
     </script>
 
-    <title>@yield('title', 'ExpressBeauty - Produits de Beauté')</title>
+    <title>@yield('title', 'Showroom Beauty - Produits de Beauté')</title>
 
     <!-- Styles -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -108,7 +108,7 @@
                 <div class="flex items-center">
                     <div class="flex-shrink-0 flex items-center justify-start">
                         <a href="/" class="block">
-                            <img src="{{ asset('storage/expressBeauty.svg') }}" alt="ExpressBeauty" class="h-[45px] w-[160px] md:h-[57px] md:w-[193px]">
+                            <img src="{{ asset('storage/showroomBeauty.svg') }}" alt="Showroom Beauty" class="h-[45px] w-[160px] md:h-[57px] md:w-[193px]">
                         </a>
                     </div>
                     <div class="hidden space-x-8 md:flex md:ml-10">
@@ -285,7 +285,7 @@
                 </div>
             </div>
             <div class="pt-8 mt-8 border-t border-gray-100/20">
-                <p class="text-center text-gray-200">&copy; {{ date('Y') }} ExpressBeauty. Tous droits réservés.</p>
+                <p class="text-center text-gray-200">&copy; {{ date('Y') }} Showroom Beauty. Tous droits réservés.</p>
             </div>
         </div>
     </footer>

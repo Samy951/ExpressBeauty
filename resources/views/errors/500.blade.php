@@ -2,7 +2,7 @@
     <div class="min-h-screen bg-white flex flex-col items-center justify-center px-4">
         <div class="max-w-md w-full text-center">
             <div class="mb-8">
-                <img src="{{ asset('storage/expressBeauty.svg') }}" alt="ExpressBeauty" class="h-[57px] w-[193px] mx-auto">
+                <img src="{{ asset('storage/showroomBeauty.svg') }}" alt="Showroom Beauty" class="h-[57px] w-[193px] mx-auto">
             </div>
 
             <h1 class="text-2xl font-bold text-gray-900 mb-4">Oups ! Une erreur est survenue</h1>

@@ -1,6 +1,6 @@
 {
-    "name": "ExpressBeauty",
-    "short_name": "ExpressBeauty",
+    "name": "Showroom Beauty",
+    "short_name": "Showroom Beauty",
     "description": "Votre destination beauté en ligne avec les meilleures marques à prix réduits",
     "start_url": "/",
     "display": "standalone",

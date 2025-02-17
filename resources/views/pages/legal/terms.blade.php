@@ -1,4 +1,4 @@
-@section('title', 'Terms & Conditions - ExpressBeauty')
+@section('title', 'Terms & Conditions - Showroom Beauty')
 
 <x-layouts.app>
     <!-- En-tête avec fond dégradé -->
@@ -20,7 +20,7 @@
                             <li>Toutes les transactions sont sécurisées par SSL</li>
                             <li>La carte bancaire du client est débitée immédiatement après l'achat</li>
                             <li>Une confirmation de commande est envoyée par email</li>
-                            <li>Le contrat est conclu entre le client et ExpressBeauty dès la validation de la commande</li>
+                            <li>Le contrat est conclu entre le client et Showroom Beauty dès la validation de la commande</li>
                             <li>Toutes les commandes sont traitées dans les plus brefs délais</li>
                             <li>Nous répondons à toutes les questions sous 2 jours ouvrés</li>
                         </ul>
@@ -28,12 +28,12 @@
 
                     <div class="p-6 bg-white rounded-xl shadow-sm border border-gray-100">
                         <h2 class="text-xl font-semibold mb-4 text-[#7B1F1F]">2. Description des Services</h2>
-                        <p class="text-gray-600">ExpressBeauty propose une large gamme de produits de beauté et de cosmétiques. Notre site permet l'achat de produits aux prix affichés. Certains produits peuvent bénéficier de réductions spéciales pour les membres.</p>
+                        <p class="text-gray-600">Showroom Beauty propose une large gamme de produits de beauté et de cosmétiques. Notre site permet l'achat de produits aux prix affichés. Certains produits peuvent bénéficier de réductions spéciales pour les membres.</p>
                     </div>
 
                     <div class="p-6 bg-white rounded-xl shadow-sm border border-gray-100">
                         <h2 class="text-xl font-semibold mb-4 text-[#7B1F1F]">3. Commandes</h2>
-                        <p class="mb-4 text-gray-600">Pour commander sur ExpressBeauty :</p>
+                        <p class="mb-4 text-gray-600">Pour commander sur Showroom Beauty :</p>
                         <ul class="pl-6 list-disc space-y-2">
                             <li>Sélectionnez vos produits</li>
                             <li>Ajoutez-les au panier</li>
@@ -45,7 +45,7 @@
 
                     <div class="p-6 bg-white rounded-xl shadow-sm border border-gray-100">
                         <h2 class="text-xl font-semibold mb-4 text-[#7B1F1F]">4. Prix et Paiement</h2>
-                        <p class="mb-4 text-gray-600">Les prix affichés sur le site sont en euros TTC. ExpressBeauty se réserve le droit de modifier ses prix à tout moment. Les produits sont facturés au prix en vigueur lors de la validation de la commande.</p>
+                        <p class="mb-4 text-gray-600">Les prix affichés sur le site sont en euros TTC. Showroom Beauty se réserve le droit de modifier ses prix à tout moment. Les produits sont facturés au prix en vigueur lors de la validation de la commande.</p>
                         <p class="text-gray-600">Nous acceptons les paiements par carte bancaire (Visa, Mastercard). Toutes les transactions sont sécurisées. Les commandes supérieures à 100€ peuvent faire l'objet de vérifications supplémentaires.</p>
                     </div>
 
@@ -59,7 +59,7 @@
                         <h2 class="text-xl font-semibold mb-4">Contact</h2>
                         <p class="mb-4">Pour toute question concernant nos conditions générales, contactez-nous :</p>
                         <ul class="pl-6 list-disc space-y-2">
-                            <li>Email : contact@expressbeauty.fr</li>
+                            <li>Email : contact@showroombeauty.fr</li>
                             <li>Téléphone : +33 (0)1 XX XX XX XX</li>
                             <li>Adresse : 123 Avenue des Champs-Élysées, 75008 Paris</li>
                         </ul>

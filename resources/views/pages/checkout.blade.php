@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ExpressBeauty - Paiement</title>
+    <title>Showroom Beauty - Paiement</title>
 
     <!-- Styles -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -20,7 +20,7 @@
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
                         <a href="/" class="block">
-                            <img src="{{ asset('storage/expressBeauty.svg') }}" alt="ExpressBeauty" class="h-[57px] w-[193px]">
+                            <img src="{{ asset('storage/showroomBeauty.svg') }}" alt="Showroom Beauty" class="h-[57px] w-[193px]">
                         </a>
                     </div>
                     <div class="hidden space-x-8 md:flex md:ml-10">
@@ -143,13 +143,13 @@
         @endphp
 
         <div class="min-h-screen flex flex-col items-center justify-center px-4 py-12">
-            <img src="{{ asset('storage/expressBeauty.svg') }}" alt="ExpressBeauty" class="h-[57px] w-[193px] mb-8">
-            
+            <img src="{{ asset('storage/showroomBeauty.svg') }}" alt="Showroom Beauty" class="h-[57px] w-[193px] mb-8">
+
             <div class="text-center max-w-md">
                 <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-[#7B1F1F] mx-auto mb-6"></div>
                 <h1 class="text-xl font-semibold text-gray-900 mb-4">Redirection vers la page de paiement sécurisée</h1>
                 <p class="text-gray-600 mb-8">Vous allez être redirigé vers notre partenaire de paiement sécurisé...</p>
-                
+
                 <!-- Informations de la commande -->
                 <div class="bg-gray-50 rounded-lg p-4 mb-8">
                     <div class="flex justify-between items-center mb-2">

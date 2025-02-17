@@ -3,7 +3,7 @@
     <div class="bg-gradient-to-r from-[#7B1F1F] to-[#9B3C3C] text-white py-16">
         <div class="container px-4 mx-auto text-center">
             <h1 class="text-4xl font-bold mb-4">Conditions générales de vente</h1>
-            <p class="text-lg text-gray-100 max-w-2xl mx-auto">Les termes et conditions qui régissent vos achats sur ExpressBeauty</p>
+            <p class="text-lg text-gray-100 max-w-2xl mx-auto">Les termes et conditions qui régissent vos achats sur Showroom Beauty</p>
         </div>
     </div>
 
@@ -21,7 +21,7 @@
                         </div>
                         <h2 class="text-2xl font-bold text-gray-900">Conditions Générales de Vente et d'Utilisation</h2>
                     </div>
-                    <p class="text-gray-600 leading-relaxed">Ce site web est exploité par ExpressBeauty. Partout sur le site, nous employons les termes « nous », « notre » et « nos » en référence à ExpressBeauty. En visitant notre site et/ou en achetant quelque chose auprès de notre entreprise, vous acceptez les conditions suivantes.</p>
+                    <p class="text-gray-600 leading-relaxed">Ce site web est exploité par Showroom Beauty. Partout sur le site, nous employons les termes « nous », « notre » et « nos » en référence à Showroom Beauty. En visitant notre site et/ou en achetant quelque chose auprès de notre entreprise, vous acceptez les conditions suivantes.</p>
                 </div>
 
                 <!-- Articles -->
@@ -119,14 +119,14 @@
                                     <svg class="w-5 h-5 text-[#7B1F1F] mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                                     </svg>
-                                    <a href="mailto:contact@expressbeauty.fr" class="text-[#7B1F1F] hover:underline">contact@expressbeauty.fr</a>
+                                    <a href="mailto:contact@showroombeauty.fr" class="text-[#7B1F1F] hover:underline">contact@showroombeauty.fr</a>
                                 </li>
                                 <li class="flex items-center">
                                     <svg class="w-5 h-5 text-[#7B1F1F] mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
                                     </svg>
-                                    <span class="text-gray-600">ExpressBeauty, 123 Rue de la Créativité, 75000 Paris, France</span>
+                                    <span class="text-gray-600">Showroom Beauty, 123 Rue de la Créativité, 75000 Paris, France</span>
                                 </li>
                                 <li class="flex items-center">
                                     <svg class="w-5 h-5 text-[#7B1F1F] mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -195,7 +195,7 @@
                 <div class="mt-12 pt-8 border-t border-gray-100">
                     <div class="text-center text-sm text-gray-600">
                         <p class="mb-2">Ces conditions générales de vente sont entrées en vigueur le {{ date('d/m/Y') }}.</p>
-                        <p class="font-medium">ExpressBeauty - SAS au capital de 10 000 € - RCS Paris 912 784 667</p>
+                        <p class="font-medium">Showroom Beauty - SAS au capital de 10 000 € - RCS Paris 912 784 667</p>
                         <p>Siège social : 123 Rue de la Créativité, 75000 Paris, France</p>
                     </div>
                 </div>

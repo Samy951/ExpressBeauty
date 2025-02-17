@@ -19,7 +19,7 @@
                     </div>
                     <h3 class="mb-2 text-xl font-semibold text-gray-900">Contactez-nous par email</h3>
                     <p class="mb-4 text-gray-600">Nous vous répondrons dans les plus brefs délais</p>
-                    <a href="mailto:contact@expressbeauty.fr" class="inline-block text-[#7B1F1F] hover:text-[#6B1A1A] font-medium">contact@expressbeauty.fr</a>
+                    <a href="mailto:contact@showroombeauty.fr" class="inline-block text-[#7B1F1F] hover:text-[#6B1A1A] font-medium">contact@showroombeauty.fr</a>
                 </div>
 
                 <div class="p-6 text-center transition-shadow duration-300 rounded-lg shadow-md bg-gray-50 hover:shadow-lg">

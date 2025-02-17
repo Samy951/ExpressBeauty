@@ -4,7 +4,7 @@
         <div class="bg-white rounded-lg shadow-md p-6">
             <div class="space-y-6">
                 <div>
-                    <h3 class="text-lg font-medium text-gray-900 mb-2">Comment commander sur ExpressBeauty ?</h3>
+                    <h3 class="text-lg font-medium text-gray-900 mb-2">Comment commander sur Showroom Beauty ?</h3>
                     <p class="text-gray-600">
                         Parcourez notre catalogue, ajoutez les produits à votre panier et suivez les étapes de commande.
                         Nous acceptons plusieurs moyens de paiement sécurisés.

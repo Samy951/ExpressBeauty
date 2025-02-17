@@ -3,7 +3,7 @@
     <div class="bg-gradient-to-r from-[#7B1F1F] to-[#9B3C3C] text-white py-16">
         <div class="container px-4 mx-auto text-center">
             <h1 class="text-4xl font-bold mb-4">Mentions légales</h1>
-            <p class="text-lg text-gray-100 max-w-2xl mx-auto">Informations légales et réglementaires concernant ExpressBeauty et l'utilisation de notre site</p>
+            <p class="text-lg text-gray-100 max-w-2xl mx-auto">Informations légales et réglementaires concernant Showroom Beauty et l'utilisation de notre site</p>
         </div>
     </div>
 
@@ -21,7 +21,7 @@
                         </div>
                         <h2 class="text-2xl font-bold">Informations légales</h2>
                     </div>
-                    <p class="text-gray-200 leading-relaxed">Conformément aux dispositions des articles 6-III et 19 de la Loi n° 2004-575 du 21 juin 2004 pour la Confiance dans l'économie numérique, dite L.C.E.N., nous portons à la connaissance des utilisateurs et visiteurs du site ExpressBeauty les informations suivantes :</p>
+                    <p class="text-gray-200 leading-relaxed">Conformément aux dispositions des articles 6-III et 19 de la Loi n° 2004-575 du 21 juin 2004 pour la Confiance dans l'économie numérique, dite L.C.E.N., nous portons à la connaissance des utilisateurs et visiteurs du site Showroom Beauty les informations suivantes :</p>
                 </div>
 
                 <!-- Section Éditeur -->
@@ -36,11 +36,11 @@
                     </div>
                     <div class="text-gray-200">
                         <p class="leading-relaxed">
-                            <span class="font-semibold">ExpressBeauty</span> est édité par EXPRESS BEAUTY COSMETICS,<br>
+                            <span class="font-semibold">Showroom Beauty</span> est édité par SHOWROOM BEAUTY COSMETICS,<br>
                             SAS au capital de 50 000 €<br>
                             Immatriculée au RCS de Paris sous le numéro 912 784 667<br>
                             Siège social : 123 Avenue des Champs-Élysées, 75008 Paris, France<br>
-                            Email : <a href="mailto:contact@expressbeauty.fr" class="text-white hover:underline">contact@expressbeauty.fr</a>
+                            Email : <a href="mailto:contact@showroombeauty.fr" class="text-white hover:underline">contact@showroombeauty.fr</a>
                         </p>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                     </div>
                     <div class="text-gray-200">
                         <p class="leading-relaxed">
-                            Le site ExpressBeauty est hébergé par :<br>
+                            Le site Showroom Beauty est hébergé par :<br>
                             <span class="font-semibold">OVHcloud</span><br>
                             2 rue Kellermann<br>
                             59100 Roubaix - France
@@ -76,8 +76,8 @@
                         <h2 class="text-2xl font-bold">Propriété intellectuelle</h2>
                     </div>
                     <div class="space-y-4 text-gray-200">
-                        <p class="leading-relaxed">Tout le contenu du présent site, incluant, de façon non limitative, les graphismes, images, textes, vidéos, animations, sons, logos, gifs et icônes ainsi que leur mise en forme sont la propriété exclusive d'ExpressBeauty à l'exception des marques, logos ou contenus appartenant à d'autres sociétés partenaires ou auteurs.</p>
-                        <p class="leading-relaxed">Toute reproduction, distribution, modification, adaptation, retransmission ou publication, même partielle, de ces différents éléments est strictement interdite sans l'accord exprès par écrit d'ExpressBeauty. Cette représentation ou reproduction, par quelque procédé que ce soit, constitue une contrefaçon sanctionnée par les articles L.335-2 et suivants du Code de la propriété intellectuelle.</p>
+                        <p class="leading-relaxed">Tout le contenu du présent site, incluant, de façon non limitative, les graphismes, images, textes, vidéos, animations, sons, logos, gifs et icônes ainsi que leur mise en forme sont la propriété exclusive de Showroom Beauty à l'exception des marques, logos ou contenus appartenant à d'autres sociétés partenaires ou auteurs.</p>
+                        <p class="leading-relaxed">Toute reproduction, distribution, modification, adaptation, retransmission ou publication, même partielle, de ces différents éléments est strictement interdite sans l'accord exprès par écrit de Showroom Beauty. Cette représentation ou reproduction, par quelque procédé que ce soit, constitue une contrefaçon sanctionnée par les articles L.335-2 et suivants du Code de la propriété intellectuelle.</p>
                     </div>
                 </div>
 
@@ -98,14 +98,14 @@
                                 <svg class="w-5 h-5 text-white mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                                 </svg>
-                                <a href="mailto:contact@expressbeauty.fr" class="text-white hover:underline">contact@expressbeauty.fr</a>
+                                <a href="mailto:contact@showroombeauty.fr" class="text-white hover:underline">contact@showroombeauty.fr</a>
                             </div>
                             <div class="flex items-center">
                                 <svg class="w-5 h-5 text-white mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
                                 </svg>
-                                <span class="text-gray-200">ExpressBeauty, 123 Avenue des Champs-Élysées, 75008 Paris, France</span>
+                                <span class="text-gray-200">Showroom Beauty, 123 Avenue des Champs-Élysées, 75008 Paris, France</span>
                             </div>
                         </div>
                     </div>
