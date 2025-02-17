@@ -9,17 +9,17 @@
     <meta name="robots" content="index, follow">
 
     <!-- PWA -->
-    <link rel="manifest" href="{{ asset('site.webmanifest?v=4') }}">
+    <link rel="manifest" href="{{ asset('site.webmanifest?v=5') }}">
     <meta name="theme-color" content="#7B1F1F">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Showroom Beauty">
-    <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png?v=4') }}">
+    <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png?v=5') }}">
 
     <!-- Favicons -->
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png?v=4') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png?v=4') }}">
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico?v=4') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png?v=5') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png?v=5') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico?v=5') }}">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
