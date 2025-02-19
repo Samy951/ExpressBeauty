@@ -32,6 +32,10 @@ class ImportScrapedProducts extends Command
         // Importer les produits Dyson
         $dysonPath = storage_path('app/scraping/dysonProducts.json');
         if (file_exists($dysonPath)) {
+            // Supprimer d'abord tous les produits Dyson existants
+            Product::where('brand', 'Dyson')->delete();
+            $this->info('Anciens produits Dyson supprimés.');
+
             $dysonProducts = json_decode(file_get_contents($dysonPath), true);
             $this->info('Traitement de ' . count($dysonProducts) . ' produits Dyson...');
 
@@ -40,8 +44,7 @@ class ImportScrapedProducts extends Command
                     // Vérifier et valider les images
                     $images = [];
                     if (!empty($product['Image_URL']) &&
-                        filter_var($product['Image_URL'], FILTER_VALIDATE_URL) &&
-                        str_contains($product['Image_URL'], 'dyson-h.assetsadobe2.com')) {
+                        filter_var($product['Image_URL'], FILTER_VALIDATE_URL)) {
                         $images[] = $product['Image_URL'];
                     }
 
@@ -50,19 +53,17 @@ class ImportScrapedProducts extends Command
                         continue;
                     }
 
-                    Product::updateOrCreate(
-                        ['name' => $product['Titre']],
-                        [
-                            'brand' => 'Dyson',
-                            'description' => $product['description_du_produit'],
-                            'price' => (float) str_replace(['€', ','], ['', '.'], $product['Price']),
-                            'image_url' => $images[0],
-                            'specifications' => json_encode([
-                                'rating' => $product['Rating'],
-                                'additional_images' => array_slice($images, 1)
-                            ])
-                        ]
-                    );
+                    Product::create([
+                        'name' => $product['Titre'],
+                        'brand' => 'Dyson',
+                        'description' => $product['description_du_produit'],
+                        'price' => (float) str_replace(['€', ','], ['', '.'], $product['Price']),
+                        'image_url' => $images[0],
+                        'specifications' => json_encode([
+                            'rating' => $product['Rating'],
+                            'additional_images' => array_slice($images, 1)
+                        ])
+                    ]);
                 } catch (\Exception $e) {
                     $this->error('Erreur lors de l\'importation du produit Dyson: ' . $product['Titre']);
                     $this->error($e->getMessage());

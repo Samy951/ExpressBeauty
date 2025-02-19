@@ -91,13 +91,41 @@
     <FilesMatch "sitemap\.xml$">
         Header set Cache-Control "max-age=86400, public"
     </FilesMatch>
+
+    # Headers spécifiques pour les images
+    <FilesMatch "\.(jpe?g|png|gif|webp)$">
+        # Permettre l'accès depuis n'importe quel domaine
+        Header set Access-Control-Allow-Origin "*"
+        Header set Access-Control-Allow-Methods "GET, HEAD, OPTIONS"
+        Header set Access-Control-Allow-Headers "*"
+        Header set Access-Control-Max-Age "3600"
+
+        # Désactiver le cache pour le débogage
+        Header set Cache-Control "no-cache, must-revalidate"
+        Header set Pragma "no-cache"
+    </FilesMatch>
 </IfModule>
 
-# Protection contre le hotlinking des images
+# Protection contre le hotlinking des images - Version plus permissive
 <IfModule mod_rewrite.c>
     RewriteEngine on
-    RewriteCond %{HTTP_REFERER} !^$
-    RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?showroombeauty.fr [NC]
-    RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?google.com [NC]
-    RewriteRule \.(jpg|jpeg|png|gif|webp)$ - [NC,F,L]
+    # Autoriser toutes les requêtes internes
+    RewriteCond %{REQUEST_URI} ^/storage/.*\.(jpe?g|png|gif|webp)$ [NC]
+    RewriteCond %{HTTP_HOST} ^(www\.)?showroombeauty\.fr$ [NC]
+    RewriteRule . - [L]
+
+    # Autoriser les requêtes sans référent
+    RewriteCond %{HTTP_REFERER} ^$
+    RewriteRule . - [L]
+
+    # Autoriser les requêtes depuis notre domaine
+    RewriteCond %{HTTP_REFERER} ^https?://(www\.)?showroombeauty\.fr [NC]
+    RewriteRule . - [L]
 </IfModule>
+
+# Permissions pour le répertoire storage
+<Directory "/storage">
+    Options -Indexes +FollowSymLinks
+    AllowOverride All
+    Require all granted
+</Directory>
