@@ -9,6 +9,7 @@ Allow: /categories/
 Allow: /about
 Allow: /contact
 Allow: /sitemap.xml
+Allow: /plan-du-site
 
 # Pages interdites
 Disallow: /admin/
@@ -26,8 +27,9 @@ Disallow: /*?*
 # Temps de crawl et délai entre les accès
 Crawl-delay: 10
 
-# Sitemap
+# Sitemaps
 Sitemap: https://showroombeauty.fr/sitemap.xml
+Sitemap: https://showroombeauty.fr/plan-du-site
 
 # Bots spécifiques
 User-agent: Googlebot
