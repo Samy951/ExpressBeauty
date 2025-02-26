@@ -9,9 +9,9 @@
     <!-- Hero Section avec image de fond -->
     <div class="relative h-[600px] bg-cover bg-center" style="background-image: url('{{ asset('storage/AdobeStock_132642948.jpeg') }}')">
         <div class="absolute inset-0 bg-black bg-opacity-40"></div>
-        <div class="container relative flex flex-col items-center justify-center h-full px-4 mx-auto text-center text-white">
+        <div class="container flex relative flex-col justify-center items-center px-4 mx-auto h-full text-center text-white">
             <h1 class="mb-6 text-5xl font-bold">Offres Déstockage !</h1>
-            <p class="max-w-2xl mb-8 text-xl">
+            <p class="mb-8 max-w-2xl text-xl">
                 Jusqu'à -95% sur des incontournables beauté, disponibles jusqu'à épuisement des stocks ! Limité à un produit par personne.
             </p>
             <a href="/products" class="bg-[#7B1F1F] text-white px-8 py-3 rounded-full text-lg font-medium hover:bg-[#6B1A1A] transition-colors">
@@ -25,26 +25,28 @@
         <div class="px-4 mx-auto max-w-7xl">
             <h2 class="mb-16 text-3xl font-bold text-center">Ils parlent de nous</h2>
 
-            <div class="relative overflow-hidden" x-data="{
-                position: 0,
-                isMobile: window.innerWidth < 640,
-                init() {
-                    this.scroll();
-                    window.addEventListener('resize', () => {
-                        this.isMobile = window.innerWidth < 640;
-                    });
-                },
-                scroll() {
-                    const speed = this.isMobile ? 0.15 : 0.1;
-                    setInterval(() => {
-                        if (this.position <= -100) {
-                            this.position = 0;
-                        } else {
-                            this.position -= speed;
-                        }
-                    }, 20);
-                }
-            }">
+            <div class="overflow-hidden relative"
+                 x-ignore
+                 x-data="{
+                    position: 0,
+                    isMobile: window.innerWidth < 640,
+                    init() {
+                        this.scroll();
+                        window.addEventListener('resize', () => {
+                            this.isMobile = window.innerWidth < 640;
+                        });
+                    },
+                    scroll() {
+                        const speed = this.isMobile ? 0.15 : 0.1;
+                        setInterval(() => {
+                            if (this.position <= -100) {
+                                this.position = 0;
+                            } else {
+                                this.position -= speed;
+                            }
+                        }, 20);
+                    }
+                }">
                 <div class="flex items-center space-x-24" :style="'transform: translateX(' + position + '%)'">
                     <!-- Groupe de logos qui se répète -->
                     <style>
@@ -153,11 +155,11 @@
             <h2 class="mb-12 text-3xl font-bold text-center">Nos Produits</h2>
 
             <!-- Filtres et tri -->
-            <div class="flex flex-col items-center justify-between mb-8 space-y-4 md:flex-row md:space-y-0">
+            <div class="flex flex-col justify-between items-center mb-8 space-y-4 md:flex-row md:space-y-0">
                 <!-- Filtres -->
-                <div class="flex flex-col w-full gap-4 md:flex-row md:w-auto">
+                <div class="flex flex-col gap-4 w-full md:flex-row md:w-auto">
                     <!-- Filtre par marque -->
-                    <select wire:model.live="brand" class="w-full px-6 py-2.5 border rounded-full border-gray-300 focus:outline-none focus:border-[#7B1F1F] md:w-[250px] appearance-none bg-white text-gray-700 font-medium shadow-sm hover:border-[#7B1F1F] transition-colors duration-200 pr-12">
+                    <select wire:model.live.debounce.300ms="brand" class="w-full px-6 py-2.5 border rounded-full border-gray-300 focus:outline-none focus:border-[#7B1F1F] md:w-[250px] appearance-none bg-white text-gray-700 font-medium shadow-sm hover:border-[#7B1F1F] transition-colors duration-200 pr-12">
                         <option value="">Toutes les marques</option>
                         @foreach($brands as $brandOption)
                             <option value="{{ $brandOption }}">{{ $brandOption }}</option>
@@ -165,7 +167,7 @@
                     </select>
 
                     <!-- Filtre par catégorie -->
-                    <select wire:model.live="category" class="w-full px-6 py-2.5 border rounded-full border-gray-300 focus:outline-none focus:border-[#7B1F1F] md:w-[250px] appearance-none bg-white text-gray-700 font-medium shadow-sm hover:border-[#7B1F1F] transition-colors duration-200 pr-12">
+                    <select wire:model.live.debounce.300ms="category" class="w-full px-6 py-2.5 border rounded-full border-gray-300 focus:outline-none focus:border-[#7B1F1F] md:w-[250px] appearance-none bg-white text-gray-700 font-medium shadow-sm hover:border-[#7B1F1F] transition-colors duration-200 pr-12">
                         <option value="">Toutes les catégories</option>
                         @foreach($categories as $value => $label)
                             <option value="{{ $value }}">{{ $label }}</option>
@@ -180,7 +182,7 @@
                 </div>
 
                 <!-- Tri -->
-                <div class="flex items-center w-full gap-2 md:w-auto md:ml-4">
+                <div class="flex gap-2 items-center w-full md:w-auto md:ml-4">
                     <select wire:model.live="sortField" class="w-full px-6 py-2.5 border rounded-full border-gray-300 focus:outline-none focus:border-[#7B1F1F] md:w-[250px] appearance-none bg-white text-gray-700 font-medium shadow-sm hover:border-[#7B1F1F] transition-colors duration-200 pr-12">
                         <option value="created_at">Plus récents</option>
                         <option value="price">Prix</option>
@@ -207,7 +209,7 @@
                 @forelse($products as $product)
                     <div class="group">
                         <div class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 h-[400px] flex flex-col">
-                            <a href="{{ route('products.show', $product->id) }}" 
+                            <a href="{{ route('products.show', $product->id) }}"
                                onclick="ttq.track('ClickProduct', {
                                    content_type: 'product',
                                    content_id: {{ $product->id }},
@@ -232,14 +234,14 @@
                                     </span>
                                 </div>
                                 <!-- Infos produit -->
-                                <div class="flex flex-col justify-between flex-grow p-4">
+                                <div class="flex flex-col flex-grow justify-between p-4">
                                     <h3 class="text-sm font-medium text-gray-900 line-clamp-2">{{ $product->name }}</h3>
                                     <div class="flex flex-col mt-2">
                                         <!-- Badge de réduction -->
                                         @php
                                             $reduction = round((($product->original_price ?? $product->price) - $product->promo_price) / ($product->original_price ?? $product->price) * 100);
                                         @endphp
-                                        <div class="flex items-center justify-between">
+                                        <div class="flex justify-between items-center">
                                             <span class="bg-[#7B1F1F] text-white px-2 py-1 text-xs font-bold rounded">-{{ $reduction }}%</span>
                                             <!-- Prix -->
                                             <div class="flex flex-col items-end">
@@ -253,7 +255,7 @@
                         </div>
                     </div>
                 @empty
-                    <div class="py-12 text-center col-span-full">
+                    <div class="col-span-full py-8 text-center">
                         <p class="text-gray-500">Aucun produit trouvé</p>
                     </div>
                 @endforelse
@@ -261,7 +263,7 @@
 
             <!-- Pagination -->
             <div class="mt-8">
-                {{ $products->links() }}
+                {{ $products->onEachSide(1)->links() }}
             </div>
         </div>
     </div>
@@ -272,7 +274,7 @@
             <!-- Statistiques -->
             <div class="grid grid-cols-2 gap-8 mb-16 md:grid-cols-4">
                 <div class="bg-gradient-to-br from-[#7B1F1F] to-[#5A1717] rounded-xl shadow-lg p-8 text-center text-white">
-                    <div class="inline-flex items-center justify-center w-16 h-16 mb-6 rounded-full bg-white/10">
+                    <div class="inline-flex justify-center items-center mb-6 w-16 h-16 rounded-full bg-white/10">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
                         </svg>
@@ -282,7 +284,7 @@
                 </div>
 
                 <div class="bg-gradient-to-br from-[#7B1F1F] to-[#5A1717] rounded-xl shadow-lg p-8 text-center text-white">
-                    <div class="inline-flex items-center justify-center w-16 h-16 mb-6 rounded-full bg-white/10">
+                    <div class="inline-flex justify-center items-center mb-6 w-16 h-16 rounded-full bg-white/10">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
                         </svg>
@@ -292,7 +294,7 @@
                 </div>
 
                 <div class="bg-gradient-to-br from-[#7B1F1F] to-[#5A1717] rounded-xl shadow-lg p-8 text-center text-white">
-                    <div class="inline-flex items-center justify-center w-16 h-16 mb-6 rounded-full bg-white/10">
+                    <div class="inline-flex justify-center items-center mb-6 w-16 h-16 rounded-full bg-white/10">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
                         </svg>
@@ -302,7 +304,7 @@
                 </div>
 
                 <div class="bg-gradient-to-br from-[#7B1F1F] to-[#5A1717] rounded-xl shadow-lg p-8 text-center text-white">
-                    <div class="inline-flex items-center justify-center w-16 h-16 mb-6 rounded-full bg-white/10">
+                    <div class="inline-flex justify-center items-center mb-6 w-16 h-16 rounded-full bg-white/10">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                         </svg>

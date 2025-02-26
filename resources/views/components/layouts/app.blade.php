@@ -251,11 +251,8 @@
 
     <title>@yield('title', 'Showroom Beauty - Produits de Beauté')</title>
 
-    <!-- Styles -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-    <!-- Livewire Styles -->
     @livewireStyles
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <!-- TikTok Pixel Code -->
     <script>
@@ -466,7 +463,16 @@
         </div>
     </footer>
 
-    <!-- Livewire Scripts -->
     @livewireScripts
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.store('app', {
+                init() {
+                    // Initialisation globale si nécessaire
+                }
+            })
+        })
+    </script>
 </body>
 </html>

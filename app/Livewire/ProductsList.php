@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Product;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\Attributes\Url;
 
 class ProductsList extends Component
 {
@@ -12,10 +13,19 @@ class ProductsList extends Component
 
     protected $paginationTheme = 'tailwind';
 
+    #[Url(history: true)]
     public $search = '';
+
+    #[Url(history: true)]
     public $brand = '';
+
+    #[Url(history: true)]
     public $category = '';
+
+    #[Url(history: true)]
     public $sortField = 'created_at';
+
+    #[Url(history: true)]
     public $sortDirection = 'desc';
 
     protected $queryString = [
@@ -23,7 +33,8 @@ class ProductsList extends Component
         'brand' => ['except' => ''],
         'category' => ['except' => ''],
         'sortField' => ['except' => 'created_at'],
-        'sortDirection' => ['except' => 'desc']
+        'sortDirection' => ['except' => 'desc'],
+        'page' => ['except' => 1],
     ];
 
     public function mount($brand = null, $category = null)
@@ -36,17 +47,27 @@ class ProductsList extends Component
         }
     }
 
-    public function updatingSearch()
+    public function updatedSearch()
     {
         $this->resetPage();
     }
 
-    public function updatingBrand()
+    public function updatedBrand()
     {
         $this->resetPage();
     }
 
-    public function updatingCategory()
+    public function updatedCategory()
+    {
+        $this->resetPage();
+    }
+
+    public function updatedSortField()
+    {
+        $this->resetPage();
+    }
+
+    public function updatedSortDirection()
     {
         $this->resetPage();
     }
@@ -65,7 +86,6 @@ class ProductsList extends Component
     {
         $query = Product::query();
 
-        // Filtre de recherche
         if ($this->search) {
             $query->where(function($q) {
                 $q->where('name', 'like', '%' . $this->search . '%')
@@ -74,12 +94,10 @@ class ProductsList extends Component
             });
         }
 
-        // Filtre par marque
         if ($this->brand) {
             $query->where('brand', $this->brand);
         }
 
-        // Filtre par catégorie
         if ($this->category) {
             switch ($this->category) {
                 case 'Maquillage':
@@ -94,7 +112,6 @@ class ProductsList extends Component
             }
         }
 
-        // Gestion du tri
         switch ($this->sortField) {
             case 'price':
                 $query->orderBy('price', $this->sortDirection);
@@ -106,21 +123,14 @@ class ProductsList extends Component
                 $query->orderBy('created_at', $this->sortDirection);
         }
 
-        $products = $query->paginate(12);
-
-        // Liste fixe des marques officielles
-        $brands = ['Dyson', 'GHD', 'Savage X Fenty', 'Fenty Beauty'];
-
-        $categories = [
-            'Maquillage' => 'Maquillage',
-            'Lingerie' => 'Lingerie',
-            'Coiffure' => 'Coiffure'
-        ];
-
         return view('livewire.products-list', [
-            'products' => $products,
-            'brands' => $brands,
-            'categories' => $categories
+            'products' => $query->paginate(12, pageName: 'page'),
+            'brands' => ['Dyson', 'GHD', 'Savage X Fenty', 'Fenty Beauty'],
+            'categories' => [
+                'Maquillage' => 'Maquillage',
+                'Lingerie' => 'Lingerie',
+                'Coiffure' => 'Coiffure'
+            ]
         ]);
     }
 }
