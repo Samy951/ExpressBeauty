@@ -25,56 +25,73 @@
         <div class="px-4 mx-auto max-w-7xl">
             <h2 class="mb-16 text-3xl font-bold text-center">Ils parlent de nous</h2>
 
-            <div class="overflow-hidden relative"
-                 x-ignore
-                 x-data="{
-                    position: 0,
-                    isMobile: window.innerWidth < 640,
-                    init() {
-                        this.scroll();
-                        window.addEventListener('resize', () => {
-                            this.isMobile = window.innerWidth < 640;
-                        });
-                    },
-                    scroll() {
-                        const speed = this.isMobile ? 0.15 : 0.1;
-                        setInterval(() => {
-                            if (this.position <= -100) {
-                                this.position = 0;
-                            } else {
-                                this.position -= speed;
-                            }
-                        }, 20);
+            <div class="overflow-hidden relative">
+                <!-- Solution CSS pure pour le défilement -->
+                <style>
+                    @keyframes marquee {
+                        0% { transform: translateX(0); }
+                        100% { transform: translateX(-100%); }
                     }
-                }">
-                <div class="flex items-center space-x-24" :style="'transform: translateX(' + position + '%)'">
-                    <!-- Groupe de logos qui se répète -->
-                    <style>
-                        @keyframes marquee {
-                            0% { transform: translateX(0); }
-                            100% { transform: translateX(-100%); }
-                        }
-                        .animate-scroll {
-                            animation: marquee 10s linear infinite;
-                        }
-                        @media (min-width: 640px) {
-                            .animate-scroll {
-                                animation: marquee 20s linear infinite;
-                            }
-                        }
-                    </style>
-                    <div class="flex items-center space-x-24 animate-scroll">
-                        <img src="{{ asset('storage/brands/marie-claire.webp') }}" alt="Marie Claire" class="w-[160px] h-[80px] object-contain transition-all duration-300 opacity-70 hover:opacity-100">
-                        <img src="{{ asset('storage/brands/cosmopolitan.webp') }}" alt="Cosmopolitan" class="w-[160px] h-[80px] object-contain transition-all duration-300 opacity-70 hover:opacity-100">
-                        <img src="{{ asset('storage/brands/sephora.webp') }}" alt="Sephora" class="w-[160px] h-[80px] object-contain transition-all duration-300 opacity-70 hover:opacity-100">
-                        <img src="{{ asset('storage/brands/allure.webp') }}" alt="Allure" class="w-[160px] h-[80px] object-contain transition-all duration-300 opacity-70 hover:opacity-100">
-                        <img src="{{ asset('storage/brands/elle.webp') }}" alt="Elle" class="w-[160px] h-[80px] object-contain transition-all duration-300 opacity-70 hover:opacity-100">
-                        <!-- Répétition des logos pour l'effet infini -->
-                        <img src="{{ asset('storage/brands/marie-claire.webp') }}" alt="Marie Claire" class="w-[160px] h-[80px] object-contain transition-all duration-300 opacity-70 hover:opacity-100">
-                        <img src="{{ asset('storage/brands/cosmopolitan.webp') }}" alt="Cosmopolitan" class="w-[160px] h-[80px] object-contain transition-all duration-300 opacity-70 hover:opacity-100">
-                        <img src="{{ asset('storage/brands/sephora.webp') }}" alt="Sephora" class="w-[160px] h-[80px] object-contain transition-all duration-300 opacity-70 hover:opacity-100">
-                        <img src="{{ asset('storage/brands/allure.webp') }}" alt="Allure" class="w-[160px] h-[80px] object-contain transition-all duration-300 opacity-70 hover:opacity-100">
-                        <img src="{{ asset('storage/brands/elle.webp') }}" alt="Elle" class="w-[160px] h-[80px] object-contain transition-all duration-300 opacity-70 hover:opacity-100">
+                    .logos-slide {
+                        display: flex;
+                        animation: marquee 30s linear infinite;
+                        white-space: nowrap;
+                    }
+                    .logos-slide:hover {
+                        animation-play-state: paused;
+                    }
+                    .logo-item {
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 160px;
+                        height: 80px;
+                        margin: 0 24px;
+                        transition: all 0.3s ease;
+                    }
+                    .logo-item img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: contain;
+                        opacity: 0.7;
+                        transition: opacity 0.3s ease;
+                    }
+                    .logo-item:hover img {
+                        opacity: 1;
+                    }
+                </style>
+                <div class="logos-slide">
+                    <!-- Premier groupe de logos -->
+                    <div class="logo-item">
+                        <img src="{{ asset('storage/brands/marie-claire.webp') }}" alt="Marie Claire">
+                    </div>
+                    <div class="logo-item">
+                        <img src="{{ asset('storage/brands/cosmopolitan.webp') }}" alt="Cosmopolitan">
+                    </div>
+                    <div class="logo-item">
+                        <img src="{{ asset('storage/brands/sephora.webp') }}" alt="Sephora">
+                    </div>
+                    <div class="logo-item">
+                        <img src="{{ asset('storage/brands/allure.webp') }}" alt="Allure">
+                    </div>
+                    <div class="logo-item">
+                        <img src="{{ asset('storage/brands/elle.webp') }}" alt="Elle">
+                    </div>
+                    <!-- Duplication pour l'effet infini -->
+                    <div class="logo-item">
+                        <img src="{{ asset('storage/brands/marie-claire.webp') }}" alt="Marie Claire">
+                    </div>
+                    <div class="logo-item">
+                        <img src="{{ asset('storage/brands/cosmopolitan.webp') }}" alt="Cosmopolitan">
+                    </div>
+                    <div class="logo-item">
+                        <img src="{{ asset('storage/brands/sephora.webp') }}" alt="Sephora">
+                    </div>
+                    <div class="logo-item">
+                        <img src="{{ asset('storage/brands/allure.webp') }}" alt="Allure">
+                    </div>
+                    <div class="logo-item">
+                        <img src="{{ asset('storage/brands/elle.webp') }}" alt="Elle">
                     </div>
                 </div>
             </div>
@@ -161,7 +178,8 @@
                     <!-- Filtre par marque -->
                     <select
                         wire:change="filterByBrand($event.target.value)"
-                        class="w-full px-6 py-2.5 border rounded-full border-gray-300 focus:outline-none focus:border-[#7B1F1F] md:w-[250px] appearance-none bg-white text-gray-700 font-medium shadow-sm hover:border-[#7B1F1F] transition-colors duration-200 pr-12">
+                        class="w-full px-6 py-2.5 border rounded-full border-gray-300 focus:outline-none focus:border-[#7B1F1F] md:w-[250px] appearance-none bg-white text-gray-700 font-medium shadow-sm hover:border-[#7B1F1F] transition-colors duration-200 pr-12"
+                        wire:loading.attr="disabled">
                         <option value="">Toutes les marques</option>
                         @foreach($brands as $brandOption)
                             <option value="{{ $brandOption }}" {{ $brand === $brandOption ? 'selected' : '' }}>{{ $brandOption }}</option>
@@ -171,7 +189,8 @@
                     <!-- Filtre par catégorie -->
                     <select
                         wire:change="filterByCategory($event.target.value)"
-                        class="w-full px-6 py-2.5 border rounded-full border-gray-300 focus:outline-none focus:border-[#7B1F1F] md:w-[250px] appearance-none bg-white text-gray-700 font-medium shadow-sm hover:border-[#7B1F1F] transition-colors duration-200 pr-12">
+                        class="w-full px-6 py-2.5 border rounded-full border-gray-300 focus:outline-none focus:border-[#7B1F1F] md:w-[250px] appearance-none bg-white text-gray-700 font-medium shadow-sm hover:border-[#7B1F1F] transition-colors duration-200 pr-12"
+                        wire:loading.attr="disabled">
                         <option value="">Toutes les catégories</option>
                         @foreach($categories as $value => $label)
                             <option value="{{ $value }}" {{ $category === $value ? 'selected' : '' }}>{{ $label }}</option>
@@ -180,15 +199,17 @@
 
                     <!-- Barre de recherche -->
                     <div class="relative w-full md:w-[250px]">
-                        <input type="text"
-                               x-data
-                               x-on:keydown.enter="$wire.setSearch($event.target.value)"
-                               value="{{ $search }}"
-                               placeholder="Rechercher un produit..."
-                               class="w-full px-6 py-2.5 border rounded-full border-gray-300 focus:outline-none focus:border-[#7B1F1F] appearance-none bg-white text-gray-700 font-medium shadow-sm hover:border-[#7B1F1F] transition-colors duration-200">
-
+                        <form wire:submit.prevent="setSearch($event.target.querySelector('input').value)">
+                            <input type="text"
+                                   value="{{ $search }}"
+                                   name="search"
+                                   placeholder="Rechercher un produit..."
+                                   class="w-full px-6 py-2.5 border rounded-full border-gray-300 focus:outline-none focus:border-[#7B1F1F] appearance-none bg-white text-gray-700 font-medium shadow-sm hover:border-[#7B1F1F] transition-colors duration-200"
+                                   wire:loading.attr="disabled">
+                            <button type="submit" class="hidden">Rechercher</button>
+                        </form>
                         @if($search)
-                        <button wire:click="setSearch('')" class="absolute right-4 top-1/2 text-gray-400 transform -translate-y-1/2 hover:text-gray-600">
+                        <button wire:click="setSearch('')" class="absolute right-4 top-1/2 text-gray-400 transform -translate-y-1/2 hover:text-gray-600" wire:loading.attr="disabled">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                             </svg>
@@ -201,14 +222,16 @@
                 <div class="flex gap-2 items-center w-full md:w-auto md:ml-4">
                     <select
                         wire:change="sortBy($event.target.value)"
-                        class="w-full px-6 py-2.5 border rounded-full border-gray-300 focus:outline-none focus:border-[#7B1F1F] md:w-[250px] appearance-none bg-white text-gray-700 font-medium shadow-sm hover:border-[#7B1F1F] transition-colors duration-200 pr-12">
+                        class="w-full px-6 py-2.5 border rounded-full border-gray-300 focus:outline-none focus:border-[#7B1F1F] md:w-[250px] appearance-none bg-white text-gray-700 font-medium shadow-sm hover:border-[#7B1F1F] transition-colors duration-200 pr-12"
+                        wire:loading.attr="disabled">
                         <option value="created_at" {{ $sortField === 'created_at' ? 'selected' : '' }}>Plus récents</option>
                         <option value="price" {{ $sortField === 'price' ? 'selected' : '' }}>Prix</option>
                         <option value="name" {{ $sortField === 'name' ? 'selected' : '' }}>Nom</option>
                     </select>
 
                     <button wire:click="$set('sortDirection', '{{ $sortDirection === 'asc' ? 'desc' : 'asc' }}')"
-                            class="p-2.5 transition-colors duration-200 rounded-full hover:bg-gray-100 border border-gray-300 hover:border-[#7B1F1F]">
+                            class="p-2.5 transition-colors duration-200 rounded-full hover:bg-gray-100 border border-gray-300 hover:border-[#7B1F1F]"
+                            wire:loading.attr="disabled">
                         @if($sortDirection === 'asc')
                             <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9M3 12h5M3 16h9M3 20h13"></path>
@@ -222,14 +245,15 @@
 
                     <!-- Bouton de réinitialisation des filtres -->
                     <button wire:click="resetFilters"
-                            class="px-6 py-2.5 ml-2 font-medium text-gray-700 bg-gray-100 rounded-full transition-colors duration-200 hover:bg-gray-200">
+                            class="px-6 py-2.5 ml-2 font-medium text-gray-700 bg-gray-100 rounded-full transition-colors duration-200 hover:bg-gray-200"
+                            wire:loading.attr="disabled">
                         Réinitialiser
                     </button>
                 </div>
             </div>
 
             <!-- Indicateur de chargement principal -->
-            <div wire:loading wire:target="filterByBrand, filterByCategory, setSearch, sortBy, resetFilters" class="flex fixed inset-0 z-50 justify-center items-center bg-black bg-opacity-30">
+            <div wire:loading class="flex fixed inset-0 z-50 justify-center items-center bg-black bg-opacity-30">
                 <div class="flex flex-col items-center p-6 bg-white rounded-lg shadow-xl">
                     <svg class="animate-spin h-10 w-10 text-[#7B1F1F] mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -239,22 +263,24 @@
                 </div>
             </div>
 
+            <!-- Debug -->
+            @if(config('app.debug'))
+            <div class="p-4 mb-4 font-mono text-xs bg-gray-100 rounded">
+                <p>Page: {{ $products->currentPage() }}/{{ $products->lastPage() }},
+                   Total: {{ $products->total() }},
+                   Par page: {{ $products->perPage() }}</p>
+                <p>Filtres: Marque={{ $brand }}, Catégorie={{ $category }}, Recherche={{ $search }}</p>
+                <p>Tri: {{ $sortField }} ({{ $sortDirection }})</p>
+                <p>URL: {{ request()->fullUrl() }}</p>
+            </div>
+            @endif
+
             <!-- Grille de produits -->
-            <div wire:loading.remove class="grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 sm:gap-6">
+            <div class="grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 sm:gap-6">
                 @forelse($products as $product)
                     <div class="group">
                         <div class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 h-[400px] flex flex-col">
                             <a href="{{ route('products.show', $product->id) }}"
-                               onclick="ttq.track('ClickProduct', {
-                                   content_type: 'product',
-                                   content_id: {{ $product->id }},
-                                   content_name: decodeURIComponent('{{ rawurlencode($product->name) }}'),
-                                   content_category: decodeURIComponent('{{ rawurlencode($product->category) }}'),
-                                   currency: 'EUR',
-                                   price: {{ $product->promo_price }},
-                                   value: {{ $product->promo_price }},
-                                   brand: decodeURIComponent('{{ rawurlencode($product->brand) }}')
-                               }); return true;"
                                class="flex flex-col h-full">
                                 <!-- Image du produit avec dimensions fixes -->
                                 <div class="relative w-full h-[250px]">

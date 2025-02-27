@@ -76,6 +76,60 @@
     <link rel="manifest" href="{{ asset('site.webmanifest') }}">
     <meta name="theme-color" content="#7B1F1F">
 
+    <!-- Scripts -->
+    <!-- Protection Alpine.js à charger avant tout autre script -->
+    <script>
+        // Éviter les instances multiples d'Alpine
+        if (typeof window._alpineDetected === 'undefined') {
+            window._alpineDetected = false;
+
+            // Observer pour détecter les scripts Alpine.js
+            const observer = new MutationObserver((mutations) => {
+                for (const mutation of mutations) {
+                    if (mutation.type === 'childList') {
+                        for (const node of mutation.addedNodes) {
+                            if (node.tagName === 'SCRIPT' &&
+                                (node.src && node.src.includes('alpine') ||
+                                node.textContent && node.textContent.includes('Alpine'))) {
+
+                                if (window._alpineDetected) {
+                                    console.warn('Tentative de chargement multiple d\'Alpine.js détectée et bloquée');
+                                    node.setAttribute('data-blocked', 'true');
+                                    node.type = 'text/blocked';
+                                } else {
+                                    window._alpineDetected = true;
+                                    console.log('Premier chargement d\'Alpine.js détecté');
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Observer le document pour les nouveaux scripts
+            observer.observe(document, {
+                childList: true,
+                subtree: true
+            });
+
+            // Protéger contre les définitions globales
+            Object.defineProperty(window, 'Alpine', {
+                set: function(val) {
+                    if (this._Alpine && val !== this._Alpine) {
+                        console.warn('Tentative de redéfinition d\'Alpine.js bloquée');
+                        return this._Alpine;
+                    }
+                    this._Alpine = val;
+                    return val;
+                },
+                get: function() {
+                    return this._Alpine;
+                },
+                configurable: false
+            });
+        }
+    </script>
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>

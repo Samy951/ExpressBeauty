@@ -107,3 +107,8 @@ Route::get('/checkout/{product}', function(App\Models\Product $product) {
 
 // Route de test pour la pagination
 Route::get('/test-pagination', App\Livewire\ProductsTest::class)->name('test.pagination');
+
+// Route de diagnostic pour les problèmes de pagination et filtres
+Route::get('/debug-pagination', function () {
+    return view('products.debug');
+})->name('debug.pagination');
