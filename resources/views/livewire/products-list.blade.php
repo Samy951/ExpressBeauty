@@ -150,7 +150,7 @@
     </div>
 
     <!-- Section Nos Produits -->
-    <div class="py-16 bg-white">
+    <div class="py-16 bg-white" wire:key="products-list">
         <div class="container px-4 mx-auto">
             <h2 class="mb-12 text-3xl font-bold text-center">Nos Produits</h2>
 
@@ -159,34 +159,52 @@
                 <!-- Filtres -->
                 <div class="flex flex-col gap-4 w-full md:flex-row md:w-auto">
                     <!-- Filtre par marque -->
-                    <select wire:model.live.debounce.300ms="brand" class="w-full px-6 py-2.5 border rounded-full border-gray-300 focus:outline-none focus:border-[#7B1F1F] md:w-[250px] appearance-none bg-white text-gray-700 font-medium shadow-sm hover:border-[#7B1F1F] transition-colors duration-200 pr-12">
+                    <select
+                        wire:change="filterByBrand($event.target.value)"
+                        class="w-full px-6 py-2.5 border rounded-full border-gray-300 focus:outline-none focus:border-[#7B1F1F] md:w-[250px] appearance-none bg-white text-gray-700 font-medium shadow-sm hover:border-[#7B1F1F] transition-colors duration-200 pr-12">
                         <option value="">Toutes les marques</option>
                         @foreach($brands as $brandOption)
-                            <option value="{{ $brandOption }}">{{ $brandOption }}</option>
+                            <option value="{{ $brandOption }}" {{ $brand === $brandOption ? 'selected' : '' }}>{{ $brandOption }}</option>
                         @endforeach
                     </select>
 
                     <!-- Filtre par catégorie -->
-                    <select wire:model.live.debounce.300ms="category" class="w-full px-6 py-2.5 border rounded-full border-gray-300 focus:outline-none focus:border-[#7B1F1F] md:w-[250px] appearance-none bg-white text-gray-700 font-medium shadow-sm hover:border-[#7B1F1F] transition-colors duration-200 pr-12">
+                    <select
+                        wire:change="filterByCategory($event.target.value)"
+                        class="w-full px-6 py-2.5 border rounded-full border-gray-300 focus:outline-none focus:border-[#7B1F1F] md:w-[250px] appearance-none bg-white text-gray-700 font-medium shadow-sm hover:border-[#7B1F1F] transition-colors duration-200 pr-12">
                         <option value="">Toutes les catégories</option>
                         @foreach($categories as $value => $label)
-                            <option value="{{ $value }}">{{ $label }}</option>
+                            <option value="{{ $value }}" {{ $category === $value ? 'selected' : '' }}>{{ $label }}</option>
                         @endforeach
                     </select>
 
                     <!-- Barre de recherche -->
-                    <input type="text"
-                           wire:model.live.debounce.300ms="search"
-                           placeholder="Rechercher un produit..."
-                           class="w-full px-6 py-2.5 border rounded-full border-gray-300 focus:outline-none focus:border-[#7B1F1F] md:w-[250px] appearance-none bg-white text-gray-700 font-medium shadow-sm hover:border-[#7B1F1F] transition-colors duration-200">
+                    <div class="relative w-full md:w-[250px]">
+                        <input type="text"
+                               x-data
+                               x-on:keydown.enter="$wire.setSearch($event.target.value)"
+                               value="{{ $search }}"
+                               placeholder="Rechercher un produit..."
+                               class="w-full px-6 py-2.5 border rounded-full border-gray-300 focus:outline-none focus:border-[#7B1F1F] appearance-none bg-white text-gray-700 font-medium shadow-sm hover:border-[#7B1F1F] transition-colors duration-200">
+
+                        @if($search)
+                        <button wire:click="setSearch('')" class="absolute right-4 top-1/2 text-gray-400 transform -translate-y-1/2 hover:text-gray-600">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                        @endif
+                    </div>
                 </div>
 
                 <!-- Tri -->
                 <div class="flex gap-2 items-center w-full md:w-auto md:ml-4">
-                    <select wire:model.live="sortField" class="w-full px-6 py-2.5 border rounded-full border-gray-300 focus:outline-none focus:border-[#7B1F1F] md:w-[250px] appearance-none bg-white text-gray-700 font-medium shadow-sm hover:border-[#7B1F1F] transition-colors duration-200 pr-12">
-                        <option value="created_at">Plus récents</option>
-                        <option value="price">Prix</option>
-                        <option value="name">Nom</option>
+                    <select
+                        wire:change="sortBy($event.target.value)"
+                        class="w-full px-6 py-2.5 border rounded-full border-gray-300 focus:outline-none focus:border-[#7B1F1F] md:w-[250px] appearance-none bg-white text-gray-700 font-medium shadow-sm hover:border-[#7B1F1F] transition-colors duration-200 pr-12">
+                        <option value="created_at" {{ $sortField === 'created_at' ? 'selected' : '' }}>Plus récents</option>
+                        <option value="price" {{ $sortField === 'price' ? 'selected' : '' }}>Prix</option>
+                        <option value="name" {{ $sortField === 'name' ? 'selected' : '' }}>Nom</option>
                     </select>
 
                     <button wire:click="$set('sortDirection', '{{ $sortDirection === 'asc' ? 'desc' : 'asc' }}')"
@@ -201,11 +219,28 @@
                             </svg>
                         @endif
                     </button>
+
+                    <!-- Bouton de réinitialisation des filtres -->
+                    <button wire:click="resetFilters"
+                            class="px-6 py-2.5 ml-2 font-medium text-gray-700 bg-gray-100 rounded-full transition-colors duration-200 hover:bg-gray-200">
+                        Réinitialiser
+                    </button>
+                </div>
+            </div>
+
+            <!-- Indicateur de chargement principal -->
+            <div wire:loading wire:target="filterByBrand, filterByCategory, setSearch, sortBy, resetFilters" class="flex fixed inset-0 z-50 justify-center items-center bg-black bg-opacity-30">
+                <div class="flex flex-col items-center p-6 bg-white rounded-lg shadow-xl">
+                    <svg class="animate-spin h-10 w-10 text-[#7B1F1F] mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    <p class="font-medium text-gray-800">Chargement des produits...</p>
                 </div>
             </div>
 
             <!-- Grille de produits -->
-            <div class="grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 sm:gap-6">
+            <div wire:loading.remove class="grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 sm:gap-6">
                 @forelse($products as $product)
                     <div class="group">
                         <div class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 h-[400px] flex flex-col">
@@ -263,7 +298,7 @@
 
             <!-- Pagination -->
             <div class="mt-8">
-                {{ $products->onEachSide(1)->links() }}
+                {{ $products->links() }}
             </div>
         </div>
     </div>

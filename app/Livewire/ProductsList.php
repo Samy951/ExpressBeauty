@@ -12,6 +12,7 @@ class ProductsList extends Component
     use WithPagination;
 
     protected $paginationTheme = 'tailwind';
+    protected $paginationView = 'pagination.custom';
 
     #[Url(history: true)]
     public $search = '';
@@ -28,15 +29,6 @@ class ProductsList extends Component
     #[Url(history: true)]
     public $sortDirection = 'desc';
 
-    protected $queryString = [
-        'search' => ['except' => ''],
-        'brand' => ['except' => ''],
-        'category' => ['except' => ''],
-        'sortField' => ['except' => 'created_at'],
-        'sortDirection' => ['except' => 'desc'],
-        'page' => ['except' => 1],
-    ];
-
     public function mount($brand = null, $category = null)
     {
         if ($brand) {
@@ -47,28 +39,21 @@ class ProductsList extends Component
         }
     }
 
-    public function updatedSearch()
+    public function filterByBrand($brand)
     {
+        $this->brand = $brand;
         $this->resetPage();
     }
 
-    public function updatedBrand()
+    public function filterByCategory($category)
     {
+        $this->category = $category;
         $this->resetPage();
     }
 
-    public function updatedCategory()
+    public function setSearch($search)
     {
-        $this->resetPage();
-    }
-
-    public function updatedSortField()
-    {
-        $this->resetPage();
-    }
-
-    public function updatedSortDirection()
-    {
+        $this->search = $search;
         $this->resetPage();
     }
 
@@ -80,10 +65,19 @@ class ProductsList extends Component
             $this->sortField = $field;
             $this->sortDirection = 'asc';
         }
+        $this->resetPage();
+    }
+
+    public function resetFilters()
+    {
+        $this->reset(['search', 'brand', 'category']);
+        $this->resetPage();
     }
 
     public function render()
     {
+        usleep(100000); // 100ms delay
+
         $query = Product::query();
 
         if ($this->search) {
@@ -123,8 +117,10 @@ class ProductsList extends Component
                 $query->orderBy('created_at', $this->sortDirection);
         }
 
+        $products = $query->paginate(12);
+
         return view('livewire.products-list', [
-            'products' => $query->paginate(12, pageName: 'page'),
+            'products' => $products,
             'brands' => ['Dyson', 'GHD', 'Savage X Fenty', 'Fenty Beauty'],
             'categories' => [
                 'Maquillage' => 'Maquillage',

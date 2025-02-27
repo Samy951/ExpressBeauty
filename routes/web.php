@@ -104,3 +104,6 @@ Route::prefix('legal')->group(function () {
 Route::get('/checkout/{product}', function(App\Models\Product $product) {
     return view('pages.checkout', ['product' => $product]);
 })->name('checkout');
+
+// Route de test pour la pagination
+Route::get('/test-pagination', App\Livewire\ProductsTest::class)->name('test.pagination');
