@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Auth;
 
 class CacheMiddleware
 {
@@ -15,10 +16,6 @@ class CacheMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        // Désactivation temporaire du cache pour déboguer
-        return $next($request);
-
-        /*
         // Ne pas mettre en cache si :
         // - C'est une requête POST
         // - L'utilisateur est connecté
@@ -55,6 +52,5 @@ class CacheMiddleware
         }
 
         return $next($request);
-        */
     }
 }
