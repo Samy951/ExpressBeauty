@@ -15,8 +15,27 @@ class CacheMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        // Ne pas mettre en cache si c'est une requête POST ou si l'utilisateur est connecté
-        if ($request->isMethod('GET') && !auth()->check()) {
+        // Désactivation temporaire du cache pour déboguer
+        return $next($request);
+
+        /*
+        // Ne pas mettre en cache si :
+        // - C'est une requête POST
+        // - L'utilisateur est connecté
+        // - C'est une requête Livewire
+        // - C'est la page d'accueil (qui utilise Livewire)
+        // - L'URL contient un paramètre de pagination ou de filtre
+        if ($request->isMethod('GET') &&
+            !Auth::check() &&
+            !$request->hasHeader('X-Livewire') &&
+            $request->path() !== '/' &&
+            !$request->has('page') &&
+            !$request->has('search') &&
+            !$request->has('brand') &&
+            !$request->has('category') &&
+            !$request->has('sortField') &&
+            !$request->has('sortDirection')) {
+
             $key = 'page_cache_' . sha1($request->fullUrl());
 
             // Vérifier si la page est en cache
@@ -36,5 +55,6 @@ class CacheMiddleware
         }
 
         return $next($request);
+        */
     }
 }

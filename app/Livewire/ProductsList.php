@@ -5,7 +5,6 @@ namespace App\Livewire;
 use App\Models\Product;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Livewire\Attributes\Url;
 use Illuminate\Support\Facades\Log;
 
 class ProductsList extends Component
@@ -15,30 +14,20 @@ class ProductsList extends Component
     protected $paginationTheme = 'tailwind';
     protected $paginationView = 'pagination.custom';
 
-    // Propriété explicite pour la pagination
-    public $page = 1;
-
-    #[Url(history: true)]
     public $search = '';
-
-    #[Url(history: true)]
     public $brand = '';
-
-    #[Url(history: true)]
     public $category = '';
-
-    #[Url(history: true)]
     public $sortField = 'created_at';
-
-    #[Url(history: true)]
     public $sortDirection = 'desc';
 
-    // Initialisation du composant
-    public function boot()
-    {
-        // Récupérer la page depuis l'URL si elle existe
-        $this->page = request()->query('page', 1);
-    }
+    // Utiliser queryString au lieu de #[Url] pour la compatibilité
+    protected $queryString = [
+        'search' => ['except' => ''],
+        'brand' => ['except' => ''],
+        'category' => ['except' => ''],
+        'sortField' => ['except' => 'created_at'],
+        'sortDirection' => ['except' => 'desc']
+    ];
 
     public function mount($brand = null, $category = null)
     {
@@ -46,17 +35,20 @@ class ProductsList extends Component
             'brand' => $brand,
             'category' => $category,
             'url_params' => request()->all(),
-            'route' => request()->route()->getName() ?? 'unknown',
-            'path' => request()->path(),
-            'page' => $this->page
         ]);
 
-        // Vérifier si on vient d'une route spécifique
-        $route = request()->route()->getName() ?? '';
+        if ($brand) {
+            $this->brand = urldecode($brand);
+        }
+
+        if ($category) {
+            $this->category = urldecode($category);
+        }
 
         // Traiter les routes de catégorie
+        $route = request()->route()->getName() ?? '';
+
         if (str_contains($route, 'products.category')) {
-            // Récupérer la catégorie directement depuis le nom de la route
             if ($route === 'products.category.lingerie') {
                 $this->category = 'Lingerie';
             } elseif ($route === 'products.category.makeup') {
@@ -64,8 +56,6 @@ class ProductsList extends Component
             } elseif ($route === 'products.category.hair') {
                 $this->category = 'Coiffure';
             }
-
-            Log::info('Catégorie extraite depuis la route', ['category' => $this->category]);
         }
         // Traiter les routes de marque
         elseif (str_contains($route, 'products.brand')) {
@@ -77,39 +67,6 @@ class ProductsList extends Component
                 $this->brand = 'Savage X Fenty';
             } elseif ($route === 'products.brand.fenty-beauty') {
                 $this->brand = 'Fenty Beauty';
-            }
-
-            Log::info('Marque extraite depuis la route', ['brand' => $this->brand]);
-        }
-
-        // Paramètres de l'URL
-        if ($brand) {
-            $this->brand = urldecode($brand);
-        }
-
-        if ($category) {
-            $this->category = urldecode($category);
-        }
-
-        // Extraire la catégorie de l'URL si nécessaire
-        if (request()->is('products/category/*')) {
-            $urlCategory = request()->segment(3);
-            if ($urlCategory) {
-                // Convertir les noms de catégorie courants
-                $categoryMap = [
-                    'lingerie' => 'Lingerie',
-                    'makeup' => 'Maquillage',
-                    'hair' => 'Coiffure'
-                ];
-
-                $urlCategory = strtolower($urlCategory);
-                if (isset($categoryMap[$urlCategory])) {
-                    $this->category = $categoryMap[$urlCategory];
-                } else {
-                    $this->category = urldecode($urlCategory);
-                }
-
-                Log::info('Route category detected', ['segment' => $urlCategory, 'mapped_to' => $this->category]);
             }
         }
     }
@@ -177,13 +134,12 @@ class ProductsList extends Component
             'category' => $this->category,
             'sortField' => $this->sortField,
             'sortDirection' => $this->sortDirection,
-            'page' => $this->page
+            'page' => request()->query('page', 1)
         ]);
-
-        usleep(100000); // 100ms delay
 
         $query = Product::query();
 
+        // Filtre de recherche
         if ($this->search) {
             $query->where(function($q) {
                 $q->where('name', 'like', '%' . $this->search . '%')
@@ -192,10 +148,12 @@ class ProductsList extends Component
             });
         }
 
+        // Filtre par marque
         if ($this->brand) {
             $query->where('brand', $this->brand);
         }
 
+        // Filtre par catégorie
         if ($this->category) {
             Log::info('Applying category filter', ['category' => $this->category]);
 
@@ -217,6 +175,7 @@ class ProductsList extends Component
             }
         }
 
+        // Gestion du tri
         switch ($this->sortField) {
             case 'price':
                 $query->orderBy('price', $this->sortDirection);
