@@ -7,33 +7,45 @@ class PriceService
     private const PRICE_TIERS = [
         [
             'min' => 0,
-            'max' => 30,
-            'promo' => 1.95,
-            'link' => 'https://www.bcdxmn8trk.com/6MW5NB/2CTPL/'
+            'max' => 20,
+            'promo' => 2.00,
+            'link' => 'https://scco.simplifycashcheckout.com/aff_c?offer_id=82650&aff_id=1798'
         ],
         [
-            'min' => 30,
-            'max' => 40,
-            'promo' => 9.95,
-            'link' => 'https://www.bcdxmn8trk.com/6MW5NB/3QQG7/'
+            'min' => 20,
+            'max' => 35,
+            'promo' => 4.95,
+            'link' => 'https://scco.simplifycashcheckout.com/aff_c?offer_id=82649&aff_id=1798'
         ],
         [
-            'min' => 40,
+            'min' => 35,
             'max' => 50,
-            'promo' => 13.99,
-            'link' => 'https://www.bcdxmn8trk.com/6MW5NB/55M6S/'
+            'promo' => 6.99,
+            'link' => 'https://scco.simplifycashcheckout.com/aff_c?offer_id=82648&aff_id=1798'
         ],
         [
             'min' => 50,
-            'max' => 80,
-            'promo' => 19.99,
-            'link' => 'https://www.bcdxmn8trk.com/6MW5NB/6JHXF/'
+            'max' => 75,
+            'promo' => 9.99,
+            'link' => 'https://scco.simplifycashcheckout.com/aff_c?offer_id=82644&aff_id=1798'
         ],
         [
-            'min' => 80,
+            'min' => 75,
+            'max' => 100,
+            'promo' => 19.99,
+            'link' => 'https://scco.simplifycashcheckout.com/aff_c?offer_id=82645&aff_id=1798'
+        ],
+        [
+            'min' => 100,
+            'max' => 150,
+            'promo' => 29.99,
+            'link' => 'https://scco.simplifycashcheckout.com/aff_c?offer_id=82646&aff_id=1798'
+        ],
+        [
+            'min' => 150,
             'max' => PHP_FLOAT_MAX,
-            'promo' => 29.95,
-            'link' => 'https://www.bcdxmn8trk.com/6MW5NB/5T3K4H/'
+            'promo' => 39.99,
+            'link' => 'https://scco.simplifycashcheckout.com/aff_c?offer_id=82647&aff_id=1798'
         ]
     ];
 

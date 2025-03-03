@@ -139,7 +139,22 @@
     <div class="bg-white">
         @php
             $sourceId = $product->name . '___' . $product->image_url;
-            $iframeUrl = rtrim($product->payment_link, '/') . '?source_id=' . rawurlencode($sourceId);
+
+            // Construction du lien selon la documentation
+            $baseUrl = rtrim($product->payment_link, '/');
+
+            // Vérifier si l'URL contient déjà des paramètres
+            $separator = (strpos($baseUrl, '?') !== false) ? '&' : '?';
+
+            // Ajouter les paramètres selon la documentation
+            $iframeUrl = $baseUrl . $separator . 'source=' . rawurlencode($sourceId);
+
+            // Ajouter le paramètre obligatoire aff_sub2 (clickid)
+            $clickId = uniqid('sb_', true); // Génère un ID unique pour cette commande
+            $iframeUrl .= '&aff_sub2=' . $clickId;
+
+            // Ajouter aff_sub comme identifiant de la source
+            $iframeUrl .= '&aff_sub=showroombeauty';
         @endphp
 
         <div class="flex flex-col justify-center items-center px-4 py-12 min-h-screen">
@@ -182,7 +197,8 @@
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 setTimeout(() => {
-                    window.location.href = "{{ $iframeUrl }}";
+                    // Utiliser directement la chaîne sans échappement HTML
+                    window.location.href = '{!! $iframeUrl !!}';
                 }, 2000);
             });
         </script>
