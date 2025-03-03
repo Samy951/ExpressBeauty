@@ -144,16 +144,6 @@
     </script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
-</head>
-<body>
-    @include('layouts.navigation')
-
-    <main>
-        {{ $slot ?? '' }}
-        @yield('content')
-    </main>
-
-    @include('layouts.footer')
 
     <!-- TikTok Pixel Code Start -->
     <script>
@@ -167,6 +157,16 @@
     }(window, document, 'ttq');
     </script>
     <!-- TikTok Pixel Code End -->
+</head>
+<body>
+    @include('layouts.navigation')
+
+    <main>
+        {{ $slot ?? '' }}
+        @yield('content')
+    </main>
+
+    @include('layouts.footer')
 
     @livewireScripts
 </body>
