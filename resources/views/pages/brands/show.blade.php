@@ -30,7 +30,7 @@
             @foreach($products as $product)
             <div class="group">
                 <div class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 h-[400px] flex flex-col">
-                    <a href="{{ route('products.show', $product->id) }}" 
+                    <a href="{{ route('products.show', $product->id) }}"
                        @click="ttq.track('ClickProduct', {
                            content_type: 'product',
                            content_id: '{{ $product->id }}',
@@ -64,6 +64,7 @@
                                 @php
                                     $reduction = round((($product->original_price ?? $product->price) - $product->promo_price) / ($product->original_price ?? $product->price) * 100);
                                 @endphp
+                                @if($reduction > 0 && $product->price < 100)
                                 <div class="flex items-center justify-between">
                                     <span class="bg-[#7B1F1F] text-white px-2 py-1 text-xs font-bold rounded">-{{ $reduction }}%</span>
                                     <!-- Prix -->
@@ -72,6 +73,7 @@
                                         <p class="text-sm text-gray-500 line-through">{{ number_format($product->original_price ?? $product->price, 2, ',', ' ') }} €</p>
                                     </div>
                                 </div>
+                                @endif
                             </div>
                         </div>
                     </a>

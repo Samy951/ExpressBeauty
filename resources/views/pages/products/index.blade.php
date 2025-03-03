@@ -155,9 +155,11 @@
                                             $reduction = 0;
                                         }
                                     @endphp
+                                    @if($reduction > 0 && $product->price < 100)
                                     <div class="flex items-center gap-2">
                                         <span class="bg-[#7B1F1F] text-white px-2 py-1 text-xs font-bold rounded">-{{ $reduction }}%</span>
                                     </div>
+                                    @endif
                                     <!-- Prix -->
                                     <div class="flex flex-col items-end">
                                         <p class="text-lg font-bold text-[#7B1F1F]">{{ number_format($product->promo_price, 2, ',', ' ') }} €</p>
