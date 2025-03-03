@@ -13,37 +13,84 @@
             brand: '{{ request('brand') }}',
             category: '{{ request('category') }}',
             sort: '{{ request('sort', 'created_at') }}',
+            isLoading: false,
             updateFilters() {
+                this.isLoading = true;
                 const url = new URL(window.location);
-                url.searchParams.set('brand', this.brand);
-                url.searchParams.set('category', this.category);
-                url.searchParams.set('sort', this.sort);
+
+                // Nettoyer les paramètres existants
+                url.searchParams.delete('page');
+
+                // Ajouter uniquement les paramètres non vides
+                if (this.brand) url.searchParams.set('brand', this.brand);
+                else url.searchParams.delete('brand');
+
+                if (this.category) url.searchParams.set('category', this.category);
+                else url.searchParams.delete('category');
+
+                if (this.sort) url.searchParams.set('sort', this.sort);
+                else url.searchParams.delete('sort');
+
+                // Rediriger vers la nouvelle URL
                 window.location = url.toString();
             }
-        }" method="GET" action="{{ route('products.index') }}" class="container px-4 py-6 mx-auto">
+        }"
+        method="GET"
+        action="{{ route('products.index') }}"
+        class="container px-4 py-6 mx-auto"
+        @submit.prevent="updateFilters()">
             <div class="flex flex-col items-center justify-between space-y-4 md:flex-row md:space-y-0 md:items-start">
-                <!-- Filtres de marque et catégorie (visibles uniquement sur la page principale des produits) -->
-                @if(request()->route()->getName() === 'products.index')
+                <!-- Filtres de marque et catégorie -->
                 <div class="flex flex-col w-full space-y-2 md:flex-row md:space-y-0 md:space-x-4 md:w-auto">
-                    <select x-model="brand" @change="updateFilters()" class="w-full px-6 py-2.5 border rounded-full border-gray-300 focus:outline-none focus:border-[#7B1F1F] md:w-[250px] appearance-none bg-white text-gray-700 font-medium shadow-sm hover:border-[#7B1F1F] transition-colors duration-200 pr-12">
+                    <select
+                        x-model="brand"
+                        @change="updateFilters()"
+                        class="w-full px-6 py-2.5 border rounded-full border-gray-300 focus:outline-none focus:border-[#7B1F1F] md:w-[250px] appearance-none bg-white text-gray-700 font-medium shadow-sm hover:border-[#7B1F1F] transition-colors duration-200 pr-12"
+                        :disabled="isLoading">
                         <option value="">Toutes les marques</option>
                         <option value="Dyson">Dyson</option>
                         <option value="GHD">GHD</option>
                         <option value="Savage X Fenty">Savage X Fenty</option>
                         <option value="Fenty Beauty">Fenty Beauty</option>
                     </select>
-                    <select x-model="category" @change="updateFilters()" class="w-full px-6 py-2.5 border rounded-full border-gray-300 focus:outline-none focus:border-[#7B1F1F] md:w-[250px] appearance-none bg-white text-gray-700 font-medium shadow-sm hover:border-[#7B1F1F] transition-colors duration-200 pr-12">
+                    <select
+                        x-model="category"
+                        @change="updateFilters()"
+                        class="w-full px-6 py-2.5 border rounded-full border-gray-300 focus:outline-none focus:border-[#7B1F1F] md:w-[250px] appearance-none bg-white text-gray-700 font-medium shadow-sm hover:border-[#7B1F1F] transition-colors duration-200 pr-12"
+                        :disabled="isLoading">
                         <option value="">Toutes les catégories</option>
                         <option value="makeup">Maquillage</option>
                         <option value="hair">Soins Capillaires</option>
                         <option value="lingerie">Lingerie</option>
                     </select>
-                </div>
-                @endif
 
-                <!-- Tri (toujours visible) -->
-                <div class="flex items-center w-full md:w-auto {{ request()->route()->getName() === 'products.index' ? '' : 'justify-end' }}">
-                    <select x-model="sort" @change="updateFilters()" class="w-full px-6 py-2.5 border rounded-full border-gray-300 focus:outline-none focus:border-[#7B1F1F] md:w-[250px] appearance-none bg-white text-gray-700 font-medium shadow-sm hover:border-[#7B1F1F] transition-colors duration-200 pr-12">
+                    <!-- Champ de recherche -->
+                    <div class="relative w-full md:w-[250px]">
+                        <input
+                            type="text"
+                            name="search"
+                            value="{{ request('search') }}"
+                            placeholder="Rechercher un produit..."
+                            class="w-full px-6 py-2.5 border rounded-full border-gray-300 focus:outline-none focus:border-[#7B1F1F] appearance-none bg-white text-gray-700 font-medium shadow-sm hover:border-[#7B1F1F] transition-colors duration-200"
+                            :disabled="isLoading"
+                            @keydown.enter="updateFilters()">
+                        @if(request('search'))
+                            <a href="{{ url()->current() }}" class="absolute right-4 top-1/2 text-gray-400 transform -translate-y-1/2 hover:text-gray-600">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </a>
+                        @endif
+                    </div>
+                </div>
+
+                <!-- Tri -->
+                <div class="flex items-center w-full md:w-auto">
+                    <select
+                        x-model="sort"
+                        @change="updateFilters()"
+                        class="w-full px-6 py-2.5 border rounded-full border-gray-300 focus:outline-none focus:border-[#7B1F1F] md:w-[250px] appearance-none bg-white text-gray-700 font-medium shadow-sm hover:border-[#7B1F1F] transition-colors duration-200 pr-12"
+                        :disabled="isLoading">
                         <option value="created_at">Plus récents</option>
                         <option value="price-asc">Prix croissant</option>
                         <option value="price-desc">Prix décroissant</option>
@@ -53,13 +100,16 @@
                 </div>
             </div>
 
-            <!-- Champs cachés pour maintenir les filtres actifs -->
-            @if($currentCategory)
-                <input type="hidden" name="category" value="{{ $currentCategory }}">
-            @endif
-            @if($currentBrand)
-                <input type="hidden" name="brand" value="{{ $currentBrand }}">
-            @endif
+            <!-- Indicateur de chargement -->
+            <div x-show="isLoading" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30">
+                <div class="flex flex-col items-center p-6 bg-white rounded-lg shadow-xl">
+                    <svg class="w-10 h-10 text-[#7B1F1F] animate-spin mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    <p class="font-medium text-gray-800">Chargement des produits...</p>
+                </div>
+            </div>
         </form>
 
         <!-- Grille de produits -->
@@ -84,7 +134,8 @@
                             <div class="relative w-full h-[250px]">
                                 <img src="{{ $product->image_url }}"
                                      alt="{{ $product->name }}"
-                                     class="absolute inset-0 w-full h-full {{ $product->brand === 'Dyson' ? 'object-contain' : 'object-cover' }} object-center transition-opacity rounded-t-lg group-hover:opacity-75">
+                                     class="absolute inset-0 w-full h-full {{ $product->brand === 'Dyson' ? 'object-contain' : 'object-cover' }} object-center transition-opacity rounded-t-lg group-hover:opacity-75"
+                                     loading="lazy">
                             </div>
                             <!-- Badge de marque -->
                             <div class="absolute z-10 top-2 left-2">
@@ -126,4 +177,33 @@
             </div>
         </div>
     </div>
+
+    <!-- Script pour gérer la pagination -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Intercepter les clics sur les liens de pagination
+            document.querySelectorAll('.pagination a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    // Afficher l'indicateur de chargement
+                    const loadingIndicator = document.createElement('div');
+                    loadingIndicator.className = 'fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30';
+                    loadingIndicator.innerHTML = `
+                        <div class="flex flex-col items-center p-6 bg-white rounded-lg shadow-xl">
+                            <svg class="w-10 h-10 text-[#7B1F1F] animate-spin mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            <p class="font-medium text-gray-800">Chargement de la page...</p>
+                        </div>
+                    `;
+                    document.body.appendChild(loadingIndicator);
+
+                    // Rediriger vers la page demandée
+                    window.location.href = this.href;
+                });
+            });
+        });
+    </script>
 </x-layouts.app>

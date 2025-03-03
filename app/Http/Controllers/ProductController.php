@@ -25,14 +25,25 @@ class ProductController extends Controller
 
             $query = Product::query();
 
-            // Récupérer la catégorie depuis la route ou la requête
+            // Récupérer les paramètres de filtrage
             $category = $request->route('category') ?? $request->input('category');
             $brand = $request->route('brand') ?? $request->input('brand');
+            $search = $request->input('search');
 
             Log::info('Filtering parameters', [
                 'category' => $category,
-                'brand' => $brand
+                'brand' => $brand,
+                'search' => $search
             ]);
+
+            // Recherche textuelle
+            if ($search) {
+                $query->where(function($q) use ($search) {
+                    $q->where('name', 'like', '%' . $search . '%')
+                      ->orWhere('description', 'like', '%' . $search . '%')
+                      ->orWhere('brand', 'like', '%' . $search . '%');
+                });
+            }
 
             // Filtrage selon la catégorie
             if ($category) {
@@ -100,7 +111,8 @@ class ProductController extends Controller
             return view('pages.products.index', [
                 'products' => $products,
                 'currentCategory' => $category,
-                'currentBrand' => $brand
+                'currentBrand' => $brand,
+                'currentSearch' => $search
             ]);
 
         } catch (\Exception $e) {
