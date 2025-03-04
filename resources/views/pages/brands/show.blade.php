@@ -60,20 +60,18 @@
                         <div class="p-4 flex flex-col justify-between flex-grow">
                             <h3 class="text-sm font-medium text-gray-900 line-clamp-2">{{ $product->name }}</h3>
                             <div class="mt-2 flex flex-col">
-                                <!-- Badge de réduction -->
-                                @php
-                                    $reduction = round((($product->original_price ?? $product->price) - $product->promo_price) / ($product->original_price ?? $product->price) * 100);
-                                @endphp
-                                @if($reduction > 0 && $product->price < 100)
                                 <div class="flex items-center justify-between">
-                                    <span class="bg-[#7B1F1F] text-white px-2 py-1 text-xs font-bold rounded">-{{ $reduction }}%</span>
+                                    @php
+                                        $reduction = round((($product->original_price ?? $product->price) - $product->promo_price) / ($product->original_price ?? $product->price) * 100);
+                                    @endphp
+                                    @if($reduction > 0 && $product->price < 100)
+                                        <span class="bg-[#7B1F1F] text-white px-2 py-1 text-xs font-bold rounded">-{{ $reduction }}%</span>
+                                    @endif
                                     <!-- Prix -->
                                     <div class="flex flex-col items-end">
                                         <p class="text-lg font-bold text-[#7B1F1F]">{{ number_format($product->promo_price, 2, ',', ' ') }} €</p>
-                                        <p class="text-sm text-gray-500 line-through">{{ number_format($product->original_price ?? $product->price, 2, ',', ' ') }} €</p>
                                     </div>
                                 </div>
-                                @endif
                             </div>
                         </div>
                     </a>

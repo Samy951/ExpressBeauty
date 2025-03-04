@@ -130,7 +130,6 @@
                     <div class="mb-8">
                         <div class="flex gap-3 items-baseline">
                             <span class="text-4xl font-bold text-[#7B1F1F]">{{ number_format($product->promo_price, 2, ',', ' ') }} €</span>
-                            <span class="text-lg text-gray-500 line-through">{{ number_format($product->original_price ?? $product->price, 2, ',', ' ') }} €</span>
                         </div>
                         <p class="mt-1 text-sm text-gray-500">Quantité très limitée</p>
                     </div>

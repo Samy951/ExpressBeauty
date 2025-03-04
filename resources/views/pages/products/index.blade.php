@@ -163,7 +163,6 @@
                                     <!-- Prix -->
                                     <div class="flex flex-col items-end">
                                         <p class="text-lg font-bold text-[#7B1F1F]">{{ number_format($product->promo_price, 2, ',', ' ') }} €</p>
-                                        <p class="text-sm text-gray-500 line-through">{{ number_format($product->original_price ?? $product->price, 2, ',', ' ') }} €</p>
                                     </div>
                                 </div>
                             </div>
