@@ -2,7 +2,7 @@
     <!-- Bannière de déstockage -->
     <div class="bg-[#7B1F1F] text-white py-2 text-center">
         <p class="text-sm">
-            ⚡ DÉSTOCKAGE : JUSQU'À -95% SUR TOUT ! LIMITÉ À UN PRODUIT PAR PERSONNE, FAITES VITE ! ⚡
+            ⚡ DÉSTOCKAGE : LIQUIDATION SUR TOUT ! LIMITÉ À UN PRODUIT PAR PERSONNE, FAITES VITE ! ⚡
         </p>
     </div>
 
@@ -12,7 +12,7 @@
         <div class="container flex relative flex-col justify-center items-center px-4 mx-auto h-full text-center text-white">
             <h1 class="mb-6 text-5xl font-bold">Offres Déstockage !</h1>
             <p class="mb-8 max-w-2xl text-xl">
-                Jusqu'à -95% sur des incontournables beauté, disponibles jusqu'à épuisement des stocks ! Limité à un produit par personne.
+                liquidation sur des incontournables beauté, disponibles jusqu'à épuisement des stocks ! Limité à un produit par personne.
             </p>
             <a href="/products" class="bg-[#7B1F1F] text-white px-8 py-3 rounded-full text-lg font-medium hover:bg-[#6B1A1A] transition-colors">
                 PROFITEZ EN MAINTENANT

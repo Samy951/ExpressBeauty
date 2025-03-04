@@ -2,7 +2,7 @@
     <!-- Bannière de déstockage -->
     <div class="bg-[#7B1F1F] text-white py-2 text-center">
         <p class="text-sm">
-            ⚡ DÉSTOCKAGE : JUSQU'À -95% SUR TOUT ! LIMITÉ À UN PRODUIT PAR PERSONNE, FAITES VITE ! ⚡
+            ⚡ DÉSTOCKAGE : LIQUIDATION SUR TOUT ! LIMITÉ À UN PRODUIT PAR PERSONNE, FAITES VITE ! ⚡
         </p>
     </div>
 
