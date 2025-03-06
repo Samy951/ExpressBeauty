@@ -15,7 +15,7 @@
                 Liquidation sur des incontournables beauté, disponibles jusqu'à épuisement des stocks ! Limité à un produit par personne.
             </p>
             <a href="/products" class="bg-[#7B1F1F] text-white px-8 py-3 rounded-full text-lg font-medium hover:bg-[#6B1A1A] transition-colors">
-                PROFITEZ EN MAINTENANT
+                PROFITEZ EN MAINTENANT !
             </a>
         </div>
     </div>
