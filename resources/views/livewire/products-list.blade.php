@@ -248,7 +248,7 @@
                              class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110">
                         <div class="absolute inset-0 bg-gradient-to-t to-transparent from-black/70"></div>
                         <div class="absolute right-0 bottom-0 left-0 p-6 text-white">
-                            <h3 class="mb-2 text-2xl font-semibold">Skincare</h3>
+                            <h3 class="mb-2 text-2xl font-semibold">Skincare coréenne</h3>
                             <p class="mb-4 text-sm text-gray-200">
                                 @if($featuredSkincare)
                                     {{ $featuredSkincare->name }}
