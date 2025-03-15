@@ -57,6 +57,9 @@ class ProductController extends Controller
                     case 'lingerie':
                         $query->where('brand', 'Savage X Fenty');
                         break;
+                    case 'skincare':
+                        $query->where('category', 'skincare');
+                        break;
                 }
             }
             // Filtrage direct par marque si spécifié

@@ -13,11 +13,13 @@ class CategoryController extends Controller
         $hairProducts = Product::where('category', 'hair')->count();
         $stylingProducts = Product::where('category', 'styling')->count();
         $accessoryProducts = Product::where('category', 'accessories')->count();
+        $skincareProducts = Product::where('category', 'skincare')->count();
 
         return view('pages.categories.index', [
             'hairProducts' => $hairProducts,
             'stylingProducts' => $stylingProducts,
-            'accessoryProducts' => $accessoryProducts
+            'accessoryProducts' => $accessoryProducts,
+            'skincareProducts' => $skincareProducts
         ]);
     }
 
@@ -34,7 +36,8 @@ class CategoryController extends Controller
         $categoryNames = [
             'hair' => 'Soins Capillaires',
             'styling' => 'Appareils de Coiffure',
-            'accessories' => 'Accessoires'
+            'accessories' => 'Accessoires',
+            'skincare' => 'Soins de la Peau'
         ];
 
         return view('pages.categories.show', [
@@ -43,4 +46,4 @@ class CategoryController extends Controller
             'categoryName' => $categoryNames[$category] ?? ucfirst($category)
         ]);
     }
-} 
+}

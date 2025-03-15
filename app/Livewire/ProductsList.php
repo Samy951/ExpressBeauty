@@ -10,6 +10,7 @@ class ProductsList extends Component
     public $featuredMakeup;
     public $featuredHair;
     public $featuredLingerie;
+    public $featuredSkincare;
 
     public function mount()
     {
@@ -27,6 +28,12 @@ class ProductsList extends Component
 
         // Pour la lingerie, utiliser directement une image de Savage X Fenty
         $this->featuredLingerie = Product::where('brand', 'Savage X Fenty')
+            ->whereNotNull('image_url')
+            ->inRandomOrder()
+            ->first();
+
+        // Pour les soins de la peau, utiliser les produits de skincare
+        $this->featuredSkincare = Product::where('category', 'skincare')
             ->whereNotNull('image_url')
             ->inRandomOrder()
             ->first();

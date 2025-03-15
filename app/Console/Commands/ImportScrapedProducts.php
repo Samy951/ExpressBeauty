@@ -251,6 +251,75 @@ class ImportScrapedProducts extends Command
             $this->error('Fichier Fenty Beauty non trouvé: ' . $fentyPath);
         }
 
+        // Importer les produits Korean Skincare
+        $koreanSkincarePath = storage_path('app/scraping/koreanSkincare.json');
+        if (file_exists($koreanSkincarePath)) {
+            $koreanSkincareProducts = json_decode(file_get_contents($koreanSkincarePath), true);
+
+            // Supprimer d'abord tous les produits Korean Skincare existants
+            Product::where('category', 'skincare')->delete();
+            $this->info('Anciens produits de soin coréens supprimés.');
+
+            $this->info('Traitement de ' . count($koreanSkincareProducts) . ' produits de soin coréens...');
+            $imported = 0;
+
+            foreach ($koreanSkincareProducts as $product) {
+                try {
+                    // Valider les données du produit
+                    if (empty($product['TITRE']) || empty($product['MARQUE']) || empty($product['PRIX'])) {
+                        continue;
+                    }
+
+                    // Gestion des images
+                    $images = [];
+                    for ($i = 1; $i <= 4; $i++) {
+                        $imageKey = "IMAGE{$i}-src";
+                        if (!empty($product[$imageKey])) {
+                            $imageUrl = 'https://' . $product[$imageKey];
+                            // Vérifier si l'URL est valide
+                            if (filter_var($imageUrl, FILTER_VALIDATE_URL)) {
+                                $images[] = $imageUrl;
+                            }
+                        }
+                    }
+
+                    // Ne pas importer si aucune image valide n'est trouvée
+                    if (empty($images)) {
+                        $this->warn("Pas d'image valide pour : " . $product['TITRE']);
+                        continue;
+                    }
+
+                    // Nettoyer le prix
+                    $price = str_replace(['€', ','], ['', '.'], $product['PRIX']);
+                    $price = (float) trim($price);
+
+                    Product::create([
+                        'name' => $product['TITRE'],
+                        'brand' => $product['MARQUE'],
+                        'category' => 'skincare',
+                        'description' => $product['DESCRIPTION'] ?? '',
+                        'price' => $price,
+                        'original_price' => $price,
+                        'image_url' => $images[0],
+                        'specifications' => json_encode([
+                            'type' => $product['TYPE'] ?? '',
+                            'taille' => $product['TAILLE'] ?? '',
+                            'ingredients' => $product['INGREDIENTS'] ?? '',
+                            'additional_images' => array_slice($images, 1)
+                        ])
+                    ]);
+
+                    $imported++;
+                } catch (\Exception $e) {
+                    $this->error('Erreur lors de l\'importation du produit de soin coréen: ' . $product['TITRE']);
+                    $this->error($e->getMessage());
+                }
+            }
+            $this->info("$imported produits de soin coréens importés avec succès.");
+        } else {
+            $this->error('Fichier Korean Skincare non trouvé: ' . $koreanSkincarePath);
+        }
+
         $this->info('Importation terminée !');
 
         // Afficher les statistiques
@@ -258,12 +327,14 @@ class ImportScrapedProducts extends Command
         $totalGhd = Product::where('brand', 'GHD')->count();
         $totalSavage = Product::where('brand', 'Savage X Fenty')->count();
         $totalFenty = Product::where('brand', 'Fenty Beauty')->count();
+        $totalSkincare = Product::where('category', 'skincare')->count();
 
         $this->info("Statistiques finales :");
         $this->info("- Produits Dyson : $totalDyson");
         $this->info("- Produits GHD : $totalGhd");
         $this->info("- Produits Savage X Fenty : $totalSavage");
         $this->info("- Produits Fenty Beauty : $totalFenty");
-        $this->info("- Total : " . ($totalDyson + $totalGhd + $totalSavage + $totalFenty));
+        $this->info("- Produits Skin Care : $totalSkincare");
+        $this->info("- Total : " . ($totalDyson + $totalGhd + $totalSavage + $totalFenty + $totalSkincare));
     }
 }

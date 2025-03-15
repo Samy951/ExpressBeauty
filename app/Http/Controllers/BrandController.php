@@ -9,7 +9,7 @@ class BrandController extends Controller
 {
     public function index()
     {
-        // Récupérer les statistiques pour chaque marque
+        // Marques principales avec images statiques
         $brands = [
             [
                 'name' => 'Dyson',
@@ -34,6 +34,12 @@ class BrandController extends Controller
                 'image' => 'storage/brands/fenty-beauty.webp',
                 'products_count' => Product::where('brand', 'Fenty Beauty')->count() . ' produits',
                 'route' => route('brands.fenty-beauty')
+            ],
+            [
+                'name' => 'Korean Beauty',
+                'image' => 'storage/brands/koreanSkincare.webp',
+                'products_count' => Product::where('category', 'skincare')->count() . ' produits',
+                'route' => route('brands.korean-beauty')
             ]
         ];
 
@@ -47,7 +53,8 @@ class BrandController extends Controller
             'dyson' => 'Dyson',
             'ghd' => 'GHD',
             'savage-x-fenty' => 'Savage X Fenty',
-            'fenty-beauty' => 'Fenty Beauty'
+            'fenty-beauty' => 'Fenty Beauty',
+            'korean-beauty' => 'Korean Beauty'
         ];
 
         $brandName = $brandNames[$brand] ?? null;
@@ -56,14 +63,26 @@ class BrandController extends Controller
             abort(404);
         }
 
-        // Récupérer les produits de la marque avec pagination
-        $products = Product::where('brand', $brandName)
-            ->orderBy('created_at', 'desc')
-            ->paginate(12)
-            ->withQueryString()
-            ->through(function ($product) {
-                return $product;
-            });
+        // Récupérer les produits avec pagination
+        if ($brandName === 'Korean Beauty') {
+            // Pour Korean Beauty, on filtre par catégorie 'skincare'
+            $products = Product::where('category', 'skincare')
+                ->orderBy('created_at', 'desc')
+                ->paginate(12)
+                ->withQueryString()
+                ->through(function ($product) {
+                    return $product;
+                });
+        } else {
+            // Pour les autres marques, on filtre par nom de marque
+            $products = Product::where('brand', $brandName)
+                ->orderBy('created_at', 'desc')
+                ->paginate(12)
+                ->withQueryString()
+                ->through(function ($product) {
+                    return $product;
+                });
+        }
 
         // Informations sur la marque
         $brandInfo = [
@@ -90,6 +109,12 @@ class BrandController extends Controller
                 'description' => 'Beauté inclusive et innovante',
                 'image' => 'storage/brands/fenty-beauty.webp',
                 'banner_image' => 'storage/brands/banners/fenty-beauty-banner.webp'
+            ],
+            'Korean Beauty' => [
+                'name' => 'Korean Beauty',
+                'description' => 'Produits de soin coréens de haute qualité',
+                'image' => 'storage/brands/koreanSkincare.webp',
+                'banner_image' => 'storage/brands/koreanSkincare.webp'
             ]
         ];
 
@@ -99,4 +124,4 @@ class BrandController extends Controller
             'brandInfo' => $brandInfo[$brandName]
         ]);
     }
-} 
+}

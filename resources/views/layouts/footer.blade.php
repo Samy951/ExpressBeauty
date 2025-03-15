@@ -18,6 +18,7 @@
                     <li><a href="{{ route('brands.show', 'ghd') }}" class="text-gray-200 hover:text-white">GHD</a></li>
                     <li><a href="{{ route('brands.show', 'savage-x-fenty') }}" class="text-gray-200 hover:text-white">Savage X Fenty</a></li>
                     <li><a href="{{ route('brands.show', 'fenty-beauty') }}" class="text-gray-200 hover:text-white">Fenty Beauty</a></li>
+                    <li><a href="{{ route('brands.show', 'korean-beauty') }}" class="text-gray-200 hover:text-white">Korean Beauty</a></li>
                 </ul>
             </div>
             <div>

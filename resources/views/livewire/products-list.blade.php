@@ -161,7 +161,7 @@
             <h2 class="mb-16 text-4xl font-bold text-center">Nos Produits</h2>
 
             <!-- Catégories de produits -->
-            <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+            <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
                 <!-- Maquillage -->
                 <div class="group">
                     <div class="overflow-hidden relative rounded-xl shadow-lg aspect-square">
@@ -239,6 +239,32 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Skincare -->
+                <div class="group">
+                    <div class="overflow-hidden relative rounded-xl shadow-lg aspect-square">
+                        <img src="{{ $featuredSkincare->image_url ?? asset('storage/categories/skincare.jpg') }}"
+                             alt="Soins de la Peau - {{ $featuredSkincare->name ?? 'Catégorie' }}"
+                             class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t to-transparent from-black/70"></div>
+                        <div class="absolute right-0 bottom-0 left-0 p-6 text-white">
+                            <h3 class="mb-2 text-2xl font-semibold">Skincare</h3>
+                            <p class="mb-4 text-sm text-gray-200">
+                                @if($featuredSkincare)
+                                    {{ $featuredSkincare->name }}
+                                @else
+                                    Découvrez nos produits de soin coréens de haute qualité
+                                @endif
+                            </p>
+                            <a href="{{ route('products.category.skincare') }}" class="inline-flex items-center text-sm font-medium text-white hover:text-[#7B1F1F] transition-colors">
+                                Découvrir
+                                <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Bouton Voir tous les produits -->
@@ -257,7 +283,7 @@
     <div class="py-16 bg-white">
         <div class="container px-4 mx-auto">
             <h2 class="mb-12 text-3xl font-bold text-center">Nos Marques</h2>
-            <div class="grid grid-cols-1 gap-8 md:grid-cols-4">
+            <div class="grid grid-cols-1 gap-8 md:grid-cols-3 lg:grid-cols-5">
                 <!-- Dyson -->
                 <a href="{{ route('brands.dyson') }}" class="block group">
                     <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 flex flex-col h-[350px] overflow-hidden">
@@ -314,6 +340,21 @@
                         <div class="flex flex-col justify-center h-[130px] p-6 text-center">
                             <h3 class="text-2xl font-semibold text-gray-900 group-hover:text-[#7B1F1F] transition-colors mb-3">Fenty Beauty</h3>
                             <p class="text-sm text-gray-600">Beauté inclusive et innovante</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Korean Skincare -->
+                <a href="{{ route('brands.korean-beauty') }}" class="block group">
+                    <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 flex flex-col h-[350px] overflow-hidden">
+                        <div class="flex items-center justify-center h-[220px] bg-white p-8">
+                            <img src="{{ asset('storage/brands/koreanSkincare.webp') }}"
+                                 alt="Korean Skincare"
+                                 class="object-contain w-4/5 h-4/5 mix-blend-multiply filter contrast-125">
+                        </div>
+                        <div class="flex flex-col justify-center h-[130px] p-6 text-center">
+                            <h3 class="text-2xl font-semibold text-gray-900 group-hover:text-[#7B1F1F] transition-colors mb-3">Korean Skincare</h3>
+                            <p class="text-sm text-gray-600">Produits de soin coréens de haute qualité</p>
                         </div>
                     </div>
                 </a>

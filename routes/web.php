@@ -16,7 +16,7 @@ Route::prefix('products')->group(function () {
 
     // Filtrage par catégorie
     Route::get('/category/{category}', [ProductController::class, 'index'])
-        ->where('category', 'makeup|hair|lingerie')
+        ->where('category', 'makeup|hair|lingerie|skincare')
         ->name('products.category');
 
     // Routes nommées pour chaque catégorie
@@ -29,6 +29,9 @@ Route::prefix('products')->group(function () {
     Route::get('/category/lingerie', [ProductController::class, 'index'])
         ->defaults('category', 'lingerie')
         ->name('products.category.lingerie');
+    Route::get('/category/skincare', [ProductController::class, 'index'])
+        ->defaults('category', 'skincare')
+        ->name('products.category.skincare');
 
     // Filtrage par marque
     Route::get('/brand/dyson', [ProductController::class, 'index'])
@@ -43,6 +46,9 @@ Route::prefix('products')->group(function () {
     Route::get('/brand/fenty-beauty', [ProductController::class, 'index'])
         ->defaults('brand', 'Fenty Beauty')
         ->name('products.brand.fenty-beauty');
+    Route::get('/brand/korean-beauty', [ProductController::class, 'index'])
+        ->defaults('brand', 'Korean Beauty')
+        ->name('products.brand.korean-beauty');
 
     // Détail d'un produit
     Route::get('/{product}', [ProductController::class, 'show'])->name('products.show');
@@ -63,6 +69,9 @@ Route::prefix('categories')->group(function () {
     Route::get('/lingerie', [CategoryController::class, 'show'])
         ->defaults('category', 'lingerie')
         ->name('categories.lingerie');
+    Route::get('/skincare', [CategoryController::class, 'show'])
+        ->defaults('category', 'skincare')
+        ->name('categories.skincare');
 });
 
 // Routes pour les marques
@@ -83,6 +92,9 @@ Route::prefix('brands')->group(function () {
     Route::get('/fenty-beauty', [BrandController::class, 'show'])
         ->defaults('brand', 'fenty-beauty')
         ->name('brands.fenty-beauty');
+    Route::get('/korean-beauty', [BrandController::class, 'show'])
+        ->defaults('brand', 'korean-beauty')
+        ->name('brands.korean-beauty');
 });
 
 // Pages statiques
