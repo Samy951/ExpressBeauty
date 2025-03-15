@@ -10,7 +10,7 @@
     <div class="relative h-[600px] bg-cover bg-center" style="background-image: url('{{ asset('storage/AdobeStock_132642948.jpeg') }}')">
         <div class="absolute inset-0 bg-black bg-opacity-40"></div>
         <div class="container flex relative flex-col justify-center items-center px-4 mx-auto h-full text-center text-white">
-            <h1 class="mb-6 text-5xl font-bold">Offres Déstockage !</h1>
+            <h1 class="mb-6 text-5xl font-bold">Meilleur site de ventes privées !</h1>
             <p class="mb-8 max-w-2xl text-xl">
                 Liquidation sur des incontournables beauté, disponibles jusqu'à épuisement des stocks ! Limité à un produit par personne.
             </p>

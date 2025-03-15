@@ -44,7 +44,21 @@
                 <div class="flex flex-col w-full space-y-2 md:flex-row md:space-y-0 md:space-x-4 md:w-auto">
                     <select
                         x-model="brand"
-                        @change="updateFilters()"
+                        @change="
+                            if (brand) {
+                                @if(isset($category))
+                                    window.location.href = '{{ url('/products/category/'.$category.'/brand') }}/' + brand;
+                                @else
+                                    this.updateFilters();
+                                @endif
+                            } else {
+                                @if(isset($category))
+                                    window.location.href = '{{ url('/products/category/'.$category) }}';
+                                @else
+                                    this.updateFilters();
+                                @endif
+                            }
+                        "
                         class="w-full px-6 py-2.5 border rounded-full border-gray-300 focus:outline-none focus:border-[#7B1F1F] md:w-[250px] appearance-none bg-white text-gray-700 font-medium shadow-sm hover:border-[#7B1F1F] transition-colors duration-200 pr-12"
                         :disabled="isLoading">
                         <option value="">Toutes les marques</option>
@@ -177,14 +191,20 @@
                     </select>
                     <select
                         x-model="category"
-                        @change="updateFilters()"
+                        @change="
+                            if (category) {
+                                window.location.href = '{{ url('/products/category') }}/' + category;
+                            } else {
+                                window.location.href = '{{ route('products.index') }}';
+                            }
+                        "
                         class="w-full px-6 py-2.5 border rounded-full border-gray-300 focus:outline-none focus:border-[#7B1F1F] md:w-[250px] appearance-none bg-white text-gray-700 font-medium shadow-sm hover:border-[#7B1F1F] transition-colors duration-200 pr-12"
                         :disabled="isLoading">
                         <option value="">Toutes les catégories</option>
                         <option value="makeup">Maquillage</option>
                         <option value="hair">Soins Capillaires</option>
                         <option value="lingerie">Lingerie</option>
-                        <option value="skincare">Skin Care</option>
+                        <option value="skincare">Korean Beauty</option>
                     </select>
 
                     <!-- Champ de recherche -->
@@ -262,9 +282,12 @@
                             </div>
                             <!-- Badge de marque -->
                             <div class="absolute z-10 top-2 left-2">
-                                <span class="bg-[#7B1F1F] text-white px-3 py-1 text-xs font-medium rounded-full">
-                                    {{ $product->brand }}
-                                </span>
+                                <a href="{{ isset($category) ? route('products.category.brand', ['category' => $category, 'brand' => $product->brand]) : route('products.index', ['brand' => $product->brand, 'sort' => request('sort')]) }}"
+                                   class="block hover:shadow-md transition-shadow duration-200">
+                                    <span class="bg-[#7B1F1F] text-white px-3 py-1 text-xs font-medium rounded-full inline-block">
+                                        {{ $product->brand }}
+                                    </span>
+                                </a>
                             </div>
                             <!-- Infos produit -->
                             <div class="flex flex-col justify-between flex-grow p-4">

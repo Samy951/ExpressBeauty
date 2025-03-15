@@ -63,11 +63,20 @@ class BrandController extends Controller
             abort(404);
         }
 
+        // Récupérer les paramètres de filtrage
+        $filterBrand = request('brand');
+
         // Récupérer les produits avec pagination
         if ($brandName === 'Korean Beauty') {
             // Pour Korean Beauty, on filtre par catégorie 'skincare'
-            $products = Product::where('category', 'skincare')
-                ->orderBy('created_at', 'desc')
+            $query = Product::where('category', 'skincare');
+
+            // Si une marque spécifique est demandée, on ajoute le filtre
+            if ($filterBrand) {
+                $query->where('brand', $filterBrand);
+            }
+
+            $products = $query->orderBy('created_at', 'desc')
                 ->paginate(12)
                 ->withQueryString()
                 ->through(function ($product) {

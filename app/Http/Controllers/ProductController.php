@@ -29,11 +29,14 @@ class ProductController extends Controller
             $category = $request->route('category') ?? $request->input('category');
             $brand = $request->route('brand') ?? $request->input('brand');
             $search = $request->input('search');
+            $sort = $request->input('sort', 'created_at');
 
             Log::info('Filtering parameters', [
                 'category' => $category,
                 'brand' => $brand,
-                'search' => $search
+                'search' => $search,
+                'sort' => $sort,
+                'route_parameters' => $request->route()->parameters()
             ]);
 
             // Recherche textuelle
@@ -45,38 +48,146 @@ class ProductController extends Controller
                 });
             }
 
+            // Filtrage par marque si spécifié
+            if ($brand) {
+                $query->where('brand', $brand);
+            }
+
             // Filtrage selon la catégorie
             if ($category) {
                 switch ($category) {
                     case 'makeup':
-                        $query->where('brand', 'Fenty Beauty');
+                        // Tout ce qui concerne le maquillage
+                        $query->where(function($q) use ($brand) {
+                            // Si une marque est spécifiée, on filtre strictement par marque
+                            if (request('brand')) {
+                                $q->where('brand', request('brand'));
+                            } else {
+                                // Si aucune marque n'est spécifiée, on privilégie Fenty Beauty et les produits coréens
+                                $q->where('brand', 'Fenty Beauty')
+                                  ->orWhere(function($sq) {
+                                      $sq->whereJsonContains('specifications->TYPE', 'Maquillage')
+                                         ->orWhereJsonContains('specifications->TYPE', 'Make-up')
+                                         ->orWhereJsonContains('specifications->TYPE', 'Lip Tint')
+                                         ->orWhereJsonContains('specifications->TYPE', 'Blush')
+                                         ->orWhereJsonContains('specifications->TYPE', 'Concealer')
+                                         ->orWhereJsonContains('specifications->TYPE', 'Correcteur')
+                                         ->orWhereJsonContains('specifications->TYPE', 'Stick')
+                                         ->orWhereJsonContains('specifications->TYPE', 'Parfum');
+                                  });
+                            }
+                        });
                         break;
                     case 'hair':
-                        $query->whereIn('brand', ['Dyson', 'GHD']);
+                        // Tout ce qui concerne les soins capillaires
+                        $query->where(function($q) use ($brand) {
+                            // Si une marque est spécifiée, on filtre strictement par marque
+                            if (request('brand')) {
+                                $q->where('brand', request('brand'));
+                            } else {
+                                // Si aucune marque n'est spécifiée, on montre les produits des marques principales (Dyson, GHD)
+                                // et les produits coréens de soins capillaires
+                                $q->whereIn('brand', ['Dyson', 'GHD'])
+                                  ->orWhere(function($sq) {
+                                      $sq->whereJsonContains('specifications->TYPE', 'Soins des cheveux')
+                                         ->orWhereJsonContains('specifications->TYPE', 'Hair Care')
+                                         ->orWhereJsonContains('specifications->TYPE', 'Hair Mist')
+                                         ->orWhereJsonContains('specifications->TYPE', 'Spray pour les cheveux')
+                                         ->orWhereJsonContains('specifications->TYPE', 'Brume pour les cheveux')
+                                         ->orWhereJsonContains('specifications->TYPE', 'ACV Vinegar Shampoo');
+                                  });
+                            }
+                        });
                         break;
                     case 'lingerie':
-                        $query->where('brand', 'Savage X Fenty');
+                        // Pour les produits de lingerie
+                        $query->where(function($q) use ($brand) {
+                            // Si une marque est spécifiée, on filtre strictement par marque
+                            if (request('brand')) {
+                                $q->where('brand', request('brand'));
+                            } else {
+                                // Par défaut, on montre les produits Savage X Fenty
+                                $q->where('brand', 'Savage X Fenty');
+                            }
+                        });
                         break;
                     case 'skincare':
-                        $query->where('category', 'skincare');
+                        // Tout ce qui concerne les soins de la peau
+                        $query->where(function($q) use ($brand) {
+                            // Si une marque est spécifiée, on filtre strictement par marque
+                            if (request('brand')) {
+                                $q->where('brand', request('brand'));
+                            } else {
+                                // Si aucune marque n'est spécifiée, on affiche tous les produits skincare
+                                $q->where('category', 'skincare')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Nettoyants')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Cleanser')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Cleansers')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Toniques')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Toner')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Toner Pads')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Compresses toniques')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Sérums')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Serums')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Serum')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Crèmes hydratantes')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Moisturisers')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Essences')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Essence')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Masques visage')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Face Mask')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Eye care')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Eye Care')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Soins des yeux')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Eye serum')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Sérum pour les yeux')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Exfoliants')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Exfoliators')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Patches pour les boutons')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Spot Patches')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Crèmes solaires')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Sunscreen')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Skin care')
+                                   ->orWhereJsonContains('specifications->TYPE', 'K-Beauty')
+                                   ->orWhereJsonContains('specifications->TYPE', 'K-beauty')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Émulsion')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Soins pour le corps')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Body Care')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Brume pour le corps')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Soins des mains')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Hand Care')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Soins des lèvres')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Lip Care')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Set')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Kit de démarrage')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Starter Kit')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Kit de voyage')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Ampoules')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Baume multifonction')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Multi Balm')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Accessoires')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Pinceau masque en silicone')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Silicon Mask Brush')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Lampe à ongles')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Démaquillant')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Ongles gel')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Gel Nails')
+                                   ->orWhereJsonContains('specifications->TYPE', 'Top coat');
+                            }
+                        });
                         break;
                 }
             }
-            // Filtrage direct par marque si spécifié
-            elseif ($brand) {
-                $query->where('brand', $brand);
-            }
 
             // Tri
-            $sortField = $request->input('sort', 'created_at');
             $sortDirection = $request->input('direction', 'desc');
 
             Log::info('Sorting parameters', [
-                'field' => $sortField,
+                'field' => $sort,
                 'direction' => $sortDirection
             ]);
 
-            switch ($sortField) {
+            switch ($sort) {
                 case 'price-asc':
                     $query->orderBy('price', 'asc');
                     break;
@@ -113,9 +224,10 @@ class ProductController extends Controller
 
             return view('pages.products.index', [
                 'products' => $products,
-                'currentCategory' => $category,
-                'currentBrand' => $brand,
-                'currentSearch' => $search
+                'category' => $category,
+                'brand' => $brand,
+                'search' => $search,
+                'sort' => $sort
             ]);
 
         } catch (\Exception $e) {

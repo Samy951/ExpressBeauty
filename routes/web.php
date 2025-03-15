@@ -19,6 +19,11 @@ Route::prefix('products')->group(function () {
         ->where('category', 'makeup|hair|lingerie|skincare')
         ->name('products.category');
 
+    // Filtrage par catégorie et marque
+    Route::get('/category/{category}/brand/{brand}', [ProductController::class, 'index'])
+        ->where('category', 'makeup|hair|lingerie|skincare')
+        ->name('products.category.brand');
+
     // Routes nommées pour chaque catégorie
     Route::get('/category/makeup', [ProductController::class, 'index'])
         ->defaults('category', 'makeup')
